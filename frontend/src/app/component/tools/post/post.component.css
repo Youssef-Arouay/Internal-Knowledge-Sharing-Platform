@@ -1,0 +1,12 @@
+.action-item {
+    margin-left: .5em;
+    cursor: pointer;
+}
+
+.addPostHome {
+    
+    margin: 1em auto; /* Combine margin-left:auto et margin */
+    width: 50em;
+    height: 10%;
+    display: inline-block; /* inline-block permet de définir les dimensions */
+}

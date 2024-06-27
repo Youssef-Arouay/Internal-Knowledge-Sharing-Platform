@@ -7,5 +7,5 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimationsAsync(), provideHttpClient(withFetch()), provideToastr({closeButton:true})]
+  providers: [provideRouter(routes), provideAnimationsAsync(), provideHttpClient(withFetch()), provideToastr({closeButton:true}), provideAnimationsAsync(), provideAnimationsAsync()]
 };

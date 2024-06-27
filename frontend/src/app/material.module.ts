@@ -15,6 +15,8 @@ import { MatToolbarModule } from "@angular/material/toolbar"
 import { MatSidenavModule } from "@angular/material/sidenav"
 import { MatListModule } from "@angular/material/list"
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from "@angular/platform-browser"
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
 
 
 @NgModule({
@@ -33,11 +35,10 @@ import { CommonModule } from '@angular/common';
         MatMenuModule,
         MatToolbarModule,
         MatSidenavModule,
-        MatListModule
-
+        MatListModule,
     ],
     imports: [
-        CommonModule,
+        CommonModule, 
         // other modules here
     ]
 })

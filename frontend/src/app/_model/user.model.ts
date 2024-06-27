@@ -23,3 +23,9 @@ export interface loginresp {
     token: any;
     user: usercred;
 }
+
+export interface postDetails {
+    id: number,
+    description: string,
+    tags: string,
+}
