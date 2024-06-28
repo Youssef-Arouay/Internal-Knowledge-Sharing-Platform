@@ -1,6 +1,7 @@
 ﻿using Backend.Data;
 using Backend.DTO;
 using Backend.Models;
+using Backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,13 @@ namespace Backend.Controllers
     public class PostController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly PostService _postService;
 
-        public PostController(ApplicationDbContext context)
+        public PostController(ApplicationDbContext context, PostService postService)
         {
             _context = context;
+            _postService = postService;
+
         }
 
         // POST: api/posts
@@ -27,41 +31,45 @@ namespace Backend.Controllers
         [Authorize]
         public async Task<IActionResult> AddPost(PostDto createPostDto)
         {
-            try
+            var result = await _postService.AddPostAsync(createPostDto, User);
+
+            if (result.Success)
             {
-                // Get user details from claims
-                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
-                var userId = await GetUserIdByEmail(userEmail);
-
-                if (userId == null)
-                {
-                    return BadRequest(new { message = "User not found" });
-                }
-
-                // Create new Post object
-                var post = new Post
-                {
-                    Description = createPostDto.Description,
-                    Tags = createPostDto.Tags,
-                    CreationDate = createPostDto.CreationDate,
-                    UserId = userId.Value  // Assign retrieved user id from the token
-                };
-
-                _context.Posts.Add(post);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction("GetPost", new { id = post.PostId }, post);
+                return CreatedAtAction("GetPost", new { id = result.Post.PostId }, result.Post);
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = "Failed to add post", error = ex.Message });
-            }
+
+            return BadRequest(new { message = result.ErrorMessage });
         }
 
-        private async Task<int?> GetUserIdByEmail(string email)
+
+        // DELETE
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> DeletePost(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-            return user?.Id;
+            var result = await _postService.DeletePostAsync(id, User);
+
+            if (result.Success)
+            {
+                return NoContent();
+            }
+
+            if (result.ErrorMessage.Contains("Unauthorized"))
+            {
+                return Unauthorized(new { message = result.ErrorMessage });
+            }
+
+            if (result.ErrorMessage.Contains("Forbidden"))
+            {
+                return StatusCode(403, new { message = result.ErrorMessage });
+            }
+
+            if (result.ErrorMessage.Contains("Post not found"))
+            {
+                return NotFound(new { message = result.ErrorMessage });
+            }
+
+            return StatusCode(500, new { message = result.ErrorMessage });
         }
 
 
@@ -80,6 +88,22 @@ namespace Backend.Controllers
                 }
 
                 return Ok(post);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
+            }
+        }
+
+        // "api : /post/all"
+        [HttpGet("all")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllPosts()
+        {
+            try
+            {
+                var posts = await _context.Posts.ToListAsync();
+                return Ok(posts);
             }
             catch (Exception ex)
             {
