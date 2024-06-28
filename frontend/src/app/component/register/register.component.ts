@@ -115,6 +115,11 @@ export class RegisterComponent {
             if (responseData && responseData.token && responseData.user) {
               localStorage.setItem('token', responseData.token);
               localStorage.setItem('user', JSON.stringify(responseData.user));
+
+              this.userService.setUser(responseData.user); // Store user data in UserService
+              console.log('User set in UserService:', this.userService.getUser());
+
+
               this.toastr.success('Logged in successfully', 'Success');
               setTimeout(() => {
                 this.router.navigateByUrl('/dashboard');

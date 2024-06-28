@@ -3,6 +3,7 @@ import { MaterialModule } from '../../../material.module';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { UserService, menu } from '../../../_service/user.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { usercred } from '../../../_model/user.model';
 
 @Component({
   selector: 'app-appmenu',
@@ -13,20 +14,32 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 })
 export class AppmenuComponent implements OnInit, DoCheck {
 
-  constructor(private toastr: ToastrService, private service: UserService, private router: Router) {
+  user! :usercred ;
+
+
+  constructor(private toastr: ToastrService, private userService: UserService, private router: Router) {
 
   }
 
   showmenu = false;
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    // let userrole = localStorage.getItem('userrole') as string;
-    //   this.service.Loadmenubyrole(userrole).subscribe(item => {
-    //     this.menulist = item;
-  }
+  // ngOnInit(): void {
+  //   this.user = this.userService.getUser();
+  //   console.log("this.user"); // Verify if user data is available here
+  //   console.log(this.user); // Verify if user data is available here
 
+  // }
+
+  ngOnInit(): void {
+    this.userService.getUserInfo().subscribe(
+      (data: usercred) => {
+        this.user = data;
+      },
+      (error) => {
+        console.error('Error fetching user info', error);
+      }
+    );
+  }
 
   ngDoCheck(): void {
     this.Setaccess();
