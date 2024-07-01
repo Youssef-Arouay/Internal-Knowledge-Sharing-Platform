@@ -28,4 +28,5 @@ export interface postDetails {
     id: number,
     description: string,
     tags: string,
+    creationDate : string,
 }

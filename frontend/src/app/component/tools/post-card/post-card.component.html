@@ -1,0 +1,166 @@
+<!-- <div class="PostContainer">
+    <div class="SubPostContainer">
+        <div>
+            <div style="display: flex; align-items: center;">
+                <img src="https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="PostImage" alt="Profile Image" />
+                <div>
+                    <p style="margin-left: 5px; text-align: start;">Username</p>
+                </div>
+            </div>
+            <p style="text-align: start; width: 96%; margin-left: 20px; margin-top: 0;">Post Title</p>
+            <img src="https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="PostImages" alt="Post Image" />
+            <div style="display: flex;">
+                <div style="display: flex; margin-left: 10px;">
+                    <div style="display: flex; align-items: center; cursor: pointer;">
+                        <img src="https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="iconsforPost" alt="Like Icon" />
+                        <p style="margin-left: 6px;">100 Likes</p>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-left: 20px; cursor: pointer;">
+                        <img src="https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="iconsforPost" alt="Comment Icon" />
+                        <p style="margin-left: 6px;">50 Comments</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin-left: 200px; cursor: pointer;">
+                    <img src="https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="iconsforPost" alt="Share Icon" />
+                    <p style="margin-left: 6px;">Share</p>
+                </div>
+            </div>
+            <div style="padding: 10px;">
+                <div style="display: flex; align-items: center;">
+                    <img src="https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="PostImage" alt="User Profile Image" />
+                    <input type="text" class="commentinput" placeholder="Write your thought" />
+                    <button class="addCommentbtn">Post</button>
+                </div>
+                <div style="align-items: center;">
+                    <div style="display: flex; align-items: center;">
+                        <img src="https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="PostImage" alt="Commenter Profile Image" />
+                        <p style="margin-left: 6px; font-size: 18px; margin-top: 6px;">Commenter Username</p>
+                    </div>
+                    <p style="margin-left: 55px; text-align: start; margin-top: -16px;">This is a comment.</p>
+                    <p style="margin-left: 55px; text-align: start; margin-top: -10px; color: #aaa; font-size: 11px;">Reply</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- ///////// -->
+
+<!-- <div class='PostContainer'>
+    <div class='SubPostContainer'>
+      <div>
+        <div style="display: flex; align-items: center;">
+          <img *ngIf="user.profile === '' else userProfile" [src]="profileImage" class="PostImage" alt="" />
+          <ng-template #userProfile>
+            <img [src]="user.profile" class="PostImage" alt="" />
+          </ng-template>
+          <div>
+            <p style="margin-left: 5px; text-align: start;">{{ user.username }}</p>
+            <p style="font-size: 11px; text-align: start; margin-left: 5px; margin-top: -13px; color: #aaa;">Following by suman</p>
+          </div>
+          <img [src]="moreOption" class="moreicons" alt="" />
+        </div>
+        <p style="text-align: start; width: 96%; margin-left: 20px; margin-top: 0;">{{ post.title }}</p>
+        <ng-container *ngIf="post.image !== ''; else postVideo">
+          <img [src]="post.image" class="PostImages" alt="" />
+        </ng-container>
+        <ng-template #postVideo>
+          <video *ngIf="post.video !== ''" class="PostImages" width="500" height="500" controls>
+            <source [src]="post.video" type="video/mp4" />
+          </video>
+        </ng-template>
+        <div style="display: flex;">
+          <div style="display: flex; margin-left: 10px;">
+            <div style="display: flex; align-items: center; cursor: pointer;">
+              <img [src]="Like" class="iconsforPost" (click)="handleLike()" alt="" />
+              <p style="margin-left: 6px;">{{ count }} Likes</p>
+            </div>
+            <div style="display: flex; align-items: center; margin-left: 20px; cursor: pointer;">
+              <img [src]="commentIcon" class="iconsforPost" (click)="toggleShow()" alt="" />
+              <p style="margin-left: 6px;">{{ Comments.length }} Comments</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; margin-left: 200px; cursor: pointer;">
+            <img [src]="shareIcon" class="iconsforPost" alt="" />
+            <p style="margin-left: 6px;">Share</p>
+          </div>
+        </div>
+        <div *ngIf="show" style="padding: 10px;">
+          <div style="display: flex; align-items: center;">
+            <img [src]="user.other.profile" class="PostImage" alt="" />
+            <input type="text" class="commentinput" placeholder="Write your thought" [(ngModel)]="commentWriting" />
+            <button class="addCommentbtn" (click)="handleComment()">Post</button>
+          </div>
+          <div *ngFor="let comment of Comments" style="align-items: center;">
+            <div style="display: flex; align-items: center;">
+              <img *ngIf="comment.profile === '' else commentProfile" src="https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="PostImage" alt="" />
+              <ng-template #commentProfile>
+                <img [src]="comment.profile" class="PostImage" alt="" />
+              </ng-template>
+              <p style="margin-left: 6px; font-size: 18px; margin-top: 6px;">{{ comment.username }}</p>
+            </div>
+            <p style="margin-left: 55px; text-align: start; margin-top: -16px;">{{ comment.comment }}</p>
+            <p style="margin-left: 55px; text-align: start; margin-top: -10px; color: #aaa; font-size: 11px;">Reply</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   -->
+
+<div class="post">
+  <div class="postWrapper">
+    <div class="postTop">
+      <div class="postTopLeft">
+        <img class="postProfileImg" src="/assets/images/userIcon.jpg" alt="" />
+        <span class="postUsername"> {{post.user.firstname }} {{post.user.lastname }}</span>
+        <span class="postDate">{{ formatPostDate(post.creationDate) }}</span>
+      </div>
+      <div class="postTopRight" >
+        <button class="menuButton" mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item >
+            <mat-icon>edit</mat-icon>
+            <span>Update Post</span>
+          </button>
+          <button mat-menu-item >
+            <mat-icon>delete</mat-icon>
+            <span>Delete Post</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+    <div class="postCenter">
+      <span class="postText">{{ post.description }}</span>
+      <!-- <img class="postImg" src="assets/images/Image_test.png" alt="Image post" /> -->
+      <div *ngIf="post.image">
+        <img class="postImg" [src]="post.image" alt="Post Image" />
+      </div>
+    </div>
+    <div class="postBottom">
+      <ng-container *ngIf="!hasLiked(post)">
+        <div class="postBottomLeft">
+          <img class="likeIcon" src="assets/images/unlike.png" alt="Like" (click)="likePost(post.postId)" />
+          <span class="postLikeCounter">{{ post.likes.$values.length }} liked the post</span>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="hasLiked(post)">
+        <div class="postBottomLeft">
+          <img class="likeIcon" src="assets/images/like.png" alt="Unlike" (click)="unlikePost(post.postId)" />
+          <span class="postLikeCounter"> You and {{ post.likes.$values.length - 1  }} liked this post</span>
+        </div>
+      </ng-container>
+    
+      <div class="postBottomRight">
+        <img class="likeIcon" src="assets/images/comments.png" alt="Comments" />
+        <span class="postCommentText" (click)="toggleShow()"> Comments</span>
+      </div>
+    </div>
+    
+    <div *ngIf="show">
+      <app-post-comment></app-post-comment>
+    </div>
+  </div>
+</div>

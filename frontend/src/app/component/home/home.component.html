@@ -1,9 +1,17 @@
-<div>
-<div id="post-feed">
-    <!-- <app-post *ngFor="let post of posts" [postData]="post"></app-post> -->
-    <app-post></app-post>
-</div>
-<button (click)="onCreatePostClick()" mat-fab color="warn" id="post-button">
-    <mat-icon>add</mat-icon>
-</button>
+<div id="homeComp">
+    <!-- <div id="post-feed">
+        <app-post *ngFor="let post of posts" [postData]="post"></app-post>
+        
+        <app-post></app-post>
+    </div> -->
+
+    <app-share-post (postAdded)="onPostAdded()"></app-share-post>
+    
+    <div *ngFor="let post of posts">
+        <app-post-card [post]="post"></app-post-card>
+    </div>
+    
+    <button (click)="onCreatePostClick()" mat-fab color="warn" id="post-button">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>

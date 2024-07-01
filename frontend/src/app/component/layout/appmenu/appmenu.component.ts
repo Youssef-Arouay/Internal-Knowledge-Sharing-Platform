@@ -8,7 +8,7 @@ import { usercred } from '../../../_model/user.model';
 @Component({
   selector: 'app-appmenu',
   standalone: true,
-  imports: [MaterialModule, RouterOutlet, RouterLink],
+  imports: [MaterialModule, RouterOutlet, RouterLink, ],
   templateUrl: './appmenu.component.html',
   styleUrl: './appmenu.component.css'
 })
@@ -31,14 +31,14 @@ export class AppmenuComponent implements OnInit, DoCheck {
   // }
 
   ngOnInit(): void {
-    this.userService.getUserInfo().subscribe(
-      (data: usercred) => {
+    this.userService.getUserInfo().subscribe({
+      next: (data: usercred) => {
         this.user = data;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching user info', error);
       }
-    );
+    });
   }
 
   ngDoCheck(): void {
@@ -56,6 +56,9 @@ export class AppmenuComponent implements OnInit, DoCheck {
   }
 
   logout() {
+
+    this.userService.clearUser();
+    
     // Clear user information from local storage
     localStorage.removeItem('token');
     localStorage.removeItem('user');

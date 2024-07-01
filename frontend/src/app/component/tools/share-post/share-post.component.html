@@ -1,0 +1,30 @@
+<div class="share">
+  <div class="shareWrapper">
+    <div class="shareTop">
+      <img class="shareProfileImg" src="assets/images/userIcon.jpg" alt="" />
+      <input
+        [(ngModel)]="post.description"
+        placeholder="What's in your mind?"
+        class="shareInput"
+      />
+    </div>
+    <hr class="shareHr" />
+    <div class="shareBottom">
+      <div class="shareOptions">
+        <div class="shareOption">
+          <fa-icon [icon]="documentIcon" class="shareIcon" style="color: goldenrod;"></fa-icon>
+          <span class="shareOptionText">Document</span>
+        </div>
+        <div class="shareOption">
+          <fa-icon [icon]="photoVideoIcon" class="shareIcon" style="color: tomato;"></fa-icon>
+          <span class="shareOptionText">Photo or Video</span>
+        </div>
+        <div class="shareOption">
+          <fa-icon [icon]="tagIcon" class="shareIcon" style="color: blue;"></fa-icon>
+          <span class="shareOptionText">Tag</span>
+        </div>
+      </div>
+      <button class="shareButton" (click)="addPost()">Share</button>
+    </div>
+  </div>
+</div>

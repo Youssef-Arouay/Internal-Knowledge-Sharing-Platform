@@ -14,7 +14,15 @@ namespace Backend.Services
         {
             _context = context;
         }
+        
+        //get UserId from Email
+        public async Task<int?> GetUserIdByEmail(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            return user?.Id;
+        }
 
+        // Add Post Logic
         public async Task<(bool Success, Post Post, string ErrorMessage)> AddPostAsync(PostDto createPostDto, ClaimsPrincipal userClaims)
         {
             try
@@ -46,11 +54,6 @@ namespace Backend.Services
             }
         }
 
-        private async Task<int?> GetUserIdByEmail(string email)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-            return user?.Id;
-        }
 
         public async Task<(bool Success, string ErrorMessage)> DeletePostAsync(int postId, ClaimsPrincipal userClaims)
         {

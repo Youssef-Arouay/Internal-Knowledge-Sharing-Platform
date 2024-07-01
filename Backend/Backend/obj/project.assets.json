@@ -4385,11 +4385,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\arway\\Desktop\\EY\\Backend\\Backend\\Backend.csproj",
+      "projectUniqueName": "C:\\Users\\arway\\Desktop\\EY\\projet\\Backend\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "C:\\Users\\arway\\Desktop\\EY\\Backend\\Backend\\Backend.csproj",
+      "projectPath": "C:\\Users\\arway\\Desktop\\EY\\projet\\Backend\\Backend\\Backend.csproj",
       "packagesPath": "C:\\Users\\arway\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\arway\\Desktop\\EY\\Backend\\Backend\\obj\\",
+      "outputPath": "C:\\Users\\arway\\Desktop\\EY\\projet\\Backend\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\arway\\AppData\\Roaming\\NuGet\\NuGet.Config",
