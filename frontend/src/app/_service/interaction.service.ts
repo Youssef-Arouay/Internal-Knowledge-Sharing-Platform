@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { postCommentReq } from '../_model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,27 @@ export class InteractionService {
     return this.http.delete<any>(`${this.baseUrl}post/unlike/${postId}`, { headers });
   }
   
+
+  // Method to add a comment
+  addComment(comment: postCommentReq): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.baseUrl}post/comment/add`, comment, { headers });
+  }
+
+
+  // Method to get comments by post ID
+  getCommentsByPostId(postId: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.baseUrl}post/${postId}/comments`, { headers });
+  }
 
 
 }

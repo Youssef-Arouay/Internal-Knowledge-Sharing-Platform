@@ -8,7 +8,7 @@
     <app-share-post (postAdded)="onPostAdded()"></app-share-post>
     
     <div *ngFor="let post of posts">
-        <app-post-card [post]="post"></app-post-card>
+        <app-post-card [post]="post" (postDeleted)="onPostDeleted()" (likePost)="onPostLiked()" (unlikePost)="onPostUnliked()"></app-post-card>
     </div>
     
     <button (click)="onCreatePostClick()" mat-fab color="warn" id="post-button">

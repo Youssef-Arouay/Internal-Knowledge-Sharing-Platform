@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { TestComponent } from '../test/test.component';
 import { PostCommentComponent } from '../post-comment/post-comment.component';
@@ -17,16 +17,24 @@ import { SharePostComponent } from '../share-post/share-post.component';
   standalone: true,
   imports: [MatIconModule,TestComponent, PostCommentComponent, CommonModule, MatMenuModule, MatMenuTrigger],
   templateUrl: './post-card.component.html',
-  styleUrl: './post-card.component.css'
+  styleUrl: './post-card.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class PostCardComponent implements OnInit {
   
   
   @Input() post: any; // Input property to receive post data from parent component
+  @Output() postDeleted: EventEmitter<void> = new EventEmitter<void>();
+  @Output() postLiked: EventEmitter<void> = new EventEmitter<void>();
+  @Output() postUnliked: EventEmitter<void> = new EventEmitter<void>();
 
   show = false;
 
   user!: usercred ;
+
+  isOwner = false; // Flag to indicate if current user is the owner of the post
+
 
   constructor(private dialog: MatDialog, private postService: PostService, private userService : UserService, private interactionService: InteractionService) { }
 
@@ -36,35 +44,35 @@ export class PostCardComponent implements OnInit {
 
   ngOnInit(): void {
     // connected user info 
+    this.fetchUserInfo() ;
+  }
+
+  fetchUserInfo(): void {
     this.userService.getUserInfo().subscribe({
       next: (data: usercred) => {
         this.user = data;
+        this.isOwner = this.user && this.post.userId === this.user.id;
       },
       error: (error) => {
         console.error('Error fetching user info', error);
       }
     });
-}
+  }
 
 
   hasLiked(post: any): boolean {
-    const userId = this.user ? this.user.id : null; // Assuming user is already fetched
-    return post.likes.$values.some((like: any) => like.userId === userId);
+    if (!this.user || !post.likes || !post.likes.$values) return false;
+    return post.likes.$values.some((like: any) => like.userId === this.user.id);
   }
-
   
-  likePost(postId: number) {
+  
+  likePost(postId: number): void {
     this.interactionService.likePost(postId).subscribe({
-      next: (response: any) => {
-        // Assuming the API returns updated post information
-        const updatedPost = response; // Adjust according to your API response structure
-  
-        // Update the posts array to reflect the new like count
-        const postIndex = this.post.findIndex((post: { postId: number; }) => post.postId === postId);
-        if (postIndex !== -1) {
-          this.post[postIndex] = updatedPost;
-          console.log('Post liked successfully', updatedPost);
-        }
+      next: () => {
+        // Assuming the API returns status code 200 upon success
+        console.log('Post liked successfully');
+        this.postLiked.emit(); // Emit event to notify parent component
+        this.hasLiked(this.post);
       },
       error: (error: any) => {
         console.error('Error liking post', error);
@@ -73,18 +81,13 @@ export class PostCardComponent implements OnInit {
   }
   
 
-  unlikePost(postId: number) {
+  unlikePost(postId: number): void {
     this.interactionService.unlikePost(postId).subscribe({
-      next: (response: any) => {
-        // Assuming the API returns updated post information after unlike
-        const updatedPost = response; // Adjust according to your API response structure
-  
-        // Update the post array to reflect the new like count
-        const postIndex = this.post.findIndex((post: { postId: number; }) => post.postId === postId);
-        if (postIndex !== -1) {
-          this.post[postIndex] = updatedPost;
-          console.log('Post unliked successfully', updatedPost);
-        }
+      next: () => {
+        console.log('Post unliked successfully');
+        this.postUnliked.emit(); // Emit event to notify parent component
+        this.hasLiked(this.post);
+
       },
       error: (error: any) => {
         console.error('Error unliking post', error);
@@ -97,4 +100,24 @@ export class PostCardComponent implements OnInit {
     return this.postService.formatPostDate(creationDate);
   }
   
+  // Method to delete a post
+  deletePost() {
+    console.log('Deleting post with id:', this.post.postId); // Debugging log
+
+    if (confirm('Are you sure you want to delete this post?')) {
+      this.postService.deletePost(this.post.postId).subscribe({
+        next: (response: any) => {
+          console.log('Post deleted successfully', response);
+          this.postDeleted.emit();
+
+          // Handle post deletion in your application (e.g., remove from UI)
+        },
+        error: (error: any) => {
+          console.error('Error deleting post', error);
+        }
+      });
+    }
+  }
+
+
 }

@@ -47,4 +47,25 @@
     padding-left: 40px;
     padding-right: 40px;
   }
+
+  .addCommentbtn:hover{
+    background-color: rgb(40, 73, 223);
+  }
+
+  .loadMoreBtn {
+    padding: 6px;
+    border: none;
+    background-color: rgb(53, 71, 150);
+    color: white;
+    border-radius: 6px;
+    margin-left: 39px;
+    cursor: pointer;
+    padding-left: 40px;
+    padding-right: 40px;
+    transition: background-color 0.3s ease; /* Smooth transition for background color change */
+}
+
+.loadMoreBtn:hover {
+    background-color: rgb(16, 61, 207); /* New background color on hover */
+}
   

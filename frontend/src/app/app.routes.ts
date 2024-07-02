@@ -3,12 +3,12 @@ import { HomeComponent } from './component/home/home.component';
 import { RegisterComponent } from './component/register/register.component';
 import { authGuard } from './_guard/auth.guard';
 import { authRedirectGuard } from './_guard/auth-redirect.guard';
-import { AddPostComponent } from './component/tools/add-post/add-post.component';
-import { ReplyComponent } from './component/tools/reply/reply.component';
 import { PostCardComponent } from './component/tools/post-card/post-card.component';
 import { SharePostComponent } from './component/tools/share-post/share-post.component';
 import { TestComponent } from './component/tools/test/test.component';
 import { PostCommentComponent } from './component/tools/post-comment/post-comment.component';
+import { PostComponent } from './component/tools/post/post.component';
+import { TagsInputComponent } from './component/tools/tags-input/tags-input.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -17,8 +17,7 @@ export const routes: Routes = [
     {path:'register', component:RegisterComponent, canActivate: [authRedirectGuard]},
 
 
-    {path:'addpost', component:AddPostComponent, canActivate:[authGuard]},
-    {path:'reply', component:PostCommentComponent},
+    {path:'reply', component:TagsInputComponent},
     {path:'postcard', component:PostCardComponent},
     {path:'sharepost', component:SharePostComponent},
 

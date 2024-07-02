@@ -1,68 +1,94 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { InteractionService } from '../../../_service/interaction.service';
+import { FormsModule } from '@angular/forms';
+import { postCommentReq } from '../../../_model/user.model';
 
 @Component({
   selector: 'app-post-comment',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './post-comment.component.html',
   styleUrl: './post-comment.component.css'
 })
 export class PostCommentComponent implements OnInit {
   @Input() post: any;  // Assuming 'post' is passed as an input to the component
-
-  users: any;  // Define type as per your user structure
-  user: any = {};
-  Like: string = '';  // Adjust type if necessary
-  count: number = 0;
-  Comments: any[] = [];
-  commentwriting: string = '';
+  @Input() postId!: number; // Get the postId as an input property
+  commentContent: string = '';
   show: boolean = true;
+  comments: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  //////*
+  displayedComments: any[] = [];
+  batchSize: number = 3;
+  loadedCommentsCount: number = 0;
+  /////
+
+
+  constructor(private interactionService: InteractionService) {}
 
   ngOnInit(): void {
-   
-  }
-
-  async getUser() {
-    try {
-      const res: any = await this.http.get(`http://139.144.12.15:80/api/user/post/user/details/${this.post.user}`).toPromise();
-      this.user = res.data;
-    } catch (error) {
-      console.log("Some error occurred:", error);
-    }
-  }
-
-  // Function to update commentwriting property on input change
-  setcommentwriting(value: string) {
-    this.commentwriting = value;
-  }
-
-
-  
-
-  async addComment() {
-    const comment = {
-      postid: this.post._id,
-      username: this.users.other.username,
-      comment: this.commentwriting,
-      profile: this.users.other.profile || 'https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    };
-
-    try {
-      const url = 'http://localhost:5000/api/post/comment/post';
-      const headers = new HttpHeaders().set('Content-Type', 'application/json').set('token', this.users.accessToken);
-      await this.http.put(url, comment, { headers }).toPromise();
-      this.Comments.push(comment);  // Update local comments array
-    } catch (error) {
-      console.error('Error adding comment:', error);
-    }
+    this.loadComments();
   }
 
   handleComment() {
-    this.addComment();
+    if (this.commentContent.trim()) {
+      const comment: postCommentReq = {
+        postId: this.postId.toString(),
+        content: this.commentContent
+      };
+
+      this.interactionService.addComment(comment).subscribe({
+        next: (response: any) => {
+          console.log('Comment added successfully, response:', response);
+          this.commentContent = "" ; // Reset the input field
+        },
+        error: (error: any) => {
+          console.error('Error adding comment', error);
+        }
+      });
+    } else {
+      alert('Comment content cannot be empty');
+    }
+  }
+
+  // loadComments() {
+  //   this.interactionService.getCommentsByPostId(this.postId).subscribe({
+  //     next: (response: any) => {
+  //       console.log('Comments fetched successfully, response:', response);
+  //       this.comments = response.$values; // Adjust based on actual response structure
+  //     },
+  //     error: (error: any) => {
+  //       console.error('Error fetching comments', error);
+  //     }
+  //   });
+  // }
+
+  loadComments() {
+    this.interactionService.getCommentsByPostId(this.postId).subscribe({
+      next: (response: any) => {
+        console.log('Comments fetched successfully, response:', response);
+        this.comments = response.$values; // Adjust based on actual response structure
+        this.loadNextBatch();
+      },
+      error: (error: any) => {
+        console.error('Error fetching comments', error);
+      }
+    });
+  }
+
+  loadNextBatch() {
+    if (this.loadedCommentsCount < this.comments.length) {
+      const endIndex = Math.min(this.loadedCommentsCount + this.batchSize, this.comments.length);
+      const newComments = this.comments.slice(this.loadedCommentsCount, endIndex);
+      this.displayedComments.push(...newComments);
+      this.loadedCommentsCount = endIndex;
+    }
+  }
+
+  onLoadMoreClick() {
+    this.loadNextBatch();
   }
 
   toggleComments() {

@@ -19,10 +19,15 @@
           <fa-icon [icon]="photoVideoIcon" class="shareIcon" style="color: tomato;"></fa-icon>
           <span class="shareOptionText">Photo or Video</span>
         </div>
-        <div class="shareOption">
-          <fa-icon [icon]="tagIcon" class="shareIcon" style="color: blue;"></fa-icon>
+        <div class="shareOption" (click)="toggleTagsInput()" >
+          <fa-icon [icon]="tagIcon" class="shareIcon" style="color: blue;" ></fa-icon>
           <span class="shareOptionText">Tag</span>
         </div>
+        <div [class.hidden]="!showTagsInput">
+          <app-tags-input #tagsInputRef></app-tags-input>
+          <button (click)="showTags()">Show Tags</button>
+        </div>
+        
       </div>
       <button class="shareButton" (click)="addPost()">Share</button>
     </div>

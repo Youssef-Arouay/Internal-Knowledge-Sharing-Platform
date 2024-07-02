@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddPostComponent } from '../tools/add-post/add-post.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { PostComponent } from '../tools/post/post.component';
@@ -15,7 +14,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, PostComponent, SharePostComponent, PostCardComponent, CommonModule],
+  imports: [MatIconModule, MatButtonModule, PostComponent, SharePostComponent, CommonModule, PostCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -65,4 +64,16 @@ export class HomeComponent implements OnInit {
     this.fetchPosts(); // Refresh posts after a new post is added
   }
 
+  onPostDeleted(): void {
+    this.fetchPosts(); // Refresh posts after a post is deleted
+  }
+  onPostLiked() : void {
+    // Handle post liked event: Fetch updated posts or update specific post in `this.posts`
+    this.fetchPosts();
+  }
+
+  onPostUnliked(): void {
+    // Handle post unliked event: Fetch updated posts or update specific post in `this.posts`
+    this.fetchPosts();
+  }
 }

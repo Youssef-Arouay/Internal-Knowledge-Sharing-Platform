@@ -44,7 +44,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<usercred>(`${this.baseUrl}user/info`, { headers });
+    return this.http.get<usercred>(`${this.baseUrl}user/GetUserDetails`, { headers });
   }
 
 }

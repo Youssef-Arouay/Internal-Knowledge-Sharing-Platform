@@ -2,13 +2,12 @@ import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { ReplyComponent } from '../reply/reply.component';
-import { AddPostComponent } from '../add-post/add-post.component';
+import { SharePostComponent } from '../share-post/share-post.component';
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, AddPostComponent],
+  imports: [MatCardModule, MatIconModule, ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'
 })
@@ -26,7 +25,7 @@ export class PostComponent {
 
   onReplyClick(){
     // this.dialog.open(ReplyComponent, {data: this.postData.postId});
-    this.dialog.open(ReplyComponent);
+    this.dialog.open(SharePostComponent);
 
   }
 

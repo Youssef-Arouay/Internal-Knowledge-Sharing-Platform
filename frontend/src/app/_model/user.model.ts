@@ -27,6 +27,11 @@ export interface loginresp {
 export interface postDetails {
     id: number,
     description: string,
-    tags: string,
+    tags: string[],
     creationDate : string,
+}
+
+export interface postCommentReq {
+    postId: string,
+    content: string,
 }

@@ -25,6 +25,16 @@ export class PostService {
     return this.http.post<postDetails>(`${this.baseUrl}post/add`, post, { headers });
   }
 
+   // Method to delete a post by ID
+   deletePost(postId: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.delete<any>(`${this.baseUrl}post/${postId}`, { headers });
+  }
+
   // fetch all posts for home page 
   getAllPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}post/all`);

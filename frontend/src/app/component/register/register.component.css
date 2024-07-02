@@ -84,6 +84,7 @@
     font-size: 13px;
     border-radius: 8px;
     width: 100%;
+    height: auto;
     outline: none;
 }
 
@@ -140,7 +141,7 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin: 0 3px;
+    margin: 0 5px;
     width: 40px;
     height: 40px;
     transition: all 0.5s;

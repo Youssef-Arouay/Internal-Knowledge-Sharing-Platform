@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReplyComponent } from './reply.component';
+import { TagsInputComponent } from './tags-input.component';
 
-describe('ReplyComponent', () => {
-  let component: ReplyComponent;
-  let fixture: ComponentFixture<ReplyComponent>;
+describe('TagsInputComponent', () => {
+  let component: TagsInputComponent;
+  let fixture: ComponentFixture<TagsInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReplyComponent]
+      imports: [TagsInputComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ReplyComponent);
+    fixture = TestBed.createComponent(TagsInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
