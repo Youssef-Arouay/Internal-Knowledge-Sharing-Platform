@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Backend.Models
 {
@@ -8,6 +9,7 @@ namespace Backend.Models
         public string Firstname { get; set; } = string.Empty;
         public string Lastname{ get; set; } = string.Empty;
         public string Username { get; set; } = string.Empty;
+        [EmailAddress]
         public string Email { get; set; } = string.Empty;
         public string PasswordHash { get; set; } = string.Empty;
 

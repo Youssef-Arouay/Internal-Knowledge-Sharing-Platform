@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace Backend.Controllers
 {
-    [Route("post")]
+    [Route("post/")]
     [ApiController]
     public class InteractionController : Controller
     {
@@ -30,7 +30,6 @@ namespace Backend.Controllers
 
 
 
-        // POST: /post/{postId}/like
         [HttpPost("like/{postId}")]
         [Authorize]
         public async Task<IActionResult> LikePost(int postId)
@@ -118,7 +117,8 @@ namespace Backend.Controllers
         //      COMMENT
         //
 
-        [HttpPost("/comment/add")]
+        // add a comment 
+        [HttpPost("/post/comment/add")]
         [Authorize]
         public async Task<IActionResult> AddComment(CommentDto commentDto)
         {
@@ -136,7 +136,8 @@ namespace Backend.Controllers
                 {
                     PostId = commentDto.PostId,
                     UserId = userId.Value,
-                    Content = commentDto.Content
+                    Content = commentDto.Content,
+                    CreationDate = commentDto.CreationDate != default ? commentDto.CreationDate : DateTime.Now
                 };
 
                 _context.Comments.Add(comment);
@@ -154,8 +155,8 @@ namespace Backend.Controllers
 
 
 
-        // DELETE: api/comment/delete/{id}
-        [HttpDelete("delete/{id}")]
+        // DELETE a comment 
+        [HttpDelete("comment/delete/{id}")]
         [Authorize]
         public async Task<IActionResult> DeleteComment(int id)
         {
@@ -191,7 +192,7 @@ namespace Backend.Controllers
             }
         }
 
-        // GET: /post/{postId}/comments
+        // GET all commetns of a specific post
         [HttpGet("{postId}/comments")]
         [Authorize]
         public async Task<IActionResult> GetPostComments(int postId)
@@ -225,6 +226,23 @@ namespace Backend.Controllers
                                             })
                                             .ToListAsync();
                 return Ok(comments);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
+            }
+        }
+
+        // GET Nbre of comments on a post
+        [HttpGet("{postId}/comment/count")]
+        [Authorize]
+        public async Task<IActionResult> GetCommentCount(int postId)
+        {
+            try
+            {
+                var commentCount = await _interactionService.GetCommentCountAsync(postId);
+
+                return Ok(new { postId, commentCount });
             }
             catch (Exception ex)
             {

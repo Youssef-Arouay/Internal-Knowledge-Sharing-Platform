@@ -103,35 +103,7 @@ namespace Backend.Controllers
         {
             try
             {
-                // Use projection to include only the necessary properties
-                var posts = await _context.Posts
-                                          .Include(p => p.User)
-                                          .Include(p => p.Likes)
-                                          .Select(p => new
-                                          {
-                                              p.PostId,
-                                              p.Description,
-                                              p.Tags,
-                                              p.CreationDate,
-                                              p.UserId,
-                                              User = new
-                                              {
-                                                  p.User.Firstname,
-                                                  p.User.Lastname
-                                              },
-                                              Likes = p.Likes.Select(l => new
-                                              {
-                                                  l.LikeId,
-                                                  l.UserId,
-                                                  User = new
-                                                  {
-                                                      l.User.Firstname,
-                                                      l.User.Lastname
-                                                  }
-                                              }).ToList()
-                                          })
-                                  .ToListAsync();
-
+                var posts = await _postService.GetAllPostsAsync();
                 return Ok(posts);
             }
             catch (Exception ex)
@@ -139,6 +111,7 @@ namespace Backend.Controllers
                 return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
             }
         }
+
         /*public async Task<IActionResult> GetAllPosts()
         {
             try
@@ -153,7 +126,7 @@ namespace Backend.Controllers
         }*/
 
 
-        
+
 
 
     }

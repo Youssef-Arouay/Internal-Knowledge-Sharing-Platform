@@ -9,6 +9,7 @@ namespace Backend.Controllers
 {
     [Route("user")]
     [ApiController]
+    [Authorize]
     public class UserController : Controller
     {
 
@@ -19,7 +20,7 @@ namespace Backend.Controllers
             _context = context;
         }
 
-        [HttpGet("info")]
+        [HttpGet(nameof(GetUserDetails))]
         [Authorize]
         public async Task<ActionResult<User>> GetUserDetails()
         {

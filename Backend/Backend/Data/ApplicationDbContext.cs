@@ -1,17 +1,18 @@
 ﻿using Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Newtonsoft.Json;
 
 namespace Backend.Data
 {
-        public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-            {
-            }
+        }
 
-            public DbSet<User> Users { get; set; }
-            public DbSet<Post> Posts { get; set; }
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<Post> Posts { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<SavedPost> SavedPosts { get; set; }
@@ -53,6 +54,20 @@ namespace Backend.Data
                 .WithMany(u => u.SavedPosts)
                 .HasForeignKey(ps => ps.UserId)
                 .OnDelete(DeleteBehavior.Cascade);  // Cascade delete from User to SavedPost
+
+            /*modelBuilder.Entity<Post>()
+                .Property(p => p.TagsAsString)
+                .HasColumnName("Tags");*/
+
+           /* modelBuilder.Entity<Post>(ConfigurePost);*/
+        }
+
+        private void ConfigurePost(EntityTypeBuilder<Post> builder)
+        {
+            builder.Property(p => p.Tags)
+                    .HasConversion(
+                       v => JsonConvert.SerializeObject(v),
+                       v => JsonConvert.DeserializeObject<List<string>>(v));
         }
     }
 }

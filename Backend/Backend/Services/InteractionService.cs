@@ -19,6 +19,14 @@ namespace Backend.Services
             return user?.Id;
         }
 
+        // get nomber comments of a post
+        public async Task<int> GetCommentCountAsync(int postId)
+        {
+            return await _context.Comments
+                .CountAsync(c => c.PostId == postId);
+        }
+
+        /// delete a comment
         public async Task<(bool Success, string ErrorMessage)> DeleteCommentAsync(int commentId, ClaimsPrincipal userClaims)
         {
             try

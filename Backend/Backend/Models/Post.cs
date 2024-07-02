@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Backend.Models
@@ -8,7 +9,9 @@ namespace Backend.Models
         [Key]
         public int PostId { get; set; }
         public string Description { get; set; } = string.Empty;
-        public string Tags { get; set; } = string.Empty;
+
+        /*[NotMapped]*/
+        public List<string> Tags { get; set; } = new List<string>();
         public DateTime CreationDate { get; set; }
 
 
@@ -23,5 +26,13 @@ namespace Backend.Models
         public ICollection<Like> Likes { get; set; }  // Likes on this post
         [JsonIgnore]
         public ICollection<SavedPost> SavedByUsers { get; set; }  // Users who have saved this post
+
+
+        /*public string TagsAsString
+        {
+            get => string.Join(",", Tags);
+            set => Tags = value?.Split(',').ToList() ?? new List<string>();
+        }*/
+
     }
 }

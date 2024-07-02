@@ -33,27 +33,8 @@ namespace Backend.Controllers
         }
 
 
-        /*[HttpPost("register")]
-        public async Task<ActionResult<User>> Register(RegisterDto request)
-        {
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
-
-            var user = new User
-            {
-                Firstname = request.Firstname,
-                Lastname = request.Lastname,
-                Email = request.Email,
-                PasswordHash = passwordHash
-            };
-
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return Ok(user);
-        }*/
-
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(RegisterDto request)
+        public async Task<ActionResult> Register(RegisterDto request)
         {
             try
             {
@@ -89,15 +70,12 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception (you could use a logging framework here)
-                // Example: _logger.LogError(ex, "Error occurred during registration");
-
                 return StatusCode(500, ex);
             }
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(LoginDto request)
+        public async Task<ActionResult> Login(LoginDto request)
         {
             try
             {
@@ -106,40 +84,19 @@ namespace Backend.Controllers
                 {
                     return BadRequest("Wrong Email or Password!");
                 }
-
                 string token = CreateToken(user);
-
                 var  response = new
                 {
                     Token = token,
                     User = user
                 };
-
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                // Log the exception (you could use a logging framework here)
-                // Example: _logger.LogError(ex, "Error occurred during login");
-
                 return StatusCode(500, "Error occurred during login");
             }
         }
-
-
-        /* [HttpPost("login")]
-         public ActionResult<User> Login(LoginDto request)
-         {
-             if(user.Email != request.Email || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-             {
-                 return BadRequest("Wrong Email or Password !");
-             }
-
-             string token = CreateToken(user);
-
-
-             return Ok(token);
-         }*/
 
 
         private string CreateToken(User user)

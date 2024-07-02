@@ -37,10 +37,10 @@ namespace Backend.Services
 
                 var post = new Post
                 {
+                    UserId = userId.Value,
                     Description = createPostDto.Description,
                     Tags = createPostDto.Tags,
-                    CreationDate = createPostDto.CreationDate,
-                    UserId = userId.Value
+                    CreationDate = createPostDto.CreationDate
                 };
 
                 _context.Posts.Add(post);
@@ -95,5 +95,50 @@ namespace Backend.Services
                 return (false, $"An error occurred while processing your request: {ex.Message}");
             }
         }
+
+        //GetAllPosts
+        public async Task<List<object>> GetAllPostsAsync()
+        {
+            var posts = await _context.Posts
+                                      .Include(p => p.User)
+                                      .Include(p => p.Likes)
+                                      .Include(p => p.Comments)
+                                      .Select(p => new
+                                      {
+                                          p.PostId,
+                                          p.Description,
+                                          p.Tags,
+                                          p.CreationDate,
+                                          p.UserId,
+                                          User = new
+                                          {
+                                              p.User.Firstname,
+                                              p.User.Lastname
+                                          },
+                                          Likes = p.Likes.Select(l => new
+                                          {
+                                              l.LikeId,
+                                              l.UserId,
+                                              User = new
+                                              {
+                                                  l.User.Firstname,
+                                                  l.User.Lastname
+                                              }
+                                          }).ToList(),
+                                          CommentCount = p.Comments.Count()
+                                      })
+                                      .ToListAsync();
+
+            return posts.Cast<object>().ToList();
+        }
+
+        // get nomber comments of a post
+        public async Task<int> GetCommentCountAsync(int postId)
+        {
+            return await _context.Comments
+                .CountAsync(c => c.PostId == postId);
+        }
+
+
     }
 }
