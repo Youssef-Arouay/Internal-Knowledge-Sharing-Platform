@@ -1,7 +1,7 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { MaterialModule } from '../../../material.module';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { UserService, menu } from '../../../_service/user.service';
+import { UserService } from '../../../_service/user.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { usercred } from '../../../_model/user.model';
 
@@ -14,30 +14,15 @@ import { usercred } from '../../../_model/user.model';
 })
 export class AppmenuComponent implements OnInit, DoCheck {
 
-  user! :usercred ;
+  user : usercred | null = null ;
 
-
-  constructor(private toastr: ToastrService, private userService: UserService, private router: Router) {
-
-  }
+  constructor(private toastr: ToastrService, private userService: UserService, private router: Router) {}
 
   showmenu = false;
 
-  // ngOnInit(): void {
-  //   this.user = this.userService.getUser();
-  //   console.log("this.user"); // Verify if user data is available here
-  //   console.log(this.user); // Verify if user data is available here
-
-  // }
-
   ngOnInit(): void {
-    this.userService.getUserInfo().subscribe({
-      next: (data: usercred) => {
-        this.user = data;
-      },
-      error: (error) => {
-        console.error('Error fetching user info', error);
-      }
+    this.userService.user$.subscribe((user) => {
+      this.user = user;
     });
   }
 
@@ -48,7 +33,7 @@ export class AppmenuComponent implements OnInit, DoCheck {
 
   Setaccess() {
     let currentUrl = this.router.url;
-    if (currentUrl == '/register') {
+    if (currentUrl == '/register' || currentUrl == '/resetpassword') {
       this.showmenu = false;
     } else {
       this.showmenu = true;
@@ -56,9 +41,7 @@ export class AppmenuComponent implements OnInit, DoCheck {
   }
 
   logout() {
-
-    this.userService.clearUser();
-    
+    this.userService.clearUser(); 
     // Clear user information from local storage
     localStorage.removeItem('token');
     localStorage.removeItem('user');

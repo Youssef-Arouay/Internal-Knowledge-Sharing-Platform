@@ -3,15 +3,15 @@
     <div class="postTop">
       <div class="postTopLeft">
         <img class="postProfileImg" src="/assets/images/userIcon.jpg" alt="" />
-        <span class="postUsername"> {{post.user.firstname }} {{post.user.lastname }}</span>
+        <span class="postUsername"> {{post.user.firstname | titlecase}} {{post.user.lastname | titlecase}}</span>
         <span class="postDate">{{ formatPostDate(post.creationDate) }}</span>
       </div>
-      <div class="postTopRight" >
+      <div class="postTopRight">
         <button *ngIf="isOwner" class="menuButton" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item >
+          <button mat-menu-item>
             <mat-icon>edit</mat-icon>
             <span>Update Post</span>
           </button>
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="postBottom">
-      <ng-container *ngIf="!hasLiked(post)">
+      <!-- <ng-container *ngIf="!hasLiked(post)">
         <div class="postBottomLeft">
           <img class="likeIcon" src="assets/images/likee.png" alt="Like" (click)="likePost(post.postId)" />
           <span class="postLikeCounter">{{ post.likes.$values.length }} {{ post.likes.$values.length === 1 ? 'like' : 'likes' }}</span>
@@ -41,14 +41,20 @@
           <img class="likeIcon" src="assets/images/liked.png" alt="Unlike" (click)="unlikePost(post.postId)" />
           <span class="postLikeCounter">{{ post.likes.$values.length }} {{ post.likes.$values.length === 1 ? 'like' : 'likes' }}</span>
         </div>
-      </ng-container>
-    
+      </ng-container> -->
+      <div class="postBottomLeft">
+        <img class="likeIcon" src="assets/images/{{ hasLiked(post) ? 'liked.png' : 'likee.png' }}"
+          alt="{{ hasLiked(post) ? 'Unlike' : 'Like' }}" (click)="handleLike(post)" />
+        <span class="postLikeCounter">{{ post.likes.$values.length }} {{ post.likes.$values.length === 1 ? 'like' :
+          'likes' }}</span>
+      </div>
+
       <div class="postBottomRight">
         <img class="commentIcon" src="assets/images/comments.png" alt="Comments" />
         <span class="postCommentText" (click)="toggleShow()"> Comments ({{post.commentCount}})</span>
       </div>
     </div>
-    
+
     <div *ngIf="show">
       <app-post-comment [postId]="post.postId"></app-post-comment>
     </div>

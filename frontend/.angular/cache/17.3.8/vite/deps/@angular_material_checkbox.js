@@ -2,13 +2,13 @@ import {
   CheckboxRequiredValidator,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
-} from "./chunk-A7J6RX36.js";
+} from "./chunk-UZLQAKCI.js";
 import {
   MatCommonModule,
   MatRipple,
   _MatInternalFormField
-} from "./chunk-RKEZMMNF.js";
-import "./chunk-2YIW4LOB.js";
+} from "./chunk-TVO3LXYO.js";
+import "./chunk-4MOHW5LC.js";
 import {
   ANIMATION_MODULE_TYPE,
   Attribute,
@@ -65,7 +65,8 @@ import {
   ɵɵresetView,
   ɵɵrestoreView,
   ɵɵviewQuery
-} from "./chunk-IB3TIOKX.js";
+} from "./chunk-ECI3W7TP.js";
+import "./chunk-4J25ECOH.js";
 import "./chunk-J4B6MK7R.js";
 
 // node_modules/@angular/material/fesm2022/checkbox.mjs

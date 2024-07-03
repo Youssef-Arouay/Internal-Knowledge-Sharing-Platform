@@ -3,12 +3,13 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileAlt, faMapMarkerAlt, faPhotoVideo, faSmile, faTags } from '@fortawesome/free-solid-svg-icons';
-import { postDetails } from '../../../_model/user.model';
+import { postDetails, usercred } from '../../../_model/user.model';
 import { PostService } from '../../../_service/post.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TagsInputComponent } from '../tags-input/tags-input.component';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../../_service/user.service';
 
 @Component({
   selector: 'app-share-post',
@@ -27,12 +28,21 @@ export class SharePostComponent {
   showTagsInput = false ;
   tags: string[] = [];
 
+  user: usercred |null = null ;
+
+  
   @Output() postAdded: EventEmitter<void> = new EventEmitter<void>();
   @ViewChild('tagsInputRef') tagsInputRef!: TagsInputComponent;
 
   post: postDetails = { id: 0, description: '', tags: [], creationDate: '', };
 
-  constructor(private postService: PostService, private router: Router) { }
+  constructor(private postService: PostService, private userService: UserService,  private router: Router) { }
+
+  ngOnInit(): void {
+    this.userService.user$.subscribe((user) => {
+      this.user = user;
+    });
+  }
 
 
   toggleTagsInput() {

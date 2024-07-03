@@ -49,7 +49,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.Like", b =>
@@ -72,7 +72,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Likes");
+                    b.ToTable("Likes", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.Post", b =>
@@ -101,7 +101,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.SavedPost", b =>
@@ -116,7 +116,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SavedPosts");
+                    b.ToTable("SavedPosts", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.User", b =>
@@ -149,7 +149,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.Comment", b =>

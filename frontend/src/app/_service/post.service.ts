@@ -32,7 +32,7 @@ export class PostService {
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.delete<any>(`${this.baseUrl}post/${postId}`, { headers });
+    return this.http.delete<any>(`${this.baseUrl}post/delete/${postId}`, { headers });
   }
 
   // fetch all posts for home page 

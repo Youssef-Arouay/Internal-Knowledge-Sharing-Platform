@@ -4,7 +4,7 @@
       <img class="shareProfileImg" src="assets/images/userIcon.jpg" alt="" />
       <input
         [(ngModel)]="post.description"
-        placeholder="What's in your mind?"
+        placeholder="What's in your mind {{user?.firstname | titlecase }} ?"
         class="shareInput"
       />
     </div>
@@ -25,7 +25,7 @@
         </div>
         <div [class.hidden]="!showTagsInput">
           <app-tags-input #tagsInputRef></app-tags-input>
-          <button (click)="showTags()">Show Tags</button>
+          <!-- <button (click)="showTags()">Show Tags</button> -->
         </div>
         
       </div>

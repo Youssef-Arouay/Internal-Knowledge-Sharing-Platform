@@ -44,33 +44,40 @@ namespace Backend.Controllers
 
 
         // DELETE
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         [Authorize]
         public async Task<IActionResult> DeletePost(int id)
         {
-            var result = await _postService.DeletePostAsync(id, User);
-
-            if (result.Success)
+            try
             {
-                return NoContent();
-            }
+                var result = await _postService.DeletePostAsync(id, User);
 
-            if (result.ErrorMessage.Contains("Unauthorized"))
+                if (result.Success)
+                {
+                    return NoContent();
+                }
+
+                if (result.ErrorMessage.Contains("Unauthorized"))
+                {
+                    return Unauthorized(new { message = result.ErrorMessage });
+                }
+
+                if (result.ErrorMessage.Contains("Forbidden"))
+                {
+                    return StatusCode(403, new { message = result.ErrorMessage });
+                }
+
+                if (result.ErrorMessage.Contains("Post not found"))
+                {
+                    return NotFound(new { message = result.ErrorMessage });
+                }
+
+                return StatusCode(500, new { message = result.ErrorMessage });
+            }
+            catch (Exception ex)
             {
-                return Unauthorized(new { message = result.ErrorMessage });
+                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
             }
-
-            if (result.ErrorMessage.Contains("Forbidden"))
-            {
-                return StatusCode(403, new { message = result.ErrorMessage });
-            }
-
-            if (result.ErrorMessage.Contains("Post not found"))
-            {
-                return NotFound(new { message = result.ErrorMessage });
-            }
-
-            return StatusCode(500, new { message = result.ErrorMessage });
         }
 
 

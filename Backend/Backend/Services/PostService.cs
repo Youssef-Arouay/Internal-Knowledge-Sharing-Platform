@@ -55,6 +55,7 @@ namespace Backend.Services
         }
 
 
+        // Delete post with deleting likes, comments...
         public async Task<(bool Success, string ErrorMessage)> DeletePostAsync(int postId, ClaimsPrincipal userClaims)
         {
             try
@@ -65,27 +66,35 @@ namespace Backend.Services
                 {
                     return (false, "Unauthorized: Email claim not found.");
                 }
-
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-
                 if (user == null)
                 {
                     return (false, "Unauthorized: User not found.");
                 }
-
                 var post = await _context.Posts.FindAsync(postId);
-
                 if (post == null)
                 {
                     return (false, "Post not found.");
                 }
-
                 if (post.UserId != user.Id)
                 {
                     return (false, "Forbidden: User does not own the post.");
                 }
+                // Delete likes associated with the post
+                var likesToDelete = await _context.Likes.Where(l => l.PostId == postId).ToListAsync();
+                _context.Likes.RemoveRange(likesToDelete);
 
+                // Delete comments associated with the post
+                var commentsToDelete = await _context.Comments.Where(c => c.PostId == postId).ToListAsync();
+                _context.Comments.RemoveRange(commentsToDelete);
+
+                // Delete saved posts associated with the post
+                var savedPostsToDelete = await _context.SavedPosts.Where(ps => ps.PostId == postId).ToListAsync();
+                _context.SavedPosts.RemoveRange(savedPostsToDelete);
+
+                // Now delete the post itself
                 _context.Posts.Remove(post);
+
                 await _context.SaveChangesAsync();
 
                 return (true, null);
@@ -95,6 +104,7 @@ namespace Backend.Services
                 return (false, $"An error occurred while processing your request: {ex.Message}");
             }
         }
+
 
         //GetAllPosts
         public async Task<List<object>> GetAllPostsAsync()

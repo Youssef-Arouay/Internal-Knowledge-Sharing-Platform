@@ -9,15 +9,17 @@ import { TestComponent } from './component/tools/test/test.component';
 import { PostCommentComponent } from './component/tools/post-comment/post-comment.component';
 import { PostComponent } from './component/tools/post/post.component';
 import { TagsInputComponent } from './component/tools/tags-input/tags-input.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { ForumComponent } from './component/forum/forum.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     
     {path:'dashboard', component:HomeComponent, canActivate:[authGuard]},
     {path:'register', component:RegisterComponent, canActivate: [authRedirectGuard]},
+    {path:'resetpassword', component:ResetPasswordComponent, canActivate: [authRedirectGuard]},
+    {path:'forum', component:ForumComponent, canActivate: [authGuard]},
 
-
-    {path:'reply', component:TagsInputComponent},
     {path:'postcard', component:PostCardComponent},
     {path:'sharepost', component:SharePostComponent},
 

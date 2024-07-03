@@ -2,13 +2,15 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { loginReq, loginresp, userRegister, usercred } from '../_model/user.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
+  private userSubject: BehaviorSubject<usercred | null> = new BehaviorSubject<usercred | null>(null);
+  public user$: Observable<usercred | null> = this.userSubject.asObservable();
+  
   private user: usercred | null = null;
   
   constructor(private http: HttpClient) { }
@@ -17,8 +19,12 @@ export class UserService {
     this.user = user;
   }
 
-  getUser(): any {
-    return this.user;
+  getUser(): usercred | null {
+    return this.userSubject.value;
+  }
+
+  updateUser(user: usercred | null) {
+    this.userSubject.next(user);
   }
 
   clearUser(): void {
@@ -47,10 +53,23 @@ export class UserService {
     return this.http.get<usercred>(`${this.baseUrl}user/GetUserDetails`, { headers });
   }
 
+  fetchUserInfo(): void {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    this.http.get<usercred>(`${this.baseUrl}user/GetUserDetails`, { headers }).subscribe({
+      next: (user: usercred) => {
+        this.userSubject.next(user);
+      },
+      error: (error) => {
+        console.error('Failed to fetch user info', error);
+        this.userSubject.next(null);
+        return error;
+      }
+    });
+  }
+
 }
 
-export interface menu {
-    code: string;
-    name: string;
-}
 

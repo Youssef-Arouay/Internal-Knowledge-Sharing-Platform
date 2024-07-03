@@ -23,7 +23,7 @@ namespace Backend.Data
                 .HasMany(u => u.Posts)
                 .WithOne(p => p.User)
                 .HasForeignKey(p => p.UserId)
-                .OnDelete(DeleteBehavior.Restrict);  // Or Cascade if needed
+                .OnDelete(DeleteBehavior.Cascade);  // Or Cascade if needed
 
             // Configure the relationship between Post and Comment
             modelBuilder.Entity<Comment>()
