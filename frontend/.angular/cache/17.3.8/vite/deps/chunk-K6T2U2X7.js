@@ -1,4 +1,10 @@
 import {
+  MAT_FORM_FIELD,
+  MatFormField,
+  MatFormFieldControl,
+  MatFormFieldModule
+} from "./chunk-NSHC2E2Y.js";
+import {
   FormGroupDirective,
   NgControl,
   NgForm,
@@ -9,20 +15,11 @@ import {
   CdkOverlayOrigin,
   Overlay,
   OverlayModule
-} from "./chunk-YWXFZXRT.js";
+} from "./chunk-ZRVDWN5Q.js";
 import {
   CdkScrollableModule,
   ViewportRuler
-} from "./chunk-37YXGX6L.js";
-import {
-  SelectionModel
-} from "./chunk-XQMYJXJP.js";
-import {
-  MAT_FORM_FIELD,
-  MatFormField,
-  MatFormFieldControl,
-  MatFormFieldModule
-} from "./chunk-KZFTARYU.js";
+} from "./chunk-XJDLU7MP.js";
 import {
   animate,
   animateChild,
@@ -33,29 +30,34 @@ import {
   trigger
 } from "./chunk-THGPNPR3.js";
 import {
-  A,
-  ActiveDescendantKeyManager,
-  DOWN_ARROW,
+  SelectionModel
+} from "./chunk-XQMYJXJP.js";
+import {
   Directionality,
-  ENTER,
   ErrorStateMatcher,
-  LEFT_ARROW,
-  LiveAnnouncer,
   MAT_OPTGROUP,
   MAT_OPTION_PARENT_COMPONENT,
   MatCommonModule,
   MatOption,
   MatOptionModule,
+  _ErrorStateTracker,
+  _countGroupLabelsBeforeOption,
+  _getOptionScrollPosition
+} from "./chunk-2GUKARHO.js";
+import {
+  A,
+  ActiveDescendantKeyManager,
+  DOWN_ARROW,
+  ENTER,
+  LEFT_ARROW,
+  LiveAnnouncer,
   RIGHT_ARROW,
   SPACE,
   UP_ARROW,
-  _ErrorStateTracker,
-  _countGroupLabelsBeforeOption,
-  _getOptionScrollPosition,
   addAriaReferencedId,
   hasModifierKey,
   removeAriaReferencedId
-} from "./chunk-TVO3LXYO.js";
+} from "./chunk-747MKM3U.js";
 import {
   CommonModule,
   NgClass
@@ -1504,4 +1506,4 @@ export {
   MatSelectTrigger,
   MatSelectModule
 };
-//# sourceMappingURL=chunk-T4MSRRE3.js.map
+//# sourceMappingURL=chunk-K6T2U2X7.js.map

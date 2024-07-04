@@ -11,6 +11,7 @@ import { PostComponent } from './component/tools/post/post.component';
 import { TagsInputComponent } from './component/tools/tags-input/tags-input.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { ForumComponent } from './component/forum/forum.component';
+import { ForumNavBarComponent } from './component/layout/forum-nav-bar/forum-nav-bar.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -23,7 +24,7 @@ export const routes: Routes = [
     {path:'postcard', component:PostCardComponent},
     {path:'sharepost', component:SharePostComponent},
 
-    {path:'test', component:TestComponent},
+    {path:'test', component:ForumNavBarComponent},
 
     { path: '**', redirectTo: 'register' },
 

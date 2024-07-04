@@ -1,0 +1,61 @@
+
+
+table {
+    width: 50%;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+mat-card {
+    margin: 2%;
+    text-align: left;
+    width: 90%;
+    margin-left: 5%;
+    border: 1px solid #ccc;
+}
+.mat-mdc-raised-button{
+    width:auto;
+}
+
+.table-header{
+background-color: blue;
+color: white;
+}
+
+/* mat-form-field {
+    margin-left: 10%;
+    width: 30%;
+  } */
+
+  .header-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .header-left {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .header-center {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .header-right {
+    flex: 1;
+    text-align: right;
+    margin-bottom: 1em;
+  }
+  
+  .btnAddFile{
+    color: azure;
+    background-color: rgb(11, 165, 231);
+  }
+  mat-form-field {
+    width: 70%;
+  }
+  

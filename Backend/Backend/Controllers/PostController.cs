@@ -119,22 +119,6 @@ namespace Backend.Controllers
             }
         }
 
-        /*public async Task<IActionResult> GetAllPosts()
-        {
-            try
-            {
-                var posts = await _context.Posts.ToListAsync();
-                return Ok(posts);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
-            }
-        }*/
-
-
-
-
 
     }
 }

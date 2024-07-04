@@ -1,5 +1,6 @@
 using Backend.Data;
 using Backend.Services;
+using Backend.Services.IServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -26,6 +27,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<PostService>();
 builder.Services.AddScoped<InteractionService>();
+builder.Services.AddTransient<IFileService, FileService>();
 
 
 builder.Services.AddControllers();

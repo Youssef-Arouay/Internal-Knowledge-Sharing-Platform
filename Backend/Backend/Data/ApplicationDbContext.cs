@@ -13,6 +13,7 @@ namespace Backend.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<FileEntity> FileEntities { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<SavedPost> SavedPosts { get; set; }
@@ -55,19 +56,19 @@ namespace Backend.Data
                 .HasForeignKey(ps => ps.UserId)
                 .OnDelete(DeleteBehavior.Cascade);  // Cascade delete from User to SavedPost
 
+            /*modelBuilder.Entity<FileEntity>()
+                 .HasOne(f => f.Post)
+                 .WithOne(p => p.File)
+                 .HasForeignKey<FileEntity>(f => f.PostId)
+                 .OnDelete(DeleteBehavior.Cascade);*/
+
             /*modelBuilder.Entity<Post>()
                 .Property(p => p.TagsAsString)
                 .HasColumnName("Tags");*/
 
-           /* modelBuilder.Entity<Post>(ConfigurePost);*/
+
         }
 
-        private void ConfigurePost(EntityTypeBuilder<Post> builder)
-        {
-            builder.Property(p => p.Tags)
-                    .HasConversion(
-                       v => JsonConvert.SerializeObject(v),
-                       v => JsonConvert.DeserializeObject<List<string>>(v));
-        }
+
     }
 }

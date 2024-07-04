@@ -7,7 +7,8 @@ import {
   MatCommonModule,
   MatRipple,
   _MatInternalFormField
-} from "./chunk-TVO3LXYO.js";
+} from "./chunk-2GUKARHO.js";
+import "./chunk-747MKM3U.js";
 import "./chunk-4MOHW5LC.js";
 import {
   ANIMATION_MODULE_TYPE,
