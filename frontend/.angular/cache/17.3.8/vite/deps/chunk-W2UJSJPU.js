@@ -21,6 +21,9 @@ import {
   ViewportRuler
 } from "./chunk-XJDLU7MP.js";
 import {
+  SelectionModel
+} from "./chunk-XQMYJXJP.js";
+import {
   animate,
   animateChild,
   query,
@@ -29,9 +32,6 @@ import {
   transition,
   trigger
 } from "./chunk-THGPNPR3.js";
-import {
-  SelectionModel
-} from "./chunk-XQMYJXJP.js";
 import {
   Directionality,
   ErrorStateMatcher,
@@ -1506,4 +1506,4 @@ export {
   MatSelectTrigger,
   MatSelectModule
 };
-//# sourceMappingURL=chunk-K6T2U2X7.js.map
+//# sourceMappingURL=chunk-W2UJSJPU.js.map

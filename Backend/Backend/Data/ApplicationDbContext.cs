@@ -56,6 +56,12 @@ namespace Backend.Data
                 .HasForeignKey(ps => ps.UserId)
                 .OnDelete(DeleteBehavior.Cascade);  // Cascade delete from User to SavedPost
 
+            modelBuilder.Entity<FileEntity>()
+                .HasOne(f => f.User)
+                .WithMany(u => u.Files)
+                .HasForeignKey(f => f.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             /*modelBuilder.Entity<FileEntity>()
                  .HasOne(f => f.Post)
                  .WithOne(p => p.File)

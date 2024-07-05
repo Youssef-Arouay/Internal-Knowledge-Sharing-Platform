@@ -27,7 +27,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<PostService>();
 builder.Services.AddScoped<InteractionService>();
-builder.Services.AddTransient<IFileService, FileService>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 
 builder.Services.AddControllers();

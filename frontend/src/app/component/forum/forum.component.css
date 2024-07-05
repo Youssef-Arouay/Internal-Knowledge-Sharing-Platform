@@ -24,10 +24,11 @@ background-color: blue;
 color: white;
 }
 
-/* mat-form-field {
-    margin-left: 10%;
-    width: 30%;
-  } */
+ mat-form-field {
+  display: flex;
+  margin-left: 50%;
+  width: 80%;
+  } 
 
   .header-container {
     display: flex;
@@ -36,6 +37,7 @@ color: white;
   }
   
   .header-left {
+    margin-left: 2em;
     flex: 1;
     text-align: left;
   }
@@ -52,10 +54,36 @@ color: white;
   }
   
   .btnAddFile{
+    margin-right: 2em;
     color: azure;
     background-color: rgb(11, 165, 231);
   }
-  mat-form-field {
-    width: 70%;
-  }
   
+
+  /* Rating Icon and Number  */
+  .starRate {
+    color: gold;
+    border-color: gold;
+    
+  }
+
+  
+  .starRated {
+    font-size: 18px;
+    color: gold;
+    border-color: gold;
+    
+  }
+
+  .star-container {
+    display: flex; /* Use flexbox to align items horizontally */
+    align-items: center; /* Center items vertically */
+}
+
+.star-container > div {
+    margin-right: 5px; /* Optional: Adds space between elements */
+}
+
+.star-container .rate-number {
+    margin-left: 5px; /* Optional: Adds space between stars and rate number */
+}

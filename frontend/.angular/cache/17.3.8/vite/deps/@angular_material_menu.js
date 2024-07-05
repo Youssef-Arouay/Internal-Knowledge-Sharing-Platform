@@ -8,6 +8,7 @@ import {
 import {
   CdkScrollableModule
 } from "./chunk-XJDLU7MP.js";
+import "./chunk-XQMYJXJP.js";
 import {
   animate,
   state,
@@ -15,7 +16,6 @@ import {
   transition,
   trigger
 } from "./chunk-THGPNPR3.js";
-import "./chunk-XQMYJXJP.js";
 import {
   Directionality,
   MatCommonModule,

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
 {
@@ -8,7 +9,16 @@ namespace Backend.Models
         public int Id { get; set; }
         public string FileName { get; set; }
         public string Description { get; set; }
-        public string Theme { get; set; }
+        public List<string> Tags { get; set; } = new List<string>();
         public string Version { get; set; }
+        public DateTime CreationDate { get; set; }
+
+
+        // Foreign key to User
+        public int UserId { get; set; }
+
+        // Navigation property
+        [ForeignKey("UserId")]
+        public User User { get; set; }
     }
 }

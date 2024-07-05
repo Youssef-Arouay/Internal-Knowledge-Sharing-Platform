@@ -2,10 +2,11 @@
 {
     public class FileDto
     {
-        public int Id { get; set; }
+        public IFormFile File { get; set; }
+
         public string FileName { get; set; }
         public string Description { get; set; }
-        public string Theme { get; set; }
+        public List<string> Tags { get; set; } = new List<string>();
         public string Version { get; set; }
     }
 }
