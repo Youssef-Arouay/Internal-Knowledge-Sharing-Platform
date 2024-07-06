@@ -5,6 +5,7 @@ using Backend.Services.IServices;
 using Microsoft.AspNetCore.StaticFiles;
 using Backend.DTO;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services
 {
@@ -17,80 +18,31 @@ namespace Backend.Services
             _context = context;
         }
 
-
-        // Upload File and save details to database
-        /*public async Task<string> UploadFile(IFormFile _IFormFile, FileDto fileDto)
+        // UPLOAD FILE METHODE
+        public async Task<string> UploadFile(IFormFile formFile, FileDto fileDto, int userId)
         {
-            string FileName = "";
             try
             {
-                FileInfo _FileInfo = new FileInfo(_IFormFile.FileName);
-                FileName = _IFormFile.FileName + "_" + DateTime.Now.Ticks.ToString() + _FileInfo.Extension;
-                var _GetFilePath = Common.GetFilePath(FileName);
-                using (var _FileStream = new FileStream(_GetFilePath, FileMode.Create))
+                // Check if the EntityName is unique
+                var existingFile = await _context.FileEntities.FirstOrDefaultAsync(f => f.EntityName == fileDto.EntityName);
+                if (existingFile != null)
                 {
-                    await _IFormFile.CopyToAsync(_FileStream);
+                    throw new Exception("A file with this EntityName already exists.");
                 }
 
-                // Save file details to database
-                var fileEntity = new FileEntity
-                {
-                    FileName = FileName,
-                    Description = fileDto.Description,
-                    Tags = fileDto.Tags,
-                    Version = fileDto.Version
-                };
-
-                _context.FileEntities.Add(fileEntity);
-                await _context.SaveChangesAsync();
-
-                return FileName;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        // Download File
-        public async Task<(byte[], string, string)> DownloadFile(string FileName)
-        {
-            try
-            {
-                var _GetFilePath = Common.GetFilePath(FileName);
-                var provider = new FileExtensionContentTypeProvider();
-                if (!provider.TryGetContentType(_GetFilePath, out var _ContentType))
-                {
-                    _ContentType = "application/octet-stream";
-                }
-                var _ReadAllBytesAsync = await File.ReadAllBytesAsync(_GetFilePath);
-                return (_ReadAllBytesAsync, _ContentType, Path.GetFileName(_GetFilePath));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }*/
-
-        // Upload File and save details to database
-        public async Task<string> UploadFile(IFormFile file, FileDto fileDto, int userId)
-        {
-            string fileName = "";
-            try
-            {
-                var fileInfo = new FileInfo(file.FileName);
-                fileName = fileDto.FileName + "_" + DateTime.Now.Ticks.ToString() + fileInfo.Extension;
+                var fileExtension = Path.GetExtension(formFile.FileName);
+                string fileName = fileDto.EntityName + fileExtension;
                 var filePath = Common.GetFilePath(fileName);
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    await file.CopyToAsync(fileStream);
+                    await formFile.CopyToAsync(fileStream);
                 }
 
-                // Save file details to database
                 var fileEntity = new FileEntity
                 {
                     FileName = fileName,
+                    EntityName = fileDto.EntityName,
                     Description = fileDto.Description,
                     Tags = fileDto.Tags,
                     Version = fileDto.Version,
@@ -105,23 +57,25 @@ namespace Backend.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to upload file", ex);
+                throw ex;
             }
         }
 
-        // Download File
-        public async Task<(byte[], string, string)> DownloadFile(string fileName)
+
+        // DOWNLOAD FILE 
+        public async Task<(byte[], string, string)> DownloadFile(string entityName)
         {
             try
             {
-                var filePath = Common.GetFilePath(fileName);
-
-                if (!File.Exists(filePath))
+                // Fetch the FileEntity from the database using the provided entity name
+                var fileEntity = await _context.FileEntities.FirstOrDefaultAsync(f => f.EntityName == entityName);
+                if (fileEntity == null)
                 {
-                    throw new FileNotFoundException("File not found");
+                    throw new FileNotFoundException("File not found in the database.");
                 }
 
-                var fileBytes = await File.ReadAllBytesAsync(filePath);
+                var fileName = fileEntity.FileName;
+                var filePath = Common.GetFilePath(fileName);
                 var provider = new FileExtensionContentTypeProvider();
 
                 if (!provider.TryGetContentType(filePath, out var contentType))
@@ -129,12 +83,14 @@ namespace Backend.Services
                     contentType = "application/octet-stream";
                 }
 
+                var fileBytes = await File.ReadAllBytesAsync(filePath);
                 return (fileBytes, contentType, Path.GetFileName(filePath));
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to download file", ex);
+                throw ex;
             }
         }
+
     }
 }

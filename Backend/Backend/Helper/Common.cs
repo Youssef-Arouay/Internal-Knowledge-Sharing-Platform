@@ -22,5 +22,7 @@
             var result = Path.Combine(_GetStaticContentDirectory, FileName);
             return result;
         }
+
+
     }
 }

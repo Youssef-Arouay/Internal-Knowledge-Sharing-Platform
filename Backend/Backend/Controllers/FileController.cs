@@ -15,89 +15,77 @@ namespace Backend.Controllers
     [Authorize]
     public class FileController : ControllerBase
     {
-        private readonly IFileService _iFileService;
-        private readonly InteractionService _interactionService;
+        private readonly IFileService _fileService;
+        private readonly ApplicationDbContext _context;
 
-        public FileController(IFileService iFileService, InteractionService interactionService)
+        public FileController(IFileService fileService, ApplicationDbContext context)
         {
-            _iFileService = iFileService;
-            _interactionService = interactionService;
-
+            _fileService = fileService;
+            _context = context;
         }
 
-        /*public FileController(IFileService iFileService)
-        {
-            _iFileService = iFileService;
-        }*/
-
-        /*[HttpPost]
+        [HttpPost]
         [Route("uploadfile")]
-        public async Task<IActionResult> UploadFile(IFormFile _IFormFile, [FromForm] FileDto fileDto)
+        public async Task<IActionResult> UploadFile(IFormFile formFile, [FromForm] FileDto fileDto)
         {
-            var result = await _iFileService.UploadFile(_IFormFile, fileDto);
-            return Ok(result);
+            try
+            {
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    return BadRequest("User email is missing or invalid.");
+                }
+
+                // Fetch the user ID based on the email
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == userEmail);
+                if (user == null)
+                {
+                    return NotFound("User not found.");
+                }
+
+                var result = await _fileService.UploadFile(formFile, fileDto, user.Id);
+                return Ok(result);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest($"Argument null exception: {ex.Message}");
+            }
+            catch (FormatException ex)
+            {
+                return BadRequest($"Format exception: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "A file with this EntityName already exists.")
+                {
+                    return Conflict(ex.Message); // Return HTTP 409 Conflict
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while uploading the file: {ex.Message}");
+            }
         }
 
 
         [HttpGet]
         [Route("downloadfile")]
-        public async Task<IActionResult> DownloadFile(string FileName)
-        {
-            var result = await _iFileService.DownloadFile(FileName);
-            return File(result.Item1, result.Item2, result.Item3);
-        }*/
-        [HttpPost]
-        [Route("uploadfile")]
-        public async Task<IActionResult> UploadFile([FromForm] FileDto request)
+        public async Task<IActionResult> DownloadFile(string entityName)
         {
             try
             {
-                // Get UserId from claims (bearer token)
-                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
-                var userId = await _interactionService.GetUserIdByEmail(userEmail);
-
-                if (userId == null)
-                {
-                    return BadRequest(new { message = "User not found" });
-                }
-
-                // Ensure only allowed fields are used
-                var fileDto = new FileDto
-                {
-                    FileName = request.FileName,
-                    Description = request.Description,
-                    Tags = request.Tags,
-                    Version = request.Version
-                };
-
-                var fileName = await _iFileService.UploadFile(request.File, fileDto, userId);
-
-                return Ok(new { FileName = fileName }); // Return FileName if needed
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = "Failed to upload file", error = ex.Message });
-            }
-        }
-
-
-
-        [HttpGet("downloadfile")]
-        public async Task<IActionResult> DownloadFile(string fileName)
-        {
-            try
-            {
-                var result = await _iFileService.DownloadFile(fileName);
+                var result = await _fileService.DownloadFile(entityName);
                 return File(result.Item1, result.Item2, result.Item3);
             }
-            catch (FileNotFoundException)
+            catch (FileNotFoundException ex)
             {
-                return NotFound("File not found");
+                return NotFound($"File not found: {ex.Message}");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Failed to download file", error = ex.Message });
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while downloading the file: {ex.Message}");
             }
         }
+
+
+
+
     }
 }
