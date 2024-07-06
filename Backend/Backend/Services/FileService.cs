@@ -31,7 +31,11 @@ namespace Backend.Services
                 }
 
                 var fileExtension = Path.GetExtension(formFile.FileName);
-                string fileName = fileDto.EntityName + fileExtension;
+               
+                /* string fileName = fileDto.EntityName + fileExtension; */
+                
+                string fileName = formFile.FileName ;
+                
                 var filePath = Common.GetFilePath(fileName);
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))

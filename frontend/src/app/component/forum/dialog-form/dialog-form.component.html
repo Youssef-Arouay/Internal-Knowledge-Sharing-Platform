@@ -1,31 +1,42 @@
+<!-- dialog-form.component.html
 <div class="dialog-container">
     <h2 mat-dialog-title>Fill the form to add a file</h2>
     <mat-dialog-content>
         <div class="form-container">
             <mat-form-field appearance="outline">
                 <mat-label>File name</mat-label>
-                <input matInput placeholder="Placeholder">
+                <input matInput placeholder="File Name" [(ngModel)]="fileForm.fileName">
                 <mat-hint>Hint</mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Description</mat-label>
-                <input matInput #input maxlength="300" (input)="onInput($event)">
-                <mat-hint align="end">{{ value().length }}/300</mat-hint>
+                <input matInput [(ngModel)]="fileForm.description">
+                <mat-hint align="end">{{ fileForm.description.length }}/300</mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Version</mat-label>
-                <input matInput>
+                <input matInput [(ngModel)]="fileForm.version">
                 <mat-hint>Hint</mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Tags</mat-label>
-                <input matInput>
+                <input matInput [(ngModel)]="fileForm.tags">
                 <mat-hint>Hint</mat-hint>
             </mat-form-field>
 
             <div class="inputFile">
-                <input type="file" class="file-input" (change)="onChange($event)" #fileUpload>
+                <input type="file" class="file-input" (change)="onChange($event)">
             </div>
+        </div>
+        <div *ngIf="fileForm.file">
+            <section class="file-info">
+                File details:
+                <ul>
+                    <li>Name: {{ fileForm.file.name }}</li>
+                    <li>Type: {{ fileForm.file.type }}</li>
+                    <li>Size: {{ fileForm.file.size }} bytes</li>
+                </ul>
+            </section>
         </div>
         <div *ngIf="file">
             <section class="file-info">
@@ -40,6 +51,50 @@
     </mat-dialog-content>
     <mat-dialog-actions>
         <button mat-button class="btnDialogCancel" (click)="onNoClick()">Cancel</button>
-        <button mat-button cdkFocusInitial class="btnDialogAdd">Add</button>
+        <button mat-button cdkFocusInitial class="btnDialogAdd" (click)="onSubmit()">Add</button>
+    </mat-dialog-actions>
+</div> -->
+
+<div class="dialog-container">
+    <h2 mat-dialog-title>Fill the form to add a file</h2>
+    <mat-dialog-content>
+        <div class="form-container">
+            <mat-form-field appearance="outline">
+                <mat-label>File name</mat-label>
+                <input matInput placeholder="File Name" [(ngModel)]="fileForm.fileName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <input matInput [(ngModel)]="fileForm.description" maxlength="300">
+                <mat-hint align="end">{{ fileForm.description.length }}/300</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Version</mat-label>
+                <input matInput [(ngModel)]="fileForm.version">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Tags</mat-label>
+                <input matInput [(ngModel)]="fileForm.tags">
+                <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+
+            <div class="inputFile">
+                <input type="file" class="file-input" [(ngModel)]="fileForm.file">
+            </div>
+        </div>
+        <div *ngIf="fileForm.file">
+            <section class="file-info">
+                File details:
+                <ul>
+                    <li>Name: {{ fileForm.file.name }}</li>
+                    <li>Type: {{ fileForm.file.type }}</li>
+                    <li>Size: {{ fileForm.file.size }} bytes</li>
+                </ul>
+            </section>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button class="btnDialogCancel" (click)="onNoClick()">Cancel</button>
+        <button mat-button cdkFocusInitial class="btnDialogAdd" (click)="onSubmit()">Add</button>
     </mat-dialog-actions>
 </div>

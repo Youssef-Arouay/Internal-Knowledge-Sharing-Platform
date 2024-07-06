@@ -35,3 +35,11 @@ export interface postCommentReq {
     postId: string,
     content: string,
 }
+
+export interface fileForm {
+  file: File | null ;
+  fileName: string ;
+  description: string;
+  version: string ;
+  tags: string[] ;
+}

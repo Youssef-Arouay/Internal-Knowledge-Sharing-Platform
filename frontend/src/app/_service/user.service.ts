@@ -8,6 +8,9 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
+  getToken() {
+    throw new Error('Method not implemented.');
+  }
   private userSubject: BehaviorSubject<usercred | null> = new BehaviorSubject<usercred | null>(null);
   public user$: Observable<usercred | null> = this.userSubject.asObservable();
   
