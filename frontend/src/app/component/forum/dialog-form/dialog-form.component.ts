@@ -54,31 +54,60 @@ export class DialogFormComponent {
   }
 
 
+  // onSubmit(): void {
+  //   if (this.fileForm.file && this.fileForm.fileName && this.fileForm.description && this.fileForm.version) {
+  //     const formData = new FormData();
+  //     formData.append('formFile', this.fileForm.file);
+  //     formData.append('entityName', this.fileForm.fileName);
+  //     formData.append('description', this.fileForm.description);
+  //     formData.append('tags', JSON.stringify(this.fileForm.tags));
+  //     formData.append('version', this.fileForm.version);
+
+  //     this.fileService.uploadFile(formData).subscribe({
+  //       next: response => {
+  //         console.log('File uploaded successfully', response);
+  //         alert('File uploaded successfully');
+  //         this.dialogRef.close();
+  //       },
+  //       error: error => {
+  //         console.error('Error uploading file:', error);
+  //         alert(`An error occurred while uploading the file: ${error.message}`);
+  //       },
+  //       complete: () => {
+  //         console.log('File upload request completed');
+  //       }
+  //     });
+  //   } else {
+  //     alert('Please fill in all required fields and select a file.');
+  //   }
+  // }
+
   onSubmit(): void {
     if (this.fileForm.file && this.fileForm.fileName && this.fileForm.description && this.fileForm.version) {
-      try {
-        this.fileService.uploadFile(this.fileForm).subscribe({
-          next: response => {
-            console.log('File uploaded successfully', response);
-            alert('File uploaded successfully');
-            this.dialogRef.close();
-          },
-          error: error => {
-            console.error('Error uploading file:', error);
-            alert(`An error occurred while uploading the file: ${error.message}`);
-          },
-          complete: () => {
-            console.log('File upload request completed');
-          }
-        });
-      } catch (error) {
-        console.error('An error occurred in the subscribe block', error);
-        alert('An unexpected error occurred. Please try again later.');
-      }
+      const formData = new FormData();
+      formData.append('formFile', this.fileForm.file);
+      formData.append('entityName', this.fileForm.fileName);
+      formData.append('description', this.fileForm.description);
+      formData.append('tags', JSON.stringify(this.fileForm.tags));
+      formData.append('version', this.fileForm.version);
+
+      this.fileService.uploadFile(formData).subscribe({
+        next: response => {
+          console.log('File uploaded successfully', response);
+          alert('File uploaded successfully');
+          this.dialogRef.close();
+        },
+        error: error => {
+          console.error('Error uploading file:', error);
+          alert(`An error occurred while uploading the file: ${error.message}`);
+        },
+        complete: () => {
+          console.log('File upload request completed');
+        }
+      });
     } else {
       alert('Please fill in all required fields and select a file.');
     }
   }
-
 
 }

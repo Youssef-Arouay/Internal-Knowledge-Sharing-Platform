@@ -23,13 +23,21 @@ export class FileService {
   //   return this.http.post<any>(`${this.baseUrl}File/uploadfile`, formData, { headers });
   // }
 
-  uploadFile(fileForm: fileForm): Observable<any> {
+  // uploadFile(fileForm: fileForm): Observable<any> {
+  //   const token = localStorage.getItem('token');
+  //   const headers = new HttpHeaders({
+  //     'Authorization': `Bearer ${token}`
+  //   });
+  //   console.log('Sending fileForm to the server:', fileForm);
+  //   return this.http.post<any>(`${this.baseUrl}file/uploadfile`, fileForm, { headers });
+  // }
+
+  uploadFile(formData: FormData): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    console.log('Sending fileForm to the server:', fileForm);
-    return this.http.post<any>(`${this.baseUrl}file/uploadfile`, fileForm, { headers });
+    return this.http.post(`${this.baseUrl}File/uploadfile`, formData, { headers });
   }
   
 }

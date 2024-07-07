@@ -11,6 +11,10 @@
       "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\models\\fileentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\helper\\common.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\helper\\common.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\dto\\filedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\dto\\filedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -33,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\migrations\\20240626125140_aa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\migrations\\20240626125140_aa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\helper\\common.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\helper\\common.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -84,45 +84,33 @@
               "RelativeDocumentMoniker": "Backend\\Controllers\\FileController.cs",
               "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\FileController.cs",
               "RelativeToolTip": "Backend\\Controllers\\FileController.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAAowCEAAAA0AAAA",
+              "ViewState": "AQIAADsAAAAAAAAAAAAwwGkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-05T20:39:49.303Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "FileService.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\FileService.cs",
               "RelativeDocumentMoniker": "Backend\\Services\\FileService.cs",
               "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\FileService.cs",
               "RelativeToolTip": "Backend\\Services\\FileService.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAAAEEAAAAJAAAA",
+              "ViewState": "AQIAADcAAAAAAAAAAAAswGQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-05T20:39:30.401Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "InteractionController.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\InteractionController.cs",
-              "RelativeDocumentMoniker": "Backend\\Controllers\\InteractionController.cs",
-              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\InteractionController.cs",
-              "RelativeToolTip": "Backend\\Controllers\\InteractionController.cs",
-              "ViewState": "AQIAAHwAAAAAAAAAAAAkwBUAAAA1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T21:52:30.316Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "FileDto.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\FileDto.cs",
               "RelativeDocumentMoniker": "Backend\\DTO\\FileDto.cs",
               "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\FileDto.cs",
               "RelativeToolTip": "Backend\\DTO\\FileDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-05T21:36:37.355Z",
               "EditorCaption": ""
@@ -135,14 +123,14 @@
               "RelativeDocumentMoniker": "Backend\\Models\\FileEntity.cs",
               "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Models\\FileEntity.cs",
               "RelativeToolTip": "Backend\\Models\\FileEntity.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAYwBIAAAAnAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-06T11:26:39.322Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "InteractionService.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\InteractionService.cs",
               "RelativeDocumentMoniker": "Backend\\Services\\InteractionService.cs",
@@ -150,12 +138,11 @@
               "RelativeToolTip": "Backend\\Services\\InteractionService.cs",
               "ViewState": "AQIAAB8AAAAAAAAAAAAkwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T21:17:35.127Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-05T21:17:35.127Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "IFileService.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\IServices\\IFileService.cs",
               "RelativeDocumentMoniker": "Backend\\Services\\IServices\\IFileService.cs",
@@ -163,12 +150,11 @@
               "RelativeToolTip": "Backend\\Services\\IServices\\IFileService.cs",
               "ViewState": "AQIAAAEAAAAAAAAAAAAmwAgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T20:39:22.913Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-05T20:39:22.913Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "20240626125140_aa.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Migrations\\20240626125140_aa.cs",
               "RelativeDocumentMoniker": "Backend\\Migrations\\20240626125140_aa.cs",
@@ -177,6 +163,31 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-06T12:46:44.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Common.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Helper\\Common.cs",
+              "RelativeDocumentMoniker": "Backend\\Helper\\Common.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Helper\\Common.cs",
+              "RelativeToolTip": "Backend\\Helper\\Common.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-06T11:26:32.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "InteractionController.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\InteractionController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\InteractionController.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\InteractionController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\InteractionController.cs",
+              "ViewState": "AQIAAHwAAAAAAAAAAAAkwBUAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-05T21:52:30.316Z"
             },
             {
               "$type": "Document",
@@ -225,18 +236,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAFoAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-06T11:56:43.132Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Common.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Helper\\Common.cs",
-              "RelativeDocumentMoniker": "Backend\\Helper\\Common.cs",
-              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Helper\\Common.cs",
-              "RelativeToolTip": "Backend\\Helper\\Common.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-06T11:26:32.22Z"
             },
             {
               "$type": "Document",

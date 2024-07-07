@@ -24,7 +24,7 @@ namespace Backend.Controllers
             _context = context;
         }
 
-        [HttpPost]
+        /*[HttpPost]
         [Route("uploadfile")]
         public async Task<IActionResult> UploadFile(IFormFile formFile, [FromForm] FileDto fileDto)
         {
@@ -61,6 +61,46 @@ namespace Backend.Controllers
                     return Conflict(ex.Message); // Return HTTP 409 Conflict
                 }
                 return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while uploading the file: {ex.Message}");
+            }
+        }*/
+
+        [HttpPost]
+        [Route("uploadfile")]
+        public async Task<IActionResult> UploadFile(IFormFile formFile, [FromForm] FileDto fileDto)
+        {
+            try
+            {
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    return BadRequest("User email is missing or invalid.");
+                }
+
+                // Fetch the user ID based on the email
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == userEmail);
+                if (user == null)
+                {
+                    return NotFound("User not found.");
+                }
+
+                var result = await _fileService.UploadFile(formFile, fileDto, user.Id);
+                return Ok(new { FileName = result }); // Return a JSON object with the file name
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(new { error = ex.Message }); // Return a JSON error
+            }
+            catch (FormatException ex)
+            {
+                return BadRequest(new { error = ex.Message }); // Return a JSON error
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "A file with this EntityName already exists.")
+                {
+                    return Conflict(new { error = ex.Message }); // Return a JSON error
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = ex.Message }); // Return a JSON error
             }
         }
 
