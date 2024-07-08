@@ -43,3 +43,24 @@ export interface fileForm {
   version: string ;
   tags: string[] ;
 }
+
+export interface FileElement {
+    firstName: string; // Adjust the type according to your backend response
+    lastName: string; // Adjust the type according to your backend response
+    entityName: string; // Adjust the type according to your backend response
+    file: File | null; // Adjust according to your application's needs
+    position: number;
+    author: string;
+    name: string;
+    description: string;
+    version: string;
+    uploadDate: string; // Adjust the type as needed (e.g., Date)
+    downloads: number;
+    rates: number;
+    tags: string[]; // Adjust as per your data structure
+  }
+  
+  
+  
+  
+  

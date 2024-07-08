@@ -12,8 +12,9 @@ namespace Backend.Models
         public string Description { get; set; }
         public List<string> Tags { get; set; } = new List<string>();
         public string Version { get; set; }
-        public DateTime CreationDate { get; set; }
-
+        public DateTime UploadDate { get; set; }
+        public int Downloads { get; set; }
+        public int Rates { get; set; }
 
         // Foreign key to User
         public int UserId { get; set; }

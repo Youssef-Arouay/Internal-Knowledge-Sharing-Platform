@@ -124,6 +124,35 @@ namespace Backend.Controllers
             }
         }
 
+        // GET ALL FILES
+        [HttpGet]
+        [Route("all")]
+        public async Task<IActionResult> GetAllFiles()
+        {
+            try
+            {
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    return BadRequest("User email is missing or invalid.");
+                }
+
+                // Fetch the user ID based on the email
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == userEmail);
+                if (user == null)
+                {
+                    return NotFound("User not found.");
+                }
+
+                var files = await _fileService.GetAllFiles(user.Id);
+                return Ok(files);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while retrieving the files: {ex.Message}");
+            }
+        }
+
 
 
 

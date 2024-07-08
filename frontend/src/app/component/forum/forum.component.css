@@ -87,3 +87,10 @@ color: white;
 .star-container .rate-number {
     margin-left: 5px; /* Optional: Adds space between stars and rate number */
 }
+
+.fileDownlaodicon {
+  font-size: 10px;
+  max-width: 2.5em;
+  max-height: 2.5em;
+  margin-left: 2em;
+}

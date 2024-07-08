@@ -50,8 +50,10 @@ namespace Backend.Services
                     Description = fileDto.Description,
                     Tags = fileDto.Tags,
                     Version = fileDto.Version,
-                    UserId = userId,
-                    CreationDate = DateTime.UtcNow
+                    Rates = 0,
+                    Downloads = 0,
+                    UploadDate = DateTime.UtcNow,
+                    UserId = userId
                 };
 
                 _context.FileEntities.Add(fileEntity);
@@ -93,6 +95,34 @@ namespace Backend.Services
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        //GET ALL FILES
+        public async Task<List<FileDtoResp>> GetAllFiles(int userId)
+        {
+            try
+            {
+                var files = await _context.FileEntities
+                    .Where(f => f.UserId == userId)
+                    .Select(f => new FileDtoResp
+                    {
+                        EntityName = f.EntityName,
+                        Description = f.Description,
+                        Tags = f.Tags,
+                        Version = f.Version,
+                        UploadDate = f.UploadDate,
+                        Downloads = f.Downloads,
+                        Rates = f.Rates,
+                        FirstName = f.User.Firstname, // Include FirstName
+                        LastName = f.User.Lastname    // Include LastName
+                    })
+                    .ToListAsync();
+                return files;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving files.", ex);
             }
         }
 
