@@ -1,12 +1,13 @@
 ﻿using Backend.Data;
 using Backend.DTO;
 using Backend.Models;
+using Backend.Services.IServices;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace Backend.Services
 {
-    public class PostService
+    public class PostService : IPostService
     {
         private readonly ApplicationDbContext _context;
 

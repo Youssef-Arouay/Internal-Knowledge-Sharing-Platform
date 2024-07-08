@@ -19,9 +19,9 @@ namespace Backend.Models
         public ICollection<Post> Posts { get; set; } = new List<Post>();
         [JsonIgnore]
         public ICollection<SavedPost> SavedPosts { get; set; }
-        public ICollection<Comment> Comments { get; set; } // Users' comments
-        public ICollection<Like> Likes { get; set; } // Users' likes
-
-        public ICollection<FileEntity> Files { get; set; }
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>(); 
+        public ICollection<Like> Likes { get; set; } = new List<Like>(); 
+        public ICollection<FileEntity> Files { get; set; } = new List<FileEntity>();
+        public ICollection<RateFile> RateFiles { get; set; } = new List<RateFile>();
     }
 }

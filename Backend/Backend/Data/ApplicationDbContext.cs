@@ -17,6 +17,7 @@ namespace Backend.Data
         public DbSet<Like> Likes { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<SavedPost> SavedPosts { get; set; }
+        public DbSet<RateFile> RateFiles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -62,15 +63,22 @@ namespace Backend.Data
                 .HasForeignKey(f => f.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            /*modelBuilder.Entity<FileEntity>()
-                 .HasOne(f => f.Post)
-                 .WithOne(p => p.File)
-                 .HasForeignKey<FileEntity>(f => f.PostId)
-                 .OnDelete(DeleteBehavior.Cascade);*/
+            // Configure the relationship between FileEntity and RateFile
+            modelBuilder.Entity<RateFile>()
+                .HasKey(rf => new { rf.RateId, rf.FileId, rf.UserId });
 
-            /*modelBuilder.Entity<Post>()
-                .Property(p => p.TagsAsString)
-                .HasColumnName("Tags");*/
+            modelBuilder.Entity<RateFile>()
+                .HasOne(r => r.File)
+                .WithMany(f => f.RateFiles)
+                .HasForeignKey(r => r.FileId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<RateFile>()
+                .HasOne(r => r.User)
+                .WithMany(u => u.RateFiles)
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
 
 
         }

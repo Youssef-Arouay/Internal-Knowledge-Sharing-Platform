@@ -1,12 +1,12 @@
 ﻿using Backend.Data;
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 using Backend.Models;
+using Backend.Services.IServices;
 
 namespace Backend.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly ApplicationDbContext _context;
 

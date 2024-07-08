@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Backend.Models
 {
@@ -22,5 +23,8 @@ namespace Backend.Models
         // Navigation property
         [ForeignKey("UserId")]
         public User User { get; set; }
+
+        [JsonIgnore]
+        public ICollection<RateFile> RateFiles{ get; set; } = new List<RateFile>();
     }
 }

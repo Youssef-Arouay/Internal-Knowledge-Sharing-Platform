@@ -57,12 +57,12 @@
 //   };
 //   files: fileForm[] = [];
 
-  
+
 //   @ViewChild(MatSort) sort!: MatSort;
 //   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
+
 //   constructor(private _liveAnnouncer: LiveAnnouncer, public dialog: MatDialog, private fileService: FileService) { }
-  
+
 //   ngAfterViewInit() {
 //     this.dataSource.sort = this.sort;
 //     this.dataSource.paginator = this.paginator;
@@ -135,6 +135,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatIconModule } from '@angular/material/icon';
 import { FileService } from '../../_service/file.service';
 import { FileElement } from '../../_model/user.model'; // Ensure this matches the data structure
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-forum',
@@ -156,10 +157,13 @@ import { FileElement } from '../../_model/user.model'; // Ensure this matches th
 })
 
 export class ForumComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['position', 'author', 'name', 'description', 'version','uploadDate', 'downloads', 'rate'];
+  displayedColumns: string[] = ['position', 'author', 'name', 'description', 'version', 'uploadDate', 'downloads', 'rate'];
   dataSource = new MatTableDataSource<FileElement>();
 
+  hasRated : boolean = false ;
+
   files: FileElement[] = [];
+  private subscriptions: Subscription[] = [];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -168,7 +172,7 @@ export class ForumComponent implements OnInit, AfterViewInit {
     private _liveAnnouncer: LiveAnnouncer,
     public dialog: MatDialog,
     private fileService: FileService
-  ) {}
+  ) { }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
@@ -180,9 +184,8 @@ export class ForumComponent implements OnInit, AfterViewInit {
   }
 
   fetchAllFiles(): void {
-    this.fileService.getAllFiles().subscribe({
+    const subscription = this.fileService.getAllFiles().subscribe({
       next: (response: any) => {
-        // Extract files array from the response
         const filesArray = response && response.$values ? response.$values : [];
   
         if (!Array.isArray(filesArray)) {
@@ -190,14 +193,17 @@ export class ForumComponent implements OnInit, AfterViewInit {
           return;
         }
   
-        // Map filesArray to FileElement[]
+        console.log('Files before reversing:', filesArray);
+  
+        // Map filesArray to FileElement[] and reverse the order
         this.files = filesArray.map((file, index) => ({
+          id: file.id,
           firstName: file.firstName,
           lastName: file.lastName,
           entityName: file.entityName,
           file: null, // Adjust according to your needs
           position: index + 1,
-          author: `${file.firstName} ${file.lastName}`,
+          author: `${file.firstName.charAt(0).toUpperCase()}${file.firstName.slice(1)} ${file.lastName.charAt(0).toUpperCase()}${file.lastName.slice(1)}`, // Capitalize first letters
           name: file.entityName,
           description: file.description,
           version: file.version,
@@ -205,7 +211,9 @@ export class ForumComponent implements OnInit, AfterViewInit {
           downloads: file.downloads,
           rates: file.rates,
           tags: file.tags // Ensure this matches your data structure
-        }));
+        })).reverse(); // Reverse the array
+  
+        console.log('Files after reversing:', this.files);
   
         this.dataSource.data = this.files;
         console.log('Files fetched successfully:', this.files);
@@ -216,8 +224,13 @@ export class ForumComponent implements OnInit, AfterViewInit {
         alert(`An error occurred while fetching files: ${error.message}`);
       }
     });
+    this.subscriptions.push(subscription);
   }
   
+  
+  
+  
+
   onChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
@@ -242,6 +255,45 @@ export class ForumComponent implements OnInit, AfterViewInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions to avoid memory leaks
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  // DOWNLOAD FILE CALL API
+  downloadFile(entityName: string): void {
+    const subscription = this.fileService.downloadFile(entityName).subscribe({
+      next: (response: Blob) => {
+        this.incrementDownloadCount(entityName);
+        this.triggerFileDownload(response, entityName);
+      },
+      error: error => {
+        console.error('Error downloading file:', error);
+        alert(`An error occurred while downloading file: ${error.message}`);
+      }
+    });
+    this.subscriptions.push(subscription);
+  }
+
+  incrementDownloadCount(entityName: string): void {
+    const fileToUpdate = this.files.find(file => file.entityName === entityName);
+    if (fileToUpdate) {
+      fileToUpdate.downloads++;
+      this.dataSource.data = [...this.files];
+    }
+  }
+
+  triggerFileDownload(blob: Blob, fileName: string): void {
+    const downloadLink = document.createElement('a');
+    downloadLink.href = window.URL.createObjectURL(blob);
+    downloadLink.download = fileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+
 }
 
 

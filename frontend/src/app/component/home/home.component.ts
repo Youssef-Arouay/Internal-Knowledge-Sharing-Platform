@@ -40,8 +40,10 @@ export class HomeComponent implements OnInit {
           this.posts = response.$values.sort((a: any, b: any) => {
             return new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime();
           });
-          console.log('Posts fetched successfully', this.posts);
-          this.cdr.detectChanges();  // Trigger change detection
+          console.log('Posts fetched and sorted successfully', this.posts);
+
+          // Trigger change detection
+          this.cdr.detectChanges();  
 
         } else {
           console.error('Unexpected response format', response);

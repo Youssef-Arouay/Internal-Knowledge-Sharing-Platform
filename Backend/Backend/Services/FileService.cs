@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using Backend.DTO;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace Backend.Services
 {
@@ -80,6 +81,10 @@ namespace Backend.Services
                     throw new FileNotFoundException("File not found in the database.");
                 }
 
+                // Increment the download count
+                fileEntity.Downloads++;
+                await _context.SaveChangesAsync(); // Save changes to update the download count
+
                 var fileName = fileEntity.FileName;
                 var filePath = Common.GetFilePath(fileName);
                 var provider = new FileExtensionContentTypeProvider();
@@ -90,6 +95,7 @@ namespace Backend.Services
                 }
 
                 var fileBytes = await File.ReadAllBytesAsync(filePath);
+
                 return (fileBytes, contentType, Path.GetFileName(filePath));
             }
             catch (Exception ex)
@@ -107,6 +113,7 @@ namespace Backend.Services
                     .Where(f => f.UserId == userId)
                     .Select(f => new FileDtoResp
                     {
+                        Id = f.Id,
                         EntityName = f.EntityName,
                         Description = f.Description,
                         Tags = f.Tags,

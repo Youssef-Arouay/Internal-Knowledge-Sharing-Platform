@@ -3,7 +3,6 @@ using Backend.Services;
 using Backend.Services.IServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -24,9 +23,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 // Register the user service
-builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<PostService>();
-builder.Services.AddScoped<InteractionService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IInteractionsService, InteractionService>();
 builder.Services.AddScoped<IFileService, FileService>();
 
 

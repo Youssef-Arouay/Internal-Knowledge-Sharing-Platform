@@ -102,9 +102,10 @@
                 <h1>Files Listing</h1>
             </div>
             <div class="header-center">
+                <!-- <i class="fal fa-search"></i> -->
                 <mat-form-field appearance="outline">
                     <mat-label>Search a file by name or content...</mat-label>
-                    <input matInput placeholder="Search...">
+                    <input matInput placeholder="Search..." >
                 </mat-form-field>
             </div>
             <div class="header-right">
@@ -156,22 +157,27 @@
 
         <!-- Downloads Column -->
         <ng-container matColumnDef="downloads">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by downloads">Downloads
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by downloads">
+                Downloads
             </th>
-            <td mat-cell *matCellDef="let element">{{element.downloads}}
-                <img class="fileDownlaodicon" src="assets/images/file.png" alt="download file" />
+            <td mat-cell *matCellDef="let element">
+                {{ element.downloads }}
+                <button mat-icon-button (click)="downloadFile(element.entityName)">
+                    <mat-icon aria-label="Download file">get_app</mat-icon>
+                </button>
             </td>
         </ng-container>
+
 
         <!-- Rate Column -->
         <ng-container matColumnDef="rate">
             <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rate">Rate</th>
             <td mat-cell *matCellDef="let element">
                 <div class="star-container">
-                    <div class="starRate">
+                    <div *ngIf="!hasRated" class="starRate">
                         <i class="far fa-star"></i> <!-- Font Awesome regular star icon -->
                     </div>
-                    <div class="starRated">
+                    <div *ngIf="hasRated" class="starRated">
                         <i class="fas fa-star"></i> <!-- Font Awesome solid star icon -->
                     </div>
                     <div class="rate-number">{{ element.rate }}</div>

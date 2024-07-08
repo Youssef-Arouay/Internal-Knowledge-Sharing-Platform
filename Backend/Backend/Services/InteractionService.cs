@@ -1,10 +1,11 @@
 ﻿using Backend.Data;
+using Backend.Services.IServices;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace Backend.Services
 {
-    public class InteractionService
+    public class InteractionService : IInteractionsService
     {
         private readonly ApplicationDbContext _context;
 

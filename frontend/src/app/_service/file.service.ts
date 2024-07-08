@@ -49,4 +49,16 @@ export class FileService {
     return this.http.get<FileElement[]>(`${this.baseUrl}file/all`, { headers });
   }
   
+  //DOWNLOAD FILE 
+  downloadFile(entityName: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.baseUrl}File/downloadfile`, {
+      headers,
+      params: { entityName },
+      responseType: 'blob' as 'json'
+    });
+  }
 }

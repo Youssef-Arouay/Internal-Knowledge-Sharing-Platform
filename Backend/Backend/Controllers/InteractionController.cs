@@ -63,7 +63,8 @@ namespace Backend.Controllers
                 var like = new Like
                 {
                     PostId = postId,
-                    UserId = userId.Value  // Assign retrieved user id from the token
+                    UserId = userId.Value,  // Assign retrieved user id from the token
+                    CreatedAt = DateTime.UtcNow,
                 };
 
                 _context.Likes.Add(like);

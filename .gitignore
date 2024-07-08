@@ -6,6 +6,9 @@
 /out-tsc
 /bazel-out
 
+/backend/backend/UploadedFiles
+/UploadedFiles
+
 # Node
 /frontend/node_modules
 /node_modules
