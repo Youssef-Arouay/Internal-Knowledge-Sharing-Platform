@@ -1,15 +1,11 @@
 ﻿using Backend.DTO;
 using Backend.Models;
-using BCrypt.Net;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Backend.Data;
-using Backend.Services;
 using Backend.Services.IServices;
 
 
