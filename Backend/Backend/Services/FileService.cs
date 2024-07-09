@@ -105,6 +105,33 @@ namespace Backend.Services
         }
 
         //GET ALL FILES
+        /* public async Task<List<FileDtoResp>> GetAllFiles(int userId)
+         {
+             try
+             {
+                 var files = await _context.FileEntities
+                     .Where(f => f.UserId == userId)
+                     .Select(f => new FileDtoResp
+                     {
+                         Id = f.Id,
+                         EntityName = f.EntityName,
+                         Description = f.Description,
+                         Tags = f.Tags,
+                         Version = f.Version,
+                         UploadDate = f.UploadDate,
+                         Downloads = f.Downloads,
+                         Rates = f.Rates,
+                         FirstName = f.User.Firstname, // Include FirstName
+                         LastName = f.User.Lastname    // Include LastName
+                     })
+                     .ToListAsync();
+                 return files;
+             }
+             catch (Exception ex)
+             {
+                 throw new Exception("An error occurred while retrieving files.", ex);
+             }
+         }*/
         public async Task<List<FileDtoResp>> GetAllFiles(int userId)
         {
             try
@@ -121,10 +148,16 @@ namespace Backend.Services
                         UploadDate = f.UploadDate,
                         Downloads = f.Downloads,
                         Rates = f.Rates,
-                        FirstName = f.User.Firstname, // Include FirstName
-                        LastName = f.User.Lastname    // Include LastName
+                        FirstName = f.User.Firstname, 
+                        LastName = f.User.Lastname,   
+                        RatedByUsers = f.RateFiles.Select(fr => new UserResp
+                        {
+                            Id = fr.UserId,
+                            Username = fr.User.Firstname + " " + fr.User.Lastname,
+                        }).ToList()
                     })
                     .ToListAsync();
+
                 return files;
             }
             catch (Exception ex)
@@ -132,6 +165,7 @@ namespace Backend.Services
                 throw new Exception("An error occurred while retrieving files.", ex);
             }
         }
+
 
     }
 }

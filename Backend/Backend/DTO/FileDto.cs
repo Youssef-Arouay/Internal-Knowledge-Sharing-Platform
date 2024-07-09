@@ -17,6 +17,7 @@
         public DateTime UploadDate { get; set; }
         public int Downloads { get; set; }
         public int Rates { get; set; }
+        public List<UserResp> RatedByUsers { get; set; }
         public string FirstName { get; set; } // Add FirstName of user ( owner )
         public string LastName { get; set; }  // Add LastName
     }

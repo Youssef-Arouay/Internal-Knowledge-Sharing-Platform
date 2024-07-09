@@ -59,6 +59,7 @@ export interface FileElement {
     downloads: number;
     rates: number;
     tags: string[]; 
+    // hasRated : boolean;
   }
   
   

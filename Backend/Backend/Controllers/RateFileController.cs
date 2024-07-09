@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace Backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     [Authorize]
     public class RateFileController : ControllerBase
@@ -64,7 +64,7 @@ namespace Backend.Controllers
                 return BadRequest("You have not rated this file.");
             }
 
-            return Ok("File unrated successfully.");
+            return Ok(new { message = "File unrated successfully." });
         }
     }
 }

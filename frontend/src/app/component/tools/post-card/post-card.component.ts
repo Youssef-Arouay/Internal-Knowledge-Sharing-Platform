@@ -75,7 +75,6 @@ export class PostCardComponent implements OnInit {
         next: () => {
           post.likes.$values = post.likes.$values.filter((like: any) => like.userId !== this.user!.id);
           this.cdr.detectChanges(); // Trigger change detection explicitly
-
         },
         error: (err) => {
           console.error('Error unliking post', err);
@@ -87,7 +86,6 @@ export class PostCardComponent implements OnInit {
         next: () => {
           post.likes.$values.push({ userId: this.user!.id }); // Assuming your like object has a userId
           this.cdr.detectChanges(); // Trigger change detection explicitly
-
         },
         error: (err) => {
           console.error('Error liking post', err);

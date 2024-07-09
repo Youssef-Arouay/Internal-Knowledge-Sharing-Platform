@@ -46,7 +46,7 @@ export class FileService {
 
   //////////////////// RATE AND UNRATE FILE (FORUM) //////////////////
   rateFile(fileId: number): Observable<any> {
-    const url = `${this.baseUrl}file/rate/${fileId}`;
+    const url = `${this.baseUrl}RateFile/rate/${fileId}`;
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -55,7 +55,7 @@ export class FileService {
   }
 
   unrateFile(fileId: number): Observable<any> {
-    const url = `${this.baseUrl}file/unrate/${fileId}`;
+    const url = `${this.baseUrl}RateFile/unrate/${fileId}`;
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`

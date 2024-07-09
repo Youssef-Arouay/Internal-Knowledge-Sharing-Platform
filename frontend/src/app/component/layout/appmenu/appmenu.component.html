@@ -4,9 +4,9 @@
         <button mat-icon-button (click)="drawer.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <span>Dashboard</span>
+        <span>Hi, {{ capitalizeFirstLetter(user?.firstname) }}</span>
+        <!-- <span>Dashboard</span> -->
         <span class="example-spacer"></span>
-        <span>Hi, {{user?.firstname}}</span>
         <button mat-button [matMenuTriggerFor]="profile"><mat-icon>arrow_drop_down</mat-icon></button>
         <mat-menu #profile>
             <button mat-menu-item>Userprofile</button>
@@ -19,22 +19,17 @@
 
             <mat-nav-list>
                 <mat-list-item>
-                    <button mat-button routerLink=""><mat-icon>home</mat-icon>Home</button>
+                    <button mat-button routerLink=""><img class="iconMenu" src="assets/images/dashboard.png" alt="icon">
+                        Feed </button>
                 </mat-list-item>
                 <mat-list-item>
-                    <button mat-button routerLink="/forum"><mat-icon>Forum</mat-icon>Forum</button>
+                    <button mat-button routerLink="/forum"><img class="iconMenu" src="assets/images/forum.png"
+                            alt="icon">Forum</button>
                 </mat-list-item>
                 <mat-list-item>
-                    <button mat-button routerLink=""><mat-icon>Blog</mat-icon>Blog</button>
+                    <button mat-button routerLink=""><img class="iconMenu" src="assets/images/files.png" alt="icon">My
+                        files</button>
                 </mat-list-item>
-                <mat-list-item>
-                    <button mat-button routerLink=""><mat-icon>Communities</mat-icon>Communities</button>
-                </mat-list-item>
-                <!-- @for(item of menulist;track item){
-                        <mat-list-item>
-                            <button mat-button routerLink="{{item.code}}"><mat-icon>home</mat-icon>{{item.name}}</button>
-                        </mat-list-item>
-                        }  -->
             </mat-nav-list>
 
         </mat-drawer>
