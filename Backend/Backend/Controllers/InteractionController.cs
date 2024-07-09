@@ -1,7 +1,7 @@
 ﻿using Backend.Data;
 using Backend.DTO;
 using Backend.Models;
-using Backend.Services;
+using Backend.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +14,9 @@ namespace Backend.Controllers
     public class InteractionController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly InteractionService _interactionService;
+        private readonly IInteractionService _interactionService;
 
-        public InteractionController(ApplicationDbContext context, InteractionService interactionService)
+        public InteractionController(ApplicationDbContext context, IInteractionService interactionService)
         {
             _context = context;
             _interactionService = interactionService;

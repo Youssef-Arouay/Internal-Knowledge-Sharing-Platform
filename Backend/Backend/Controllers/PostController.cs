@@ -2,6 +2,7 @@
 using Backend.DTO;
 using Backend.Models;
 using Backend.Services;
+using Backend.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +19,9 @@ namespace Backend.Controllers
     public class PostController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly PostService _postService;
+        private readonly IPostService _postService;
 
-        public PostController(ApplicationDbContext context, PostService postService)
+        public PostController(ApplicationDbContext context, IPostService postService)
         {
             _context = context;
             _postService = postService;

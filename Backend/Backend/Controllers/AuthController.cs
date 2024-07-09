@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Backend.Data;
 using Backend.Services;
+using Backend.Services.IServices;
 
 
 namespace Backend.Controllers
@@ -23,9 +24,9 @@ namespace Backend.Controllers
 
         private readonly IConfiguration _configuration;
         private readonly ApplicationDbContext _context;
-        private readonly AuthService _authService;
+        private readonly IAuthService _authService;
 
-        public AuthController(IConfiguration configuration, ApplicationDbContext context, AuthService authService)
+        public AuthController(IConfiguration configuration, ApplicationDbContext context, IAuthService authService)
         {
             _configuration = configuration;
             _context = context;

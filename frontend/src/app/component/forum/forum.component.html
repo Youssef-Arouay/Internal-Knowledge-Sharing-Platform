@@ -163,7 +163,8 @@
             <td mat-cell *matCellDef="let element">
                 {{ element.downloads }}
                 <button mat-icon-button (click)="downloadFile(element.entityName)">
-                    <mat-icon aria-label="Download file">get_app</mat-icon>
+                    <!-- <mat-icon aria-label="Download file">download</mat-icon> -->
+                    <i style="color: rgb(38, 97, 165);" class="fa-solid fa-file-arrow-down"></i>
                 </button>
             </td>
         </ng-container>
@@ -173,17 +174,18 @@
         <ng-container matColumnDef="rate">
             <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rate">Rate</th>
             <td mat-cell *matCellDef="let element">
-                <div class="star-container">
-                    <div *ngIf="!hasRated" class="starRate">
-                        <i class="far fa-star"></i> <!-- Font Awesome regular star icon -->
-                    </div>
-                    <div *ngIf="hasRated" class="starRated">
-                        <i class="fas fa-star"></i> <!-- Font Awesome solid star icon -->
-                    </div>
-                    <div class="rate-number">{{ element.rate }}</div>
+              <div class="star-container">
+                <div (click)="rateFile(element)" *ngIf="!element.hasRated" class="starRate">
+                  <i class="far fa-star"></i>
                 </div>
+                <div (click)="unrateFile(element)" *ngIf="element.hasRated" class="starRated">
+                  <i class="fas fa-star"></i>
+                </div>
+                <div class="rate-number">{{ element.rates }}</div>
+              </div>
             </td>
-        </ng-container>
+          </ng-container>
+          
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

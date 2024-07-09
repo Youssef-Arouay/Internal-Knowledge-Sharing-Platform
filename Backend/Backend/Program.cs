@@ -25,9 +25,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Register the user service
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IPostService, PostService>();
-builder.Services.AddScoped<IInteractionsService, InteractionService>();
+builder.Services.AddScoped<IInteractionService, InteractionService>();
 builder.Services.AddScoped<IFileService, FileService>();
-
+builder.Services.AddTransient<IRateFileService, RateFileService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

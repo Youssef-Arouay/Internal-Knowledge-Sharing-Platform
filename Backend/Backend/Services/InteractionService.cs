@@ -5,7 +5,7 @@ using System.Security.Claims;
 
 namespace Backend.Services
 {
-    public class InteractionService : IInteractionsService
+    public class InteractionService : IInteractionService
     {
         private readonly ApplicationDbContext _context;
 

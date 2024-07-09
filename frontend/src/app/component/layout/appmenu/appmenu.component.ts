@@ -2,8 +2,8 @@ import { Component, DoCheck, OnInit } from '@angular/core';
 import { MaterialModule } from '../../../material.module';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { UserService } from '../../../_service/user.service';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { usercred } from '../../../_model/user.model';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-appmenu',
@@ -16,12 +16,27 @@ export class AppmenuComponent implements OnInit, DoCheck {
 
   user : usercred | null = null ;
 
-  constructor(private toastr: ToastrService, private userService: UserService, private router: Router) {}
+  constructor( private userService: UserService, private router: Router) {}
 
   showmenu = false;
 
+  // Old Simple NgOnInit call 
+  // ngOnInit(): void {
+  //   this.userService.user$.subscribe((user) => {
+  //     this.user = user;
+  //   });
+  // }
+
+  //New implementation
   ngOnInit(): void {
-    this.userService.user$.subscribe((user) => {
+    this.userService.user$.pipe(
+      catchError((error) => {
+        if (error.status === 401) {
+          this.logout();
+        }
+        return of(null); // Return a null observable or handle as needed
+      })
+    ).subscribe((user) => {
       this.user = user;
     });
   }
