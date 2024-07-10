@@ -3,26 +3,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { TestComponent } from '../test/test.component';
 import { PostCommentComponent } from '../post-comment/post-comment.component';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { PostService } from '../../../_service/post.service';
-import { postDetails, usercred } from '../../../_model/user.model';
+import { usercred } from '../../../_model/user.model';
 import { UserService } from '../../../_service/user.service';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { InteractionService } from '../../../_service/interaction.service';
 import { MatDialog } from '@angular/material/dialog';
-import { SharePostComponent } from '../share-post/share-post.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
-  imports: [MatIconModule,TestComponent, PostCommentComponent, CommonModule, MatMenuModule, MatMenuTrigger],
+  imports: [MatIconModule,TestComponent, PostCommentComponent, CommonModule, MatMenuModule, MatMenuTrigger, MatTooltipModule],
   templateUrl: './post-card.component.html',
   styleUrl: './post-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class PostCardComponent implements OnInit {
-  
   
   @Input() post: any ; // Input property to receive post data from parent component
   
@@ -74,7 +72,7 @@ export class PostCardComponent implements OnInit {
       this.interactionService.unlikePost(post.postId).subscribe({
         next: () => {
           post.likes.$values = post.likes.$values.filter((like: any) => like.userId !== this.user!.id);
-          this.cdr.detectChanges(); // Trigger change detection explicitly
+          this.cdr.detectChanges(); 
         },
         error: (err) => {
           console.error('Error unliking post', err);
@@ -84,14 +82,15 @@ export class PostCardComponent implements OnInit {
       // Like the post
       this.interactionService.likePost(post.postId).subscribe({
         next: () => {
-          post.likes.$values.push({ userId: this.user!.id }); // Assuming your like object has a userId
-          this.cdr.detectChanges(); // Trigger change detection explicitly
+          post.likes.$values.push({ userId: this.user!.id }); 
+          this.cdr.detectChanges(); 
         },
         error: (err) => {
           console.error('Error liking post', err);
         }
       });
     }
+    console.log("post.likes.$values: ", post.likes.$values)
   }
   
 
@@ -116,6 +115,10 @@ export class PostCardComponent implements OnInit {
         }
       });
     }
+  }
+
+  getUserLikesTooltip(post: any): string {
+    return post.likes.$values.map((like: any) => `${like.user.firstname} ${like.user.lastname}`).join(', ');
   }
 
 

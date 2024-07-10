@@ -18,8 +18,8 @@ namespace Backend.Migrations
                 name: "FK_SavedPost_Users_UserId",
                 table: "SavedPost");
 
-            migrationBuilder.DropTable(
-                name: "FileEntities");
+            /*migrationBuilder.DropTable(
+                name: "FileEntities");*/
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_SavedPost",

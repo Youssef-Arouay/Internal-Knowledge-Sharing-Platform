@@ -56,6 +56,7 @@ namespace Backend.Controllers
                 {
                     Firstname = request.Firstname,
                     Lastname = request.Lastname,
+                    Username = request.Firstname + request.Lastname,
                     Email = request.Email,
                     PasswordHash = passwordHash
                 };
@@ -91,7 +92,7 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Error occurred during login");
+                return StatusCode(500, "Error occurred during login"+ ex);
             }
         }
 

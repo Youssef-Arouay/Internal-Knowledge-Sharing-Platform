@@ -43,6 +43,14 @@ export class InteractionService {
     return this.http.post<any>(`${this.baseUrl}post/comment/add`, comment, { headers });
   }
 
+  deleteComment(commentId: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<any>(`${this.baseUrl}post/comment/delete/${commentId}`, { headers });
+  }
+
 
   // Method to get comments by post ID
   getCommentsByPostId(postId: number): Observable<any> {

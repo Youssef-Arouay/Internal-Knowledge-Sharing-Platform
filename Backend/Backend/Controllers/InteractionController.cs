@@ -59,7 +59,7 @@ namespace Backend.Controllers
                     return BadRequest(new { message = "User has already liked this post" });
                 }
 
-                // Create new Like object
+                // Create new Likes object
                 var like = new Like
                 {
                     PostId = postId,

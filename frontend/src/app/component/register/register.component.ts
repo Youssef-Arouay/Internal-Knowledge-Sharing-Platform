@@ -45,7 +45,6 @@ export class RegisterComponent {
     }
   }
 
-
   _regform = this.builder.group({
     email: this.builder.control('', Validators.required),
     password: this.builder.control('', Validators.required),
@@ -60,7 +59,7 @@ export class RegisterComponent {
     if (this._regform.valid) {
       let _obj: userRegister = {
         firstname: this._regform.value.firstname as string,
-        lastname: this._regform.value.firstname as string,
+        lastname: this._regform.value.lastname as string,
         email: this._regform.value.email as string,
         password: this._regform.value.password as string
       }

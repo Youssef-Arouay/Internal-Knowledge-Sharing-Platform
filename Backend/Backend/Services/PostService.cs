@@ -56,7 +56,7 @@ namespace Backend.Services
         }
 
 
-        // Delete post with deleting likes, comments...
+        // Delete post with deleting Like, comments...
         public async Task<(bool Success, string ErrorMessage)> DeletePostAsync(int postId, ClaimsPrincipal userClaims)
         {
             try
@@ -81,7 +81,7 @@ namespace Backend.Services
                 {
                     return (false, "Forbidden: User does not own the post.");
                 }
-                // Delete likes associated with the post
+                // Delete Like associated with the post
                 var likesToDelete = await _context.Likes.Where(l => l.PostId == postId).ToListAsync();
                 _context.Likes.RemoveRange(likesToDelete);
 
@@ -133,7 +133,7 @@ namespace Backend.Services
                                               User = new
                                               {
                                                   l.User.Firstname,
-                                                  l.User.Lastname
+                                                  l.User.Lastname,
                                               }
                                           }).ToList(),
                                           CommentCount = p.Comments.Count()

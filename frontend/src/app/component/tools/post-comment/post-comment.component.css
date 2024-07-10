@@ -31,6 +31,14 @@
   .iconsforPost {
     width: 20px;
   }
+
+  .trashIcon{
+    color: rgb(234, 32, 32);
+    border: none;
+    background-color: transparent;
+    margin-left: auto;
+    font-size: 1.3em;
+  }
   
   .moreicons {
     width: 20px;

@@ -4,9 +4,8 @@ using Backend.Helper;
 using Backend.Services.IServices;
 using Microsoft.AspNetCore.StaticFiles;
 using Backend.DTO;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
+
 
 namespace Backend.Services
 {

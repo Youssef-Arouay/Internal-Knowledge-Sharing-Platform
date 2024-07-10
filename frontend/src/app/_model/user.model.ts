@@ -4,16 +4,6 @@ export interface userRegister {
     email: string;
     password: string
 }
-
-export interface usercred {
-    id: number,
-    firstname: string,
-    lastname: string,
-    username: string,
-    email: string,
-    password: string
-}
-
 export interface loginReq {
     email: string;
     password: string;
@@ -22,6 +12,15 @@ export interface loginReq {
 export interface loginresp {
     token: any;
     user: usercred;
+}
+
+export interface usercred {
+    id: number,
+    firstname: string,
+    lastname: string,
+    username: string,
+    email: string,
+    password: string
 }
 
 export interface postDetails {
@@ -59,6 +58,7 @@ export interface FileElement {
     downloads: number;
     rates: number;
     tags: string[]; 
+    ratedByUsers:any;
     // hasRated : boolean;
   }
   

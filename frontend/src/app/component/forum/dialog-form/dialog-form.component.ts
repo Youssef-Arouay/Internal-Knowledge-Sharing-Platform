@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { fileForm } from '../../../_model/user.model';
 import { FileService } from '../../../_service/file.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dialog-form',
@@ -32,7 +33,8 @@ export class DialogFormComponent {
 
   protected readonly value = signal('');
 
-  constructor(private http: HttpClient, public dialogRef: MatDialogRef<DialogFormComponent>, private fileService: FileService,
+  constructor(private http: HttpClient, public dialogRef: MatDialogRef<DialogFormComponent>, private fileService: FileService, 
+    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any, ) { }
 
   onNoClick(): void {
@@ -53,35 +55,6 @@ export class DialogFormComponent {
     }
   }
 
-
-  // onSubmit(): void {
-  //   if (this.fileForm.file && this.fileForm.fileName && this.fileForm.description && this.fileForm.version) {
-  //     const formData = new FormData();
-  //     formData.append('formFile', this.fileForm.file);
-  //     formData.append('entityName', this.fileForm.fileName);
-  //     formData.append('description', this.fileForm.description);
-  //     formData.append('tags', JSON.stringify(this.fileForm.tags));
-  //     formData.append('version', this.fileForm.version);
-
-  //     this.fileService.uploadFile(formData).subscribe({
-  //       next: response => {
-  //         console.log('File uploaded successfully', response);
-  //         alert('File uploaded successfully');
-  //         this.dialogRef.close();
-  //       },
-  //       error: error => {
-  //         console.error('Error uploading file:', error);
-  //         alert(`An error occurred while uploading the file: ${error.message}`);
-  //       },
-  //       complete: () => {
-  //         console.log('File upload request completed');
-  //       }
-  //     });
-  //   } else {
-  //     alert('Please fill in all required fields and select a file.');
-  //   }
-  // }
-
   onSubmit(): void {
     if (this.fileForm.file && this.fileForm.fileName && this.fileForm.description && this.fileForm.version) {
       const formData = new FormData();
@@ -94,19 +67,20 @@ export class DialogFormComponent {
       this.fileService.uploadFile(formData).subscribe({
         next: response => {
           console.log('File uploaded successfully', response);
-          alert('File uploaded successfully');
+          this.toastr.success('File uploaded successfully')
           this.dialogRef.close();
         },
         error: error => {
           console.error('Error uploading file:', error);
-          alert(`An error occurred while uploading the file: ${error.message}`);
+          this.toastr.error('An error occurred while uploading the file:' , error.message);
         },
         complete: () => {
           console.log('File upload request completed');
         }
       });
     } else {
-      alert('Please fill in all required fields and select a file.');
+      this.toastr.error('Please fill in all required fields and select a file.');
+
     }
   }
 

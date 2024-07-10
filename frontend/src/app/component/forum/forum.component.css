@@ -62,31 +62,34 @@ color: white;
 
   /* Rating Icon and Number  */
   .starRate {
+    font-size: 18px;
     color: gold;
     border-color: gold;
-    font-size: 18px;
   }
 
   
   .starRated {
     font-size: 18px;
-    color: gold;
     border-color: gold;
-    
+    color: gold;
   }
 
   .star-container {
     display: flex; /* Use flexbox to align items horizontally */
     align-items: center; /* Center items vertically */
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.rate-number {
+    margin-left: 5px; 
+    display: inline-block;
 }
 
 .star-container > div {
     margin-right: 5px; /* Optional: Adds space between elements */
 }
 
-.star-container .rate-number {
-    margin-left: 5px; /* Optional: Adds space between stars and rate number */
-}
 
 .fileDownlaodicon {
   font-size: 10px;

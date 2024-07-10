@@ -73,47 +73,22 @@
                 </button>
             </td>
         </ng-container>
-
-
-        <!-- Rate Column -->
-        <!-- <ng-container matColumnDef="rate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rate">Rate</th>
+        <ng-container matColumnDef="rate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Rate</th>
             <td mat-cell *matCellDef="let element">
-              <div class="star-container">
-                <div (click)="rateFile(element)" *ngIf="!element.hasRated" class="starRate">
-                  <i class="far fa-star"></i>
+                <div class="star-container" (click)="handleRateFile(element)">
+                    <i *ngIf="hasRatedMap[element.id]; else notRated" class="fa-solid fa-star starRated"></i>
+                    <ng-template #notRated>
+                        <i class="fa-regular fa-star starRate"></i>
+                    </ng-template>
+                    <div class="rate-number">{{ element.rates }}</div>
                 </div>
-                <div (click)="unrateFile(element)" *ngIf="element.hasRated" class="starRated">
-                  <i class="fas fa-star"></i>
-                </div>
-                <div class="rate-number">{{ element.rates }}</div>
-              </div>
             </td>
-          </ng-container> -->
-          <ng-container matColumnDef="rate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rate">Rate</th>
-            <td mat-cell *matCellDef="let element">
-              <div class="star-container" (click)="handleRateFile(element)">
-                <div *ngIf="element.hasRated" class="starRated">
-                    <i class="far fa-star"></i>
-                </div>
-                <div *ngIf="!element.hasRated" class="starRate">
-                    <i class="far fa-star"></i>
-                </div>
-                <!-- <div (click)="handleRateFile(element)" [ngClass]="{'starRate': element.hasRated, 'starRated': !element.hasRated}">
-                  <i class="far fa-star"></i>
-                </div> -->
-                <div class="rate-number">{{ element.rates }}</div>
-              </div>
-            </td>
-          </ng-container>
-          
-
+        </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
     <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons aria-label="Select page of periodic elements">
     </mat-paginator>
 </mat-card>

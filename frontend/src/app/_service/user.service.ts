@@ -16,6 +16,7 @@ export class UserService {
   public user$: Observable<usercred | null> = this.userSubject.asObservable();
   
   private user: usercred | null = null;
+  baseUrl = environment.apiUrl;
   
   constructor(private http: HttpClient, private router : Router) { }
 
@@ -35,8 +36,7 @@ export class UserService {
     this.user = null;
   }
 
-  baseUrl = environment.apiUrl;
-
+  ////// AUTH /////////
   Userregistration(_data: userRegister) : Observable<HttpResponse<any>>{
     return this.http.post<any>(this.baseUrl + 'auth/register', _data,{observe:'response'});
   }
@@ -45,6 +45,7 @@ export class UserService {
     return this.http.post<any>(this.baseUrl + 'auth/login', _data,{observe:'response'});
   }
 
+  //// User Details //////
   getUserInfo(): Observable<usercred> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({

@@ -1,4 +1,5 @@
-﻿using Backend.Models;
+﻿using Backend.DTO;
+using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
@@ -14,11 +15,10 @@ namespace Backend.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<FileEntity> FileEntities { get; set; }
-        public DbSet<Like> Likes { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Like> Likes { get; set; }
         public DbSet<SavedPost> SavedPosts { get; set; }
         public DbSet<RateFile> RateFiles { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
@@ -34,7 +34,7 @@ namespace Backend.Data
                 .HasForeignKey(c => c.PostId)
                 .OnDelete(DeleteBehavior.Restrict);  // Prevent cascading delete
 
-            // Configure the relationship between Post and Like
+            // Configure the relationship between Post and Likes
             modelBuilder.Entity<Like>()
                 .HasOne(l => l.Post)
                 .WithMany(p => p.Likes)

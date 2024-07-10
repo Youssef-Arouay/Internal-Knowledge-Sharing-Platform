@@ -119,20 +119,44 @@
       align-items: center;   
   }
   
-  
   .likeIcon{
     width: 24px;
     height: 24px;
     margin-right: 5px;
     cursor: pointer;
   }
+
+  .editIcon{
+    color: rgb(43, 97, 196);
+    margin-right: 1em;
+  }
+
+  .trashIcon{
+    color: rgb(218, 34, 34);
+    margin-right: 1em;
+  }
   
   .postLikeCounter{
     font-size: 0.9em;
     margin-Top: 6px ;
-    
   }
-  
+
+  .postLikeCounter:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+  .postLikeText{
+    font-size: 0.9em;
+    margin-Top: 6px ; 
+  }
+
+  .postLikeText:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
   .postBottomRight{
     display: flex;
     align-items: center;   
@@ -149,8 +173,8 @@
       border-bottom: 1px gray;
       font-size: 0.9em;
       margin: 3px ;
-
   }
+  
 
   
   .postText {

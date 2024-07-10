@@ -12,12 +12,14 @@
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item>
-            <mat-icon>edit</mat-icon>
-            <span>Update Post</span>
+            <!-- <mat-icon>edit</mat-icon> -->
+            <i class="fa-regular fa-pen-to-square editIcon"></i>
+            <span>Update</span>
           </button>
           <button mat-menu-item (click)="deletePost()">
-            <mat-icon>delete</mat-icon>
-            <span>Delete Post</span>
+            <!-- <mat-icon>delete</mat-icon> -->
+            <i class="fa-solid fa-trash trashIcon"></i>
+            <span>Delete</span>
           </button>
         </mat-menu>
       </div>
@@ -30,23 +32,10 @@
       </div>
     </div>
     <div class="postBottom">
-      <!-- <ng-container *ngIf="!hasLiked(post)">
-        <div class="postBottomLeft">
-          <img class="likeIcon" src="assets/images/likee.png" alt="Like" (click)="likePost(post.postId)" />
-          <span class="postLikeCounter">{{ post.likes.$values.length }} {{ post.likes.$values.length === 1 ? 'like' : 'likes' }}</span>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="hasLiked(post)">
-        <div class="postBottomLeft">
-          <img class="likeIcon" src="assets/images/liked.png" alt="Unlike" (click)="unlikePost(post.postId)" />
-          <span class="postLikeCounter">{{ post.likes.$values.length }} {{ post.likes.$values.length === 1 ? 'like' : 'likes' }}</span>
-        </div>
-      </ng-container> -->
       <div class="postBottomLeft">
         <img class="likeIcon" src="assets/images/{{ hasLiked(post) ? 'liked.png' : 'likee.png' }}"
           alt="{{ hasLiked(post) ? 'Unlike' : 'Like' }}" (click)="handleLike(post)" />
-        <span class="postLikeCounter">{{ post.likes.$values.length }} {{ post.likes.$values.length === 1 ? 'like' :
-          'likes' }}</span>
+        <span class="postLikeCounter" matTooltip="{{ getUserLikesTooltip(post) }}" >{{ post.likes.$values.length }} {{ post.likes.$values.length === 1 ? 'like' : 'likes' }}</span>
       </div>
 
       <div class="postBottomRight">

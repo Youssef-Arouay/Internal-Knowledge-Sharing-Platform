@@ -9,9 +9,17 @@
 /backend/backend/UploadedFiles
 /UploadedFiles
 
-# Node
+
+/backend/backend/obj
+/backend/obj
+/backend/backend/bin
+/backend/bin
+
 /frontend/node_modules
 /node_modules
+/frontend/.vscode
+/frontend/.angular
+# Node
 npm-debug.log
 yarn-error.log
 

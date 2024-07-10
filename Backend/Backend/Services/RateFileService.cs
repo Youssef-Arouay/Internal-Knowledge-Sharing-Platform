@@ -2,8 +2,6 @@
 using Backend.Models;
 using Backend.Services.IServices;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading.Tasks;
 
 namespace Backend.Services
 {
@@ -18,27 +16,13 @@ namespace Backend.Services
 
         public async Task<int?> GetUserIdByEmail(string email)
         {
-            try
-            {
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-                return user?.Id;
-            }
-            catch (Exception ex)
-            {
-                throw ex; // Re-throw the exception to propagate it further
-            }
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            return user?.Id;
         }
 
         public async Task<bool> HasUserRatedFileAsync(int fileId, int userId)
         {
-            try
-            {
-                return await _context.RateFiles.AnyAsync(rf => rf.FileId == fileId && rf.UserId == userId);
-            }
-            catch (Exception ex)
-            {
-                throw; // Re-throw the exception to propagate it further
-            }
+            return await _context.RateFiles.AnyAsync(rf => rf.FileId == fileId && rf.UserId == userId);
         }
 
         public async Task<object> RateFileAsync(int fileId, int userId)

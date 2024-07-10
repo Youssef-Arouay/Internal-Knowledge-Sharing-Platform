@@ -11,9 +11,11 @@ import { DialogFormComponent } from './dialog-form/dialog-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatIconModule } from '@angular/material/icon';
 import { FileService } from '../../_service/file.service';
-import { FileElement } from '../../_model/user.model'; // Ensure this matches the data structure
+import { FileElement, usercred } from '../../_model/user.model'; // Ensure this matches the data structure
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../_service/user.service';
+import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-forum',
@@ -40,6 +42,7 @@ export class ForumComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<FileElement>();
 
   hasRated: boolean = false;
+  user: usercred | null=null;
 
   files: FileElement[] = [];
   hasRatedMap: { [fileId: number]: boolean } = {}; // Map to track if user has rated a file
@@ -50,6 +53,7 @@ export class ForumComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
+    private userService: UserService,
     private cdr: ChangeDetectorRef,
     private _liveAnnouncer: LiveAnnouncer,
     public dialog: MatDialog,
@@ -63,6 +67,9 @@ export class ForumComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.userService.user$.subscribe((user) => {
+      this.user = user;
+    });
     this.fetchAllFiles();
   }
 
@@ -70,32 +77,43 @@ export class ForumComponent implements OnInit, AfterViewInit {
     const subscription = this.fileService.getAllFiles().subscribe({
       next: (response: any) => {
         const filesArray = response && response.$values ? response.$values : [];
+        
+        console.log("response :",response);
 
         if (!Array.isArray(filesArray)) {
           console.error('Files received are not an array:', filesArray);
           return;
         }
-
         // Map filesArray to FileElement[] and reverse the order
-        this.files = filesArray.map((file, index) => ({
-          id: file.id,
-          firstName: file.firstName,
-          lastName: file.lastName,
-          entityName: file.entityName,
-          file: null,
-          position: index + 1,
-          author: `${file.firstName.charAt(0).toUpperCase()}${file.firstName.slice(1)} ${file.lastName.charAt(0).toUpperCase()}${file.lastName.slice(1)}`, // Capitalize first letters
-          name: file.entityName,
-          description: file.description,
-          version: file.version,
-          uploadDate: file.uploadDate,
-          downloads: file.downloads,
-          rates: file.rates,
-          tags: file.tags,
-        })).reverse(); // Reverse the array to get it from the newest to oldest one 
+        this.files = filesArray.map((file, index) => {
+          // Initialize hasRatedMap based on whether the current user has rated the file
+          this.hasRatedMap[file.id] = file.ratedByUsers.$values.some((user: usercred) => user.id === this.user?.id);
+  
+          return {
+            id: file.id,
+            firstName: file.firstName,
+            lastName: file.lastName,
+            entityName: file.entityName,
+            file: null,
+            position: index + 1,
+            author: `${file.firstName.charAt(0).toUpperCase()}${file.firstName.slice(1)} ${file.lastName.charAt(0).toUpperCase()}${file.lastName.slice(1)}`,
+            name: file.entityName,
+            description: file.description,
+            version: file.version,
+            uploadDate: file.uploadDate,
+            downloads: file.downloads,
+            rates: file.rates,
+            tags: file.tags,
+            ratedByUsers: file.ratedByUsers
+          };
+        }).reverse();// Reverse the array to get it from the newest to oldest one 
+
         this.dataSource.data = this.files;
-        // console.log('Files fetched successfully:', this.files);
-        // console.log('Data Source:', this.dataSource.data); // Log the data source
+
+        this.cdr.detectChanges(); // Trigger change detection explicitly
+        console.log("this.files :",this.files)
+        console.log('Data Source:', this.dataSource.data); // Log the data source
+
       },
       error: error => {
         console.error('Error fetching files:', error);
@@ -103,6 +121,7 @@ export class ForumComponent implements OnInit, AfterViewInit {
       }
     });
     this.subscriptions.push(subscription);
+    console.log("this.subscriptions", this.subscriptions)
   }
 
   onChange(event: any): void {
@@ -161,96 +180,42 @@ export class ForumComponent implements OnInit, AfterViewInit {
     downloadLink.click();
     document.body.removeChild(downloadLink);
   }
+  
 
-
-  // RATE AND UNRATE
-  // handleRateFile(file: FileElement): void {
-  //   if (this.hasRated) {
-  //     this.unrateFile(file);
-  //     this.cdr.detectChanges(); // Trigger change detection explicitly
-  //     this.hasRated = true;
-  //   } else {
-  //     this.rateFile(file);
-  //     this.hasRated = false;
-  //     this.cdr.detectChanges(); // Trigger change detection explicitly
-  //   }
-  // }
-
-  // rateFile(file: FileElement): void {
-  //   const subscription = this.fileService.rateFile(file.id).subscribe({
-  //     next: () => {
-  //       file.rates++;
-  //       this.dataSource.data = [...this.files];
-  //       this.toastr.success('File rated successfully');
-  //       this.hasRated = true;
-  //     },
-  //     error: error => {
-  //       console.error('Error rating file:', error);
-  //       this.toastr.error('Failed due to : ' + error.message, 'Failed to rate file');
-  //     }
-  //   });
-
-  //   this.subscriptions.push(subscription);
-  // }
-
-  // unrateFile(file: FileElement): void {
-  //   const subscription = this.fileService.unrateFile(file.id).subscribe({
-  //     next: () => {
-  //       file.rates--;
-  //       this.dataSource.data = [...this.files];
-  //       this.toastr.success('File unrated successfully');
-  //       this.hasRated = false;
-  //     },
-  //     error: error => {
-  //       console.error('Error unrating file:', error);
-  //       this.toastr.error('Failed due to : ' + error.message, 'Failed to unrate file');
-  //     }
-  //   });
-
-  //   this.subscriptions.push(subscription);
-  // }
-
+  // RATE & UNRATE FILE //
   handleRateFile(file: FileElement): void {
     const hasRated = this.hasRatedMap[file.id];
+    console.log("this.hasRatedMap", this.hasRatedMap)
     if (hasRated) {
-      this.unrateFile(file.id);
+      this.unrateFile(file);
     } else {
-      this.rateFile(file.id);
+      this.rateFile(file);
     }
   }
-
-  rateFile(fileId: number): void {
-    const subscription = this.fileService.rateFile(fileId).subscribe({
+  
+  rateFile(file: FileElement): void {
+    const subscription = this.fileService.rateFile(file.id).subscribe({
       next: () => {
-        const file = this.files.find(f => f.id === fileId);
-        if (file) {
-          file.rates++;
-          this.hasRatedMap[fileId] = true;
-          this.dataSource.data = [...this.files];
-          this.toastr.success('File rated successfully');
-          this.cdr.detectChanges(); // Trigger change detection explicitly
-        }
+        file.rates++;
+        this.hasRatedMap[file.id] = true; 
+        this.dataSource.data = [...this.files];
+        this.cdr.detectChanges();
       },
       error: error => {
         console.error('Error rating file:', error);
         this.toastr.error('Failed to rate file');
       }
     });
-  
     this.subscriptions.push(subscription);
   }
   
-  unrateFile(fileId: number): void {
-    const subscription = this.fileService.unrateFile(fileId).subscribe({
+  unrateFile(file: FileElement): void {
+    const subscription = this.fileService.unrateFile(file.id).subscribe({
       next: () => {
-        const file = this.files.find(f => f.id === fileId);
-        if (file) {
-          file.rates--;
-          this.hasRatedMap[fileId] = false;
-          this.dataSource.data = [...this.files];
-          this.toastr.success('File unrated successfully');
-          this.cdr.detectChanges(); // Trigger change detection explicitly
-        }
+        file.rates--;
+        this.hasRatedMap[file.id] = false; 
+        this.dataSource.data = [...this.files];
+        this.cdr.detectChanges();
       },
       error: error => {
         console.error('Error unrating file:', error);
@@ -260,7 +225,6 @@ export class ForumComponent implements OnInit, AfterViewInit {
   
     this.subscriptions.push(subscription);
   }
-  
 
 
 

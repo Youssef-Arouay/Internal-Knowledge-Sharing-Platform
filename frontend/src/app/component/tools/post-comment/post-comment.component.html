@@ -2,23 +2,26 @@
     <div className='SubPostContainer'>
         <div *ngIf="show" style="padding: 15px;">
             <div style="display: flex; align-items: center; padding-top: 1.3em; padding-left: 1em;">
-                <img [src]=" 'https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'"
-                    class="PostImage" alt="" />
-                <p *ngIf="user" style="margin-left: 6px;">{{ user.firstname | titlecase }} </p>
-                <input type="text" class="commentinput" placeholder="Write your thought" [(ngModel)]="commentContent" />
+                <img src="/assets/images/userIcon.jpg" class="PostImage" alt="" />
+                <input type="text" class="commentinput" placeholder="Write your thought {{ user?.firstname | titlecase }}" 
+                [(ngModel)]="commentContent" />
                 <button class="addCommentbtn" (click)="handleComment()">Post</button>
             </div>
             <div *ngFor="let comment of displayedComments"
                 style="align-items: center; padding-top: 1em; padding-left: 1em;">
                 <div style="display: flex; align-items: center;">
-                    <img src="https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        class="PostImagee" alt="" />
-                    <p style="margin-left: 6px; font-size: 16px; margin-top: 16px;">{{ comment.user.firstname | titlecase
-                        }} {{ comment.user.lastname | titlecase}}</p>
+                    <img src="/assets/images/userIcon.jpg" class="PostImagee" alt="" />
+                    <p style="margin-left: 1em; font-size: 16px; margin-top: 1em;">
+                        {{ comment.user.firstname | titlecase}} {{ comment.user.lastname | titlecase}}
+                    </p>
+                    <button *ngIf="user?.id == comment.userId" mat-menu-item class="trashIcon" (click)="deleteComment(comment.commentId)">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                 </div>
-                <p style="margin-left: 60px; text-align: start; font-size: 14px;  margin-top: -18px;">{{ comment.content}}</p>
-                <p style="margin-left: 55px; text-align: start; margin-top: -10px; color: #aaa; font-size: 11px;">Reply
-                </p>
+                <p style="margin-left: 60px; text-align: start; font-size: 14px;  margin-top: -18px;">{{
+                    comment.content}}</p>
+                <p style="margin-left: 55px; text-align: start; margin-top: -10px; color: #aaa; font-size: 11px;">
+                    Reply</p>
             </div>
             <button *ngIf="loadedCommentsCount < comments.length" class="loadMoreBtn" (click)="onLoadMoreClick()">Load
                 more</button>
