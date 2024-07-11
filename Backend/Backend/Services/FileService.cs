@@ -136,8 +136,8 @@ namespace Backend.Services
             try
             {
                 var files = await _context.FileEntities
-                    .Where(f => f.UserId == userId)
-                    .Select(f => new FileDtoResp
+/*                    .Where(f => f.UserId == userId)*/                    
+                        .Select(f => new FileDtoResp
                     {
                         Id = f.Id,
                         EntityName = f.EntityName,
@@ -155,6 +155,41 @@ namespace Backend.Services
                             Username = fr.User.Firstname + " " + fr.User.Lastname,
                         }).ToList()
                     })
+                    .ToListAsync();
+
+                return files;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving files.", ex);
+            }
+        }
+
+        // GET THE FILES OF A USER
+        public async Task<List<FileDtoResp>> GetMyFiles(int userId)
+        {
+            try
+            {
+                var files = await _context.FileEntities
+                        .Where(f => f.UserId == userId)
+                        .Select(f => new FileDtoResp
+                        {
+                            Id = f.Id,
+                            EntityName = f.EntityName,
+                            Description = f.Description,
+                            Tags = f.Tags,
+                            Version = f.Version,
+                            UploadDate = f.UploadDate,
+                            Downloads = f.Downloads,
+                            Rates = f.Rates,
+                            FirstName = f.User.Firstname,
+                            LastName = f.User.Lastname,
+                            RatedByUsers = f.RateFiles.Select(fr => new UserResp
+                            {
+                                Id = fr.UserId,
+                                Username = fr.User.Firstname + " " + fr.User.Lastname,
+                            }).ToList()
+                        })
                     .ToListAsync();
 
                 return files;

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { TestComponent } from '../test/test.component';
 import { PostCommentComponent } from '../post-comment/post-comment.component';
 import { CommonModule } from '@angular/common';
 import { PostService } from '../../../_service/post.service';
@@ -14,7 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-post-card',
   standalone: true,
-  imports: [MatIconModule,TestComponent, PostCommentComponent, CommonModule, MatMenuModule, MatMenuTrigger, MatTooltipModule],
+  imports: [MatIconModule, PostCommentComponent, CommonModule, MatMenuModule, MatMenuTrigger, MatTooltipModule],
   templateUrl: './post-card.component.html',
   styleUrl: './post-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -35,7 +34,8 @@ export class PostCardComponent implements OnInit {
   isOwner : boolean = false; // Flag to indicate if current user is the owner of the post
 
 
-  constructor(private cdr: ChangeDetectorRef, private dialog: MatDialog, private postService: PostService, private userService : UserService, private interactionService: InteractionService) { }
+  constructor(private cdr: ChangeDetectorRef, private dialog: MatDialog, private postService: PostService, 
+    private userService : UserService, private interactionService: InteractionService) { }
 
 
   ngOnInit(): void {
@@ -118,8 +118,11 @@ export class PostCardComponent implements OnInit {
   }
 
   getUserLikesTooltip(post: any): string {
-    return post.likes.$values.map((like: any) => `${like.user.firstname} ${like.user.lastname}`).join(', ');
+    return post.likes.$values
+      .map((like: any) => `${like.user.firstname} ${like.user.lastname}`)
+      .join(', ');
   }
-
+  
+  
 
 }

@@ -2,7 +2,6 @@
 using Backend.DTO;
 using Backend.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -23,45 +22,6 @@ namespace Backend.Controllers
             _context = context;
         }
 
-        /*[HttpPost]
-        [Route("uploadfile")]
-        public async Task<IActionResult> UploadFile(IFormFile formFile, [FromForm] FileDto fileDto)
-        {
-            try
-            {
-                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
-                if (string.IsNullOrEmpty(userEmail))
-                {
-                    return BadRequest("User email is missing or invalid.");
-                }
-
-                // Fetch the user ID based on the email
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == userEmail);
-                if (user == null)
-                {
-                    return NotFound("User not found.");
-                }
-
-                var result = await _fileService.UploadFile(formFile, fileDto, user.Id);
-                return Ok(result);
-            }
-            catch (ArgumentNullException ex)
-            {
-                return BadRequest($"Argument null exception: {ex.Message}");
-            }
-            catch (FormatException ex)
-            {
-                return BadRequest($"Format exception: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message == "A file with this EntityName already exists.")
-                {
-                    return Conflict(ex.Message); // Return HTTP 409 Conflict
-                }
-                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while uploading the file: {ex.Message}");
-            }
-        }*/
 
         [HttpPost]
         [Route("uploadfile")]
@@ -144,6 +104,36 @@ namespace Backend.Controllers
                 }
 
                 var files = await _fileService.GetAllFiles(user.Id);
+                return Ok(files);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while retrieving the files: {ex.Message}");
+            }
+        }
+
+
+        // ALL FILES OF A USER
+        [HttpGet]
+        [Route("myfiles")]
+        public async Task<IActionResult> GetMyFiles()
+        {
+            try
+            {
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    return BadRequest("User email is missing or invalid.");
+                }
+
+                // Fetch the user ID based on the email
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == userEmail);
+                if (user == null)
+                {
+                    return NotFound("User not found.");
+                }
+
+                var files = await _fileService.GetMyFiles(user.Id);
                 return Ok(files);
             }
             catch (Exception ex)

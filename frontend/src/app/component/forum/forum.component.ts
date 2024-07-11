@@ -60,17 +60,17 @@ export class ForumComponent implements OnInit, AfterViewInit {
     private fileService: FileService,
     private toastr: ToastrService,
   ) { }
+  
+    ngOnInit(): void {
+      this.userService.user$.subscribe((user) => {
+        this.user = user;
+      });
+      this.fetchAllFiles();
+    }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-  }
-
-  ngOnInit(): void {
-    this.userService.user$.subscribe((user) => {
-      this.user = user;
-    });
-    this.fetchAllFiles();
   }
 
   fetchAllFiles(): void {
@@ -95,7 +95,8 @@ export class ForumComponent implements OnInit, AfterViewInit {
             lastName: file.lastName,
             entityName: file.entityName,
             file: null,
-            position: index + 1,
+            // position: index + 1,
+            position: filesArray.length - index,
             author: `${file.firstName.charAt(0).toUpperCase()}${file.firstName.slice(1)} ${file.lastName.charAt(0).toUpperCase()}${file.lastName.slice(1)}`,
             name: file.entityName,
             description: file.description,
@@ -107,30 +108,26 @@ export class ForumComponent implements OnInit, AfterViewInit {
             ratedByUsers: file.ratedByUsers
           };
         }).reverse();// Reverse the array to get it from the newest to oldest one 
-
         this.dataSource.data = this.files;
 
         this.cdr.detectChanges(); // Trigger change detection explicitly
-        console.log("this.files :",this.files)
-        console.log('Data Source:', this.dataSource.data); // Log the data source
-
       },
       error: error => {
-        console.error('Error fetching files:', error);
+        // console.error('Error fetching files:', error);
         this.toastr.error('Failed due to : ' + error.message, 'Failed to fetch files');
       }
     });
     this.subscriptions.push(subscription);
-    console.log("this.subscriptions", this.subscriptions)
   }
 
-  onChange(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      // Handle file upload logic
-    }
-  }
+  // onChange(event: any): void {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     // Handle file upload logic
+  //   }
+  // }
 
+  // Open upload file form
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogFormComponent, {
       data: {}
@@ -138,6 +135,7 @@ export class ForumComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
+        this.fetchAllFiles();
     });
   }
 

@@ -1,10 +1,15 @@
 <div class="post">
   <div class="postWrapper">
     <div class="postTop">
-      <div class="postTopLeft">
-        <img class="postProfileImg" src="/assets/images/userIcon.jpg" alt="" />
-        <span class="postUsername"> {{post.user.firstname | titlecase}} {{post.user.lastname | titlecase}}</span>
-        <span class="postDate">{{ formatPostDate(post.creationDate) }}</span>
+      <div class="topLeftElt">
+        <div class="postTopLeft">
+          <img class="postProfileImg" src="/assets/images/userIcon.jpg" alt="" />
+          <span class="postUsername"> {{post.user.firstname | titlecase}} {{post.user.lastname | titlecase}}</span>
+          <span class="postDate">{{ formatPostDate(post.creationDate) }}</span>
+        </div>
+        <div class="tagsPost">
+          <span *ngFor="let tag of post.tags.$values"> #{{tag}} </span>
+        </div>
       </div>
       <div class="postTopRight">
         <button *ngIf="isOwner" class="menuButton" mat-icon-button [matMenuTriggerFor]="menu">
@@ -32,10 +37,16 @@
       </div>
     </div>
     <div class="postBottom">
+
       <div class="postBottomLeft">
+
         <img class="likeIcon" src="assets/images/{{ hasLiked(post) ? 'liked.png' : 'likee.png' }}"
           alt="{{ hasLiked(post) ? 'Unlike' : 'Like' }}" (click)="handleLike(post)" />
-        <span class="postLikeCounter" matTooltip="{{ getUserLikesTooltip(post) }}" >{{ post.likes.$values.length }} {{ post.likes.$values.length === 1 ? 'like' : 'likes' }}</span>
+
+        <span class="postLikeCounter" matTooltip="{{getUserLikesTooltip(post)}}"
+        matTooltipClass="custom-tooltip">
+          {{ post.likes.$values.length }} {{post.likes.$values.length === 1 ? 'like' : 'likes' }}</span>
+
       </div>
 
       <div class="postBottomRight">

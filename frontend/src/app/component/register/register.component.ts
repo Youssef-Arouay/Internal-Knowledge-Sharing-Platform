@@ -18,7 +18,7 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class RegisterComponent {
 
-  isSignDivVisiable: boolean = false;
+  isSignDivVisible: boolean = false;
 
   constructor(private builder: FormBuilder, private userService: UserService,
     private toastr: ToastrService, private router: Router) {
@@ -55,6 +55,39 @@ export class RegisterComponent {
     // phone: this.builder.control('', Validators.required)
   })
 
+  // proceedregister() {
+  //   if (this._regform.valid) {
+  //     let _obj: userRegister = {
+  //       firstname: this._regform.value.firstname as string,
+  //       lastname: this._regform.value.lastname as string,
+  //       email: this._regform.value.email as string,
+  //       password: this._regform.value.password as string
+  //     }
+
+  //     this.userService.Userregistration(_obj).subscribe(response => {
+  //       console.log(response)
+  //       if (response.status == 200) {
+  //         this.toastr.success('Registration completed', 'Registration');
+  //         this._regform.reset();
+
+  //         this.isSignDivVisible = false; // Set isSignDivVisible to true
+  //         //this.router.navigateByUrl('/register');
+  //       } else {
+  //         console.log(response);
+  //         this.toastr.error('Failed due to : ' + response, 'Registeration Failed')
+  //       }
+  //     },
+  //       (error) => {
+  //         console.error('Error during registration:', error);
+  //         this.toastr.error('Failed due to : ' + error.error.message, 'Registration Failed');
+  //       }
+  //     );
+
+  //   } else {
+  //     this.toastr.error('Please fill out the form correctly', 'Registration Failed');
+  //   }
+  // }
+
   proceedregister() {
     if (this._regform.valid) {
       let _obj: userRegister = {
@@ -62,32 +95,32 @@ export class RegisterComponent {
         lastname: this._regform.value.lastname as string,
         email: this._regform.value.email as string,
         password: this._regform.value.password as string
-      }
+      };
 
-      this.userService.Userregistration(_obj).subscribe(response => {
-        console.log(response)
-        if (response.status == 200) {
-          this.toastr.success('Registration completed', 'Registration');
-          this._regform.reset();
-
-          this.isSignDivVisiable = false; // Set isSignDivVisible to true
-          //this.router.navigateByUrl('/register');
-        } else {
+      this.userService.Userregistration(_obj).subscribe({
+        next: response => {
           console.log(response);
-          this.toastr.error('Failed due to : ' + response, 'Registeration Failed')
-        }
-      },
-        (error) => {
+          if (response.status === 200) {
+            this.toastr.success('Registration completed', 'Registration');
+            this._regform.reset();
+            this.isSignDivVisible = false; // Set isSignDivVisible to false
+            // this.router.navigateByUrl('/register'); // Uncomment if you want to navigate
+          } else {
+            this.toastr.error('Failed due to: ' + response, 'Registration Failed');
+          }
+        },
+        error: error => {
           console.error('Error during registration:', error);
-          this.toastr.error('Failed due to : ' + error.error.message, 'Registration Failed');
+          this.toastr.error('Failed due to: ' + error.error.message, 'Registration Failed');
+        },
+        complete: () => {
+          console.log('Registration request completed');
         }
-      );
-
+      });
     } else {
       this.toastr.error('Please fill out the form correctly', 'Registration Failed');
     }
   }
-
 
 
   //////LOGIN////////
@@ -102,7 +135,7 @@ export class RegisterComponent {
         email: this._loginform.value.email as string,
         password: this._loginform.value.password as string,
       };
-  
+
       this.userService.Proceedlogin(loginObj).subscribe(
         (response: HttpResponse<loginresp>) => {
           if (response.status === 200) {
@@ -143,6 +176,6 @@ export class RegisterComponent {
       this.toastr.error('Please fill out the form correctly', 'Login Failed');
     }
   }
-  
+
 
 }

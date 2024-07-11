@@ -12,8 +12,6 @@ using System.Security.Claims;
 namespace Backend.Controllers
 {
 
-
-
     [Route("post")]
     [ApiController]
     public class PostController : Controller
@@ -112,6 +110,34 @@ namespace Backend.Controllers
             try
             {
                 var posts = await _postService.GetAllPostsAsync();
+                return Ok(posts);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
+            }
+        }
+
+        // Return User's posts
+        [HttpGet("myposts")]
+        [Authorize]
+        public async Task<IActionResult> GetMyPosts()
+        {
+            try
+            {
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    return BadRequest("User email is missing or invalid.");
+                }
+
+                // Fetch the user ID based on the email
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == userEmail);
+                if (user == null)
+                {
+                    return NotFound("User not found.");
+                }
+                var posts = await _postService.GetMyPostsAsync(user.Id);
                 return Ok(posts);
             }
             catch (Exception ex)

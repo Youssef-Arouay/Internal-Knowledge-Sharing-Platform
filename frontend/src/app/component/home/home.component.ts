@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { PostComponent } from '../tools/post/post.component';
 import { UserService } from '../../_service/user.service';
 import { SharePostComponent } from '../tools/share-post/share-post.component';
 import { PostCardComponent } from '../tools/post-card/post-card.component';
@@ -14,7 +13,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, PostComponent, SharePostComponent, CommonModule, PostCardComponent],
+  imports: [MatIconModule, MatButtonModule, SharePostComponent, CommonModule, PostCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

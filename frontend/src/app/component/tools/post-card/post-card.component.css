@@ -54,145 +54,170 @@
 
 
 
-   .post {
-    height: auto;
-    width: 60%;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-    margin: 30px 0;
-  }
-  
-  .postWrapper {
-    padding: 10px;
-  }
-  
-  .postTop {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .postTopLeft {
-    display: flex;
-    align-items: center;
-  }
-  
-  .postProfileImg {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .postUsername {
-    font-size: 15px;
-    font-weight: 500;
-    margin: 0 10px;
-  }
-  
-  .postDate{
-      font-size: 12px;
-      margin: 0 10px;
-  }
-  
-  .postCenter{
-      margin: 20px 0;
-      text-align: left;
-  }
-  
-  .postImg{
-      margin-top: 20px;
-      max-width: 60%;
-      max-height: 300px;
-      object-fit: contain;
-  }
-  
-  .postBottom{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-  }
-  
-  .postBottomLeft{
-      display: flex;
-      align-items: center;   
-  }
-  
-  .likeIcon{
-    width: 24px;
-    height: 24px;
-    margin-right: 5px;
-    cursor: pointer;
-  }
-
-  .editIcon{
-    color: rgb(43, 97, 196);
-    margin-right: 1em;
-  }
-
-  .trashIcon{
-    color: rgb(218, 34, 34);
-    margin-right: 1em;
-  }
-  
-  .postLikeCounter{
-    font-size: 0.9em;
-    margin-Top: 6px ;
-  }
-
-  .postLikeCounter:hover {
-    cursor: pointer;
-    text-decoration: underline;
+.post {
+  height: auto;
+  width: 60%;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  margin: 30px 0;
 }
 
-  .postLikeText{
-    font-size: 0.9em;
-    margin-Top: 6px ; 
-  }
+.postWrapper {
+  padding: 10px;
+}
 
-  .postLikeText:hover {
-    cursor: pointer;
-    text-decoration: underline;
+.postTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.postTopLeft {
+  display: flex;
+  align-items: center;
+}
+
+.topLeftElt {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-right: 4px;
+}
+
+.postProfileImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.postUsername {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 10px;
+}
+
+.postDate {
+  font-size: 12px;
+  margin: 0 10px;
+}
+
+.postCenter {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.postImg {
+  margin-top: 20px;
+  max-width: 60%;
+  max-height: 300px;
+  object-fit: contain;
+}
+
+.postBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.postBottomLeft {
+  display: flex;
+  align-items: center;
+}
+
+/* //// ICON /// */
+.likeIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.editIcon {
+  color: rgb(43, 97, 196);
+  margin-right: 1em;
+}
+
+.trashIcon {
+  color: rgb(218, 34, 34);
+  margin-right: 1em;
+}
+
+/* // Like // */
+.postLikeCounter {
+  font-size: 0.9em;
+  margin-Top: 6px;
+}
+
+.postLikeCounter:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  white-space: pre-line !important; /* Ensure pre-line is applied */
+  color: #333131;
+
+}
+
+/* Ensure to add this CSS in your global styles (styles.css or styles.scss) or in the component's CSS file with ::ng-deep */
+::ng-deep .mat-tooltip.custom-tooltip {
+  white-space: pre-line !important; /* Ensure pre-line is applied */
 }
 
 
-  .postBottomRight{
-    display: flex;
-    align-items: center;   
+.postLikeText {
+  font-size: 0.9em;
+  margin-Top: 6px;
 }
-  .commentIcon{
-    width: 20px;
-    height: 20px;
-    margin-top: 5px;
-    cursor: pointer;
+
+.postLikeText:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
-  
-  .postCommentText{
-      cursor: pointer;
-      border-bottom: 1px gray;
-      font-size: 0.9em;
-      margin: 3px ;
-  }
-  
 
-  
-  .postText {
 
-    text-align: left;
-    width: 96%;
-    margin-left: 20px; /* Specify units for margin-left */
-    margin-top: 0;
-  }
-  
+.postBottomRight {
+  display: flex;
+  align-items: center;
+}
 
-  .menuButton {
-    background-color: white;
-    border-radius: 60%;
-    border: none; /* Remove any border */
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.commentIcon {
+  width: 20px;
+  height: 20px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.postCommentText {
+  cursor: pointer;
+  border-bottom: 1px gray;
+  font-size: 0.9em;
+  margin: 3px;
+}
+
+.postText {
+  text-align: left;
+  width: 96%;
+  margin-left: 20px;
+  /* Specify units for margin-left */
+  margin-top: 0;
+}
+
+
+.menuButton {
+  background-color: white;
+  border-radius: 60%;
+  border: none;
+  /* Remove any border */
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tagsPost {
+  color: #6e6e6e;
+  font-size: 14px;
+  margin-top: -8px;
+  margin-left: 18%;
+}

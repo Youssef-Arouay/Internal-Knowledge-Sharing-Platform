@@ -6,12 +6,18 @@
         </button>
         <span>Hi, {{ capitalizeFirstLetter(user?.firstname) }}</span>
         <!-- <span>Dashboard</span> -->
-        <span class="example-spacer"></span>
-        <button mat-button [matMenuTriggerFor]="profile"><mat-icon>arrow_drop_down</mat-icon></button>
+        <span class="example-spacer"> </span>
+
+        <button mat-button [matMenuTriggerFor]="profile"> 
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+            <mat-icon>arrow_drop_down</mat-icon>
+        </button>
         <mat-menu #profile>
-            <button mat-menu-item>Userprofile</button>
-            <button mat-menu-item routerLink="/resetpassword">Resetpassword</button>
-            <button mat-menu-item (click)="logout()">Logout</button>
+            <button mat-menu-item routerLink="/profile"><i class="fa-regular fa-user" style="padding-left: 0.2em; padding-right: 1em;"></i>
+                Profile</button>
+            <button mat-menu-item (click)="logout()">            
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="logout" ></mat-icon>
+                Logout</button>
         </mat-menu>
     </mat-toolbar>
     <mat-drawer-container autosize>
@@ -27,7 +33,7 @@
                             alt="icon">Forum</button>
                 </mat-list-item>
                 <mat-list-item>
-                    <button mat-button routerLink=""><img class="iconMenu" src="assets/images/files.png" alt="icon">My
+                    <button mat-button routerLink="/myfiles"><img class="iconMenu" src="assets/images/files.png" alt="icon">My
                         files</button>
                 </mat-list-item>
             </mat-nav-list>

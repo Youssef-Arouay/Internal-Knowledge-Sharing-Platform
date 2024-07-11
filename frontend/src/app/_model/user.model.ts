@@ -19,6 +19,7 @@ export interface usercred {
     firstname: string,
     lastname: string,
     username: string,
+    phoneNumber: number,
     email: string,
     password: string
 }

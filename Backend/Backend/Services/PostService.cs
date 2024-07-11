@@ -143,6 +143,44 @@ namespace Backend.Services
             return posts.Cast<object>().ToList();
         }
 
+
+        //Get a user's post
+        public async Task<List<object>> GetMyPostsAsync(int userId)
+        {
+            var posts = await _context.Posts
+                                       .Where(f => f.UserId == userId)
+                                      .Include(p => p.User)
+                                      .Include(p => p.Likes)
+                                      .Include(p => p.Comments)
+                                      .Select(p => new
+                                      {
+                                          p.PostId,
+                                          p.Description,
+                                          p.Tags,
+                                          p.CreationDate,
+                                          p.UserId,
+                                          User = new
+                                          {
+                                              p.User.Firstname,
+                                              p.User.Lastname
+                                          },
+                                          Likes = p.Likes.Select(l => new
+                                          {
+                                              l.LikeId,
+                                              l.UserId,
+                                              User = new
+                                              {
+                                                  l.User.Firstname,
+                                                  l.User.Lastname,
+                                              }
+                                          }).ToList(),
+                                          CommentCount = p.Comments.Count()
+                                      })
+                                      .ToListAsync();
+
+            return posts.Cast<object>().ToList();
+        }
+
         // get nomber comments of a post
         public async Task<int> GetCommentCountAsync(int postId)
         {

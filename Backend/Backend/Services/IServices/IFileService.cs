@@ -8,5 +8,6 @@ namespace Backend.Services.IServices
         Task<string> UploadFile(IFormFile formFile, FileDto fileDto, int userId);
         Task<(byte[], string, string)> DownloadFile(string fileName);
         Task<List<FileDtoResp>> GetAllFiles(int userId);
+        Task<List<FileDtoResp>> GetMyFiles(int userId);
     }
 }
