@@ -83,6 +83,40 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpDelete("delete/{fileId}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteFile(int fileId)
+        {
+            try
+            {
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    return BadRequest("User email is missing or invalid.");
+                }
+
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == userEmail);
+                if (user == null)
+                {
+                    return NotFound("User not found.");
+                }
+
+                var result = await _fileService.DeleteFileAsync(fileId, user.Id);
+                if (!result)
+                {
+                    return NotFound("File not found or you do not have permission to delete this file.");
+                }
+
+                return Ok(new { message = "File deleted successfully" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred while processing your request.", error = ex.Message });
+            }
+        }
+
+
+
         // GET ALL FILES
         [HttpGet]
         [Route("all")]

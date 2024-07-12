@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from './user.service';
 import {  Observable } from 'rxjs';
-import { FileElement } from '../_model/user.model';
+import { FileElement } from '../_model/file.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class FileService {
     });
   }
 
-  
+
   uploadFile(formData: FormData): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
@@ -70,5 +70,10 @@ export class FileService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.delete(url, {headers} );
+  }
+
+  deleteFile(fileId: number): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.delete<any>(`${this.baseUrl}File/delete/${fileId}`, { headers });
   }
 }

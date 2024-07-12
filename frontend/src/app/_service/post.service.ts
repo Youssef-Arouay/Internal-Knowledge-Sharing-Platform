@@ -47,6 +47,11 @@ export class PostService {
   }
 
 
+  // Fetch user files
+  getUserFiles(): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<any>(`${this.baseUrl}File/myfiles`, { headers });
+  }
 
 
   formatPostDate(creationDate: string | Date): string {

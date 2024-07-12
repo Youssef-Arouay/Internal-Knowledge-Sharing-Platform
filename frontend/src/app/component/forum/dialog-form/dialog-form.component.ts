@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { fileForm } from '../../../_model/user.model';
+import { fileForm } from '../../../_model/file.model';
 import { FileService } from '../../../_service/file.service';
 import { ToastrService } from 'ngx-toastr';
 

@@ -11,11 +11,12 @@ import { DialogFormComponent } from './dialog-form/dialog-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatIconModule } from '@angular/material/icon';
 import { FileService } from '../../_service/file.service';
-import { FileElement, usercred } from '../../_model/user.model'; // Ensure this matches the data structure
+import { usercred } from '../../_model/user.model'; 
+import { FileElement } from '../../_model/file.model'; 
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../_service/user.service';
-import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
+
 
 @Component({
   selector: 'app-forum',

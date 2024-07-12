@@ -73,16 +73,14 @@ namespace Backend.Services
         {
             try
             {
-                // Fetch the FileEntity from the database using the provided entity name
                 var fileEntity = await _context.FileEntities.FirstOrDefaultAsync(f => f.EntityName == entityName);
                 if (fileEntity == null)
                 {
                     throw new FileNotFoundException("File not found in the database.");
                 }
 
-                // Increment the download count
                 fileEntity.Downloads++;
-                await _context.SaveChangesAsync(); // Save changes to update the download count
+                await _context.SaveChangesAsync(); 
 
                 var fileName = fileEntity.FileName;
                 var filePath = Common.GetFilePath(fileName);
@@ -103,34 +101,28 @@ namespace Backend.Services
             }
         }
 
-        //GET ALL FILES
-        /* public async Task<List<FileDtoResp>> GetAllFiles(int userId)
-         {
-             try
-             {
-                 var files = await _context.FileEntities
-                     .Where(f => f.UserId == userId)
-                     .Select(f => new FileDtoResp
-                     {
-                         Id = f.Id,
-                         EntityName = f.EntityName,
-                         Description = f.Description,
-                         Tags = f.Tags,
-                         Version = f.Version,
-                         UploadDate = f.UploadDate,
-                         Downloads = f.Downloads,
-                         Rates = f.Rates,
-                         FirstName = f.User.Firstname, // Include FirstName
-                         LastName = f.User.Lastname    // Include LastName
-                     })
-                     .ToListAsync();
-                 return files;
-             }
-             catch (Exception ex)
-             {
-                 throw new Exception("An error occurred while retrieving files.", ex);
-             }
-         }*/
+        public async Task<bool> DeleteFileAsync(int fileId, int userId)
+        {
+            var file = await _context.FileEntities
+                .Include(f => f.RateFiles) 
+                .FirstOrDefaultAsync(f => f.Id == fileId && f.UserId == userId);
+
+            if (file == null)
+            {
+                return false;
+            }
+            // Delete associated rates
+            _context.RateFiles.RemoveRange(file.RateFiles);
+
+            // Delete the file itself
+            _context.FileEntities.Remove(file);
+
+            await _context.SaveChangesAsync();
+            
+            return true; 
+        }
+
+
         public async Task<List<FileDtoResp>> GetAllFiles(int userId)
         {
             try

@@ -9,5 +9,8 @@ namespace Backend.Services.IServices
         Task<(byte[], string, string)> DownloadFile(string fileName);
         Task<List<FileDtoResp>> GetAllFiles(int userId);
         Task<List<FileDtoResp>> GetMyFiles(int userId);
+        Task<bool> DeleteFileAsync(int fileId, int userId); 
+
     }
+
 }

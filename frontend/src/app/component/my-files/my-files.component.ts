@@ -9,11 +9,14 @@ import { MyPostsResp, Post } from '../../_model/post.model';
 import { PostService } from '../../_service/post.service';
 import {MatChipsModule} from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
+import { FileElement } from '../../_model/file.model';
+import { MatButtonModule } from '@angular/material/button';
+import { FileService } from '../../_service/file.service';
 
 @Component({
   selector: 'app-my-files',
   standalone: true,
-  imports: [CommonModule, MatTabsModule, PostCardComponent, MatCardModule,MatChipsModule],
+  imports: [CommonModule, MatTabsModule, PostCardComponent, MatCardModule,MatChipsModule, MatButtonModule],
   templateUrl: './my-files.component.html',
   styleUrl: './my-files.component.css'
 })
@@ -22,8 +25,10 @@ export class MyFilesComponent implements OnInit {
   user : usercred | null = null;
   savedPosts: Post[] = []; // Array to hold saved posts
   myPosts: Post[] = [];
+  myFiles: FileElement[] = []; // Array to hold user's files
 
   constructor(
+    private fileService: FileService,
     private postService: PostService,
     private userService: UserService,
     private interactionService: InteractionService,
@@ -34,9 +39,11 @@ export class MyFilesComponent implements OnInit {
       this.user = user;
       this.fetchSavedPosts();
       this.fetchMyPosts();
+      this.fetchUserFiles();
     });
   }
 
+  // Get saved posts of the user
   fetchSavedPosts(): void {
     this.interactionService.getSavedPosts().subscribe({
       next: (resp) => {
@@ -66,5 +73,33 @@ export class MyFilesComponent implements OnInit {
         console.error('Error fetching my posts:', error);
       }
     });
+  }
+
+  // Fetch user files
+  fetchUserFiles(): void {
+    this.postService.getUserFiles().subscribe({
+      next: (files) => {
+        this.myFiles = files.$values;
+        this.cdr.detectChanges(); // Ensure the component updates
+        console.log("this.myFiles :", this.myFiles);
+      },
+      error: (error) => {
+        console.error('Error fetching user files:', error);
+      }
+    });
+  }
+
+  deleteFile(fileId: number): void {
+    if (confirm('Are you sure you want to delete this file?')) {
+      this.fileService.deleteFile(fileId).subscribe({
+        next: (response) => {
+          console.log('File deleted successfully', response);
+          this.myFiles = this.myFiles.filter(file => file.id !== fileId);
+        },
+        error: (error) => {
+          console.error('Error deleting file', error);
+        }
+      });
+    }
   }
 }
