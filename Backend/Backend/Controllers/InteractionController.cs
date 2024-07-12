@@ -251,6 +251,97 @@ namespace Backend.Controllers
             }
         }
 
+        // Save a post
+        [HttpPost("save/{postId}")]
+        [Authorize]
+        public async Task<IActionResult> SavePost(int postId)
+        {
+            try
+            {
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                var userId = await _interactionService.GetUserIdByEmail(userEmail);
+
+                if (userId == null)
+                {
+                    return BadRequest(new { message = "User not found" });
+                }
+
+                var post = await _context.Posts.FindAsync(postId);
+
+                if (post == null)
+                {
+                    return NotFound(new { message = "Post not found" });
+                }
+
+                await _interactionService.SavePostAsync(userId.Value, postId);
+                return Ok(new { message = "Post saved successfully" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
+            }
+        }
+
+
+        // Unsave a post
+        [HttpDelete("unsave/{postId}")]
+        [Authorize]
+        public async Task<IActionResult> UnsavePost(int postId)
+        {
+            try
+            {
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                var userId = await _interactionService.GetUserIdByEmail(userEmail);
+
+                if (userId == null)
+                {
+                    return BadRequest(new { message = "User not found" });
+                }
+
+                var post = await _context.Posts.FindAsync(postId);
+
+                if (post == null)
+                {
+                    return NotFound(new { message = "Post not found" });
+                }
+
+                var result = await _interactionService.UnsavePostAsync(userId.Value, postId);
+                if (result)
+                {
+                    return Ok(new { message = "Post unsaved successfully" });
+                }
+                return BadRequest(new { message = "Post was not saved by the user" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
+            }
+        }
+
+        // Get saved posts for the logged-in user
+        [HttpGet("saved")]
+        [Authorize]
+        public async Task<IActionResult> GetSavedPosts()
+        {
+            try
+            {
+                var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+                var userId = await _interactionService.GetUserIdByEmail(userEmail);
+
+                if (userId == null)
+                {
+                    return BadRequest(new { message = "User not found" });
+                }
+
+                var savedPosts = await _interactionService.GetSavedPostsAsync(userId.Value);
+                return Ok(savedPosts);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
+            }
+        }
+
 
 
     }

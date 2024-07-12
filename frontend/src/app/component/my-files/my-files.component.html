@@ -1,10 +1,38 @@
-<mat-tab-group> 
-    <mat-tab label="My files"> My files 
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4 container">
 
+    <mat-tab label="Saved posts">
+        <div *ngFor="let post of savedPosts">
+            <div class="savedPostsCards">
+                <app-post-card [post]="post"></app-post-card>
+            </div>
+        </div>
     </mat-tab>
     <mat-tab label="My posts">
-        aaa
-        <!-- <app-post-card [post]="post"></app-post-card> -->
+        <div *ngFor="let post of myPosts">
+            <div class="myPostsCards">
+                <app-post-card [post]="post"></app-post-card>
+            </div>
+        </div>
     </mat-tab>
-  </mat-tab-group>
-  
+
+    <mat-tab label="My files">
+        <div class="example-large-box mat-elevation-z4">
+
+            <mat-card class="example-card" appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title>Chihuahua</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>longTextlongTextlongTextlongTextlongTextlongTextlongText</p>
+                </mat-card-content>
+                <mat-card-footer class="example-card-footer">
+                    <mat-chip-set aria-label="Chihuahua traits">
+                        <mat-chip>charming</mat-chip>
+                        <mat-chip>graceful</mat-chip>
+                        <mat-chip>sassy</mat-chip>
+                    </mat-chip-set>
+                </mat-card-footer>
+            </mat-card>
+        </div>
+    </mat-tab>
+</mat-tab-group>

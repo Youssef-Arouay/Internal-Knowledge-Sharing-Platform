@@ -1,0 +1,39 @@
+.container {
+    justify-content: center;
+    height: 98%;
+    width: 97%;
+}
+
+.example-stretched-tabs {
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 5px;
+}
+
+.example-large-box {
+    height: 97%;
+    width: 97%; 
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+
+.myPostsCards .savedPostsCards {
+display: flex;
+align-items: center;
+justify-content: center;
+    height: 95%;
+    width: 90%;
+} 
+
+
+/* My Files */
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-card-footer {
+    padding: 16px;
+  }
+  

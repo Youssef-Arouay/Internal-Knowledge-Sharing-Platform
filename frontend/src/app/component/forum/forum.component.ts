@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -37,7 +37,7 @@ import { consumerPollProducersForChange } from '@angular/core/primitives/signals
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ForumComponent implements OnInit, AfterViewInit {
+export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterViewInit {
   displayedColumns: string[] = ['position', 'author', 'name', 'description', 'version', 'uploadDate', 'downloads', 'rate'];
   dataSource = new MatTableDataSource<FileElement>();
 
@@ -64,8 +64,8 @@ export class ForumComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
       this.userService.user$.subscribe((user) => {
         this.user = user;
+        this.fetchAllFiles();
       });
-      this.fetchAllFiles();
     }
 
   ngAfterViewInit() {

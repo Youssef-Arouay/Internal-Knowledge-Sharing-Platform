@@ -23,6 +23,15 @@ export interface usercred {
     email: string,
     password: string
 }
+export interface User {
+    id: number,
+    firstname: string,
+    lastname: string,
+    username: string,
+    phoneNumber: number,
+    email: string,
+    password: string
+}
 
 export interface postDetails {
     id: number,

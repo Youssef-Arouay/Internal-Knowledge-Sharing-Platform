@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
 import { postDetails } from '../_model/user.model';
+import {MyPostsResp} from '../_model/post.model'
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,25 +14,25 @@ export class PostService {
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private userService: UserService) { }
+  
+  private createAuthorizationHeader(contentType: string = 'application/json'): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': contentType
+    });
+  }
 
 
   // Methode to add a post 
   addPost(post: postDetails): Observable<postDetails> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
+    const headers = this.createAuthorizationHeader();  
     return this.http.post<postDetails>(`${this.baseUrl}post/add`, post, { headers });
   }
 
    // Method to delete a post by ID
    deletePost(postId: number): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
+    const headers = this.createAuthorizationHeader();  
     return this.http.delete<any>(`${this.baseUrl}post/delete/${postId}`, { headers });
   }
 
@@ -39,6 +40,13 @@ export class PostService {
   getAllPosts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}post/all`);
   }
+
+  getMyPosts(): Observable<MyPostsResp> {
+    const headers = this.createAuthorizationHeader();  
+    return this.http.get<MyPostsResp>(`${this.baseUrl}post/myposts`, { headers });
+  }
+
+
 
 
   formatPostDate(creationDate: string | Date): string {

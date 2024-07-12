@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
-  user!: usercred ;
+  user!: usercred | null ;
   posts: any[] = [];
 
 
@@ -28,7 +28,10 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.fetchPosts();
+    this.userService.user$.subscribe((user) => {
+      this.user = user;
+      this.fetchPosts();
+    });
   }
   
   fetchPosts() {
