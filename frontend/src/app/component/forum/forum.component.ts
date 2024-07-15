@@ -3,7 +3,6 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, O
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { ForumNavBarComponent } from '../layout/forum-nav-bar/forum-nav-bar.component';
 import { MaterialModule } from '../../material.module';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
@@ -29,7 +28,6 @@ import { UserService } from '../../_service/user.service';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    ForumNavBarComponent,
     MatDialogModule,
     CommonModule
   ],

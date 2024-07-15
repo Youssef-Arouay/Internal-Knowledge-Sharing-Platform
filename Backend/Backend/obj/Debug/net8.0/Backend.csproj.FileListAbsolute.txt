@@ -565,3 +565,8 @@ C:\Users\arway\Desktop\Internal-Knowledge-Sharing-Platform\Backend\Backend\obj\D
 C:\Users\arway\Desktop\Internal-Knowledge-Sharing-Platform\Backend\Backend\obj\Debug\net8.0\Backend.pdb
 C:\Users\arway\Desktop\Internal-Knowledge-Sharing-Platform\Backend\Backend\obj\Debug\net8.0\Backend.genruntimeconfig.cache
 C:\Users\arway\Desktop\Internal-Knowledge-Sharing-Platform\Backend\Backend\obj\Debug\net8.0\ref\Backend.dll
+C:\Users\arway\Desktop\Internal-Knowledge-Sharing-Platform\Backend\Backend\bin\Debug\net8.0\Google.Apis.dll
+C:\Users\arway\Desktop\Internal-Knowledge-Sharing-Platform\Backend\Backend\bin\Debug\net8.0\Google.Apis.Auth.dll
+C:\Users\arway\Desktop\Internal-Knowledge-Sharing-Platform\Backend\Backend\bin\Debug\net8.0\Google.Apis.Core.dll
+C:\Users\arway\Desktop\Internal-Knowledge-Sharing-Platform\Backend\Backend\bin\Debug\net8.0\System.Management.dll
+C:\Users\arway\Desktop\Internal-Knowledge-Sharing-Platform\Backend\Backend\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll

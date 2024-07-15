@@ -13,7 +13,6 @@ import {
   TemplatePortal
 } from "./chunk-3LMCORZX.js";
 import "./chunk-Y3A4T6YI.js";
-import "./chunk-XQMYJXJP.js";
 import {
   animate,
   animateChild,
@@ -24,6 +23,7 @@ import {
   transition,
   trigger
 } from "./chunk-THGPNPR3.js";
+import "./chunk-XQMYJXJP.js";
 import {
   Directionality,
   MatCommonModule

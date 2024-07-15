@@ -5,6 +5,7 @@ import { loginReq, loginresp, userRegister, usercred } from '../_model/user.mode
 import { BehaviorSubject, Observable, Subscription, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
+declare var google : any ;
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +20,7 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  // for APIs call 
   private createAuthorizationHeader(contentType: string = 'application/json'): HttpHeaders {
     const token = localStorage.getItem('token');
     return new HttpHeaders({
@@ -39,8 +41,6 @@ export class UserService {
     this.user = null; 
     this.userSubject.next(null); // Notify all subscribers that the user is null
     this.clearSubs(); 
-    console.log("User cleared:", this.user);
-    console.log("User cleared$$:", this.user$);
 
   }
 
@@ -54,6 +54,12 @@ export class UserService {
     return this.http.post<any>(this.baseUrl + 'auth/login', _data, { observe: 'response' });
   }
 
+        // login with google api
+  LoginGoogle(credentials: string ): Observable<any> {
+    const headers = new HttpHeaders().set('Content-type', 'application/json');
+    return this.http.post<any>(this.baseUrl + 'auth/loginWithGoogle', JSON.stringify(credentials), { headers });
+  }
+
   //// User Details //////
   getUserInfo(): Observable<usercred> {
     const headers = this.createAuthorizationHeader();
@@ -62,7 +68,6 @@ export class UserService {
 
   fetchUserInfo(): void {
     const headers = this.createAuthorizationHeader();
-
     this.http.get<usercred>(`${this.baseUrl}user/GetUserDetails`, { headers }).subscribe({
       next: (user: usercred) => {
         this.userSubject.next(user);
@@ -80,17 +85,16 @@ export class UserService {
   // LOGOUT : Clear Local Storage, Cookies and Entity User
   logout() {
     this.clearUser();
+    //localStorage.clear;
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    localStorage.clear;
-    this.clearCookies();
+    //this.clearCookies();
 
-    console.log("Logged out successfully")
-    // Navigate to the login or register page
+    google.accounts.id.disableAutoSelect();
+
     setTimeout(() => {
       this.router.navigateByUrl('/register');
     }, 200);
-    // Show a logout success message
   }
 
   clearCookies(): void {

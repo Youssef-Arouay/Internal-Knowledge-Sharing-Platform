@@ -1,12 +1,11 @@
 ﻿using Backend.DTO;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using Backend.Data;
 using Backend.Services.IServices;
+using Google.Apis.Auth;
+using Azure.Core;
+using Microsoft.IdentityModel.Tokens;
 
 
 namespace Backend.Controllers
@@ -82,8 +81,8 @@ namespace Backend.Controllers
                 {
                     return BadRequest("Wrong Email or Password!");
                 }
-                string token = CreateToken(user);
-                var  response = new
+                string token = _authService.CreateToken(user);
+                var response = new
                 {
                     Token = token,
                     User = user
@@ -92,33 +91,59 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Error occurred during login"+ ex);
+                return StatusCode(500, "Error occurred during login" + ex);
             }
         }
 
 
-        private string CreateToken(User user)
+        // Login with google account( only if it exists)
+        [HttpPost("loginWithGoogle")]
+        public async Task<IActionResult> LoginGoogle([FromBody] string credential)
         {
-            List<Claim> claims = new List<Claim> {
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, "User"),
+            try
+            {
+                var settings = new GoogleJsonWebSignature.ValidationSettings()
+                {
+                    Audience = new List<string> { this._configuration.GetSection("GoogleClient:Id").Value! }
+                };
 
-            };
+                Console.WriteLine("settings", settings);
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                _configuration.GetSection("Jwt:Token").Value!));
+                var payLoad = await GoogleJsonWebSignature.ValidateAsync(credential, settings);
 
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+                Console.WriteLine("payLoad", payLoad);
 
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: creds 
-                );
+                var user = await _authService.GetUserByEmailAsync(payLoad.Email);
 
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return jwt;
+                if (user != null)
+                {
+                    string token = _authService.CreateToken(user);
+                    var response = new
+                    {
+                        Token = token,
+                        User = user
+                    };
+                    return Ok(response);
+                }
+                else
+                {
+                    return BadRequest("User not found. You must Sign up with the same email first !");
+                }
+            }
+            catch (Google.Apis.Auth.InvalidJwtException ex)
+            {
+                // Handle invalid JWT exception
+                Console.WriteLine($"Invalid JWT: {ex.Message}");
+                return BadRequest("Invalid token");
+            }
+            catch (Exception ex)
+            {
+                // Handle all other exceptions
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
         }
+
     }
+
 }

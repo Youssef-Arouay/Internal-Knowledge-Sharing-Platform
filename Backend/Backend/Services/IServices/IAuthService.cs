@@ -10,5 +10,6 @@ namespace Backend.Services.IServices
         bool IsValidPassword(string password);
         bool VerifyPassword(string password, string passwordHash);
 
+        string CreateToken(User user);
     }
 }
