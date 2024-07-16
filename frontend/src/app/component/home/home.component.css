@@ -14,7 +14,7 @@
 }
 
 #homeComp {
-    width: 100%;
+    width: auto;
     /* Adjust width as per your layout */
     margin: 2em 20%;
     /* Vertical margin top and bottom of 2em, and auto left and right margin for centering */
@@ -25,6 +25,6 @@
 /* Example of adjusting card components */
 app-share-post,
 app-post-card {
-    width: 100%;
+    width: auto;
     margin-bottom: 1em;
 }

@@ -2,9 +2,39 @@
     flex : 1 1 auto ;
 }
 
+.toolbar {
+    color: white;
+    background-color: #2e2e38;
+}
+
+.listItem{
+    width: auto;
+    height: auto;
+    margin: 1em;
+}
+
+
 .iconMenu {
     /* font-size: 1.5em; */
-    max-width: 23px;
-    max-height: 23px;
-    margin: 1em;
+    max-width: 25px;
+    max-height: 25px;
+    margin: 0.5em;
+    font-size: 25px;
+}
+
+.logoIcon {
+    font-size: 1.1em;
+    max-width: 8em;
+    max-height: 4em;
+    margin: 0.2em;
+}
+
+.homeIcon{
+    max-width: 30px;
+    max-height: 30px;
+    color: white;
+}
+
+.leftDrawer{
+    width: 12%;
 }

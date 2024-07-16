@@ -58,7 +58,12 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
     public dialog: MatDialog,
     private fileService: FileService,
     private toastr: ToastrService,
-  ) { }
+  ) {
+    // this.dataSource.filterPredicate = (data: FileElement, filter: string) => {
+    //   return data.entityName.toLowerCase().includes(filter) || 
+    //          data.description.toLowerCase().includes(filter);
+    // };
+   }
   
     ngOnInit(): void {
       this.userService.user$.subscribe((user) => {
@@ -119,13 +124,25 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
     this.subscriptions.push(subscription);
   }
 
-  // onChange(event: any): void {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     // Handle file upload logic
-  //   }
-  // }
 
+  //Search by any word in any column
+  applyFilter(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const filterValue = inputElement.value.trim().toLowerCase();
+    const filterTerms = filterValue.split(' ');
+    
+    this.dataSource.data = this.files.filter(file => {
+      return filterTerms.every(term => 
+        file.entityName.toLowerCase().includes(term) ||
+        file.description.toLowerCase().includes(term) ||
+        file.version.toLowerCase().includes(term) ||
+        file.firstName.toLowerCase().includes(term) ||
+        file.lastName.toLowerCase().includes(term) ||
+        `${file.firstName.toLowerCase()} ${file.lastName.toLowerCase()}`.includes(term)
+      );
+    });
+  }
+  
   // Open upload file form
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogFormComponent, {
@@ -169,6 +186,7 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
       this.dataSource.data = [...this.files];
     }
   }
+  
   triggerFileDownload(blob: Blob, fileName: string): void {
     const downloadLink = document.createElement('a');
     downloadLink.href = window.URL.createObjectURL(blob);

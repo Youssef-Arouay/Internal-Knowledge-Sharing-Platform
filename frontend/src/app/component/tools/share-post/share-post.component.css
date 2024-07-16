@@ -1,7 +1,7 @@
 .share {
     background-color: white;
 
-    width: 55%;
+    width: 70%;
     height: 170px;
     border-radius: 10px;
     -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
@@ -36,13 +36,14 @@
   }
   
   .shareHr {
-    margin: 20px;
+    margin: 25px;
   }
   
   .shareBottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
   }
   
   .shareOptions{

@@ -9,6 +9,8 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { ForumComponent } from './component/forum/forum.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { MyFilesComponent } from './component/my-files/my-files.component';
+import { TagsInputComponent } from './component/tools/tags-input/tags-input.component';
+import { DialogFormComponent } from './component/forum/dialog-form/dialog-form.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -24,7 +26,7 @@ export const routes: Routes = [
     {path:'postcard', component:PostCardComponent},
     {path:'sharepost', component:SharePostComponent},
 
-    // {path:'test', component:},
+    {path:'test', component:DialogFormComponent},
 
     { path: '**', redirectTo: 'register' },
 

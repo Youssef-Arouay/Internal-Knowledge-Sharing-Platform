@@ -1,16 +1,17 @@
 @if(showmenu){
 <div>
-    <mat-toolbar color="primary" class="mat-elevation-z8">
+    <mat-toolbar class="mat-elevation-z8 toolbar">
         <button mat-icon-button (click)="drawer.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <span>Hi, {{ capitalizeFirstLetter(user?.firstname) }}</span>
+        <img class="logoIcon" src="assets/images/favicon.png" alt="icon">        
+        <span style="margin-left: 2em;">Hi, {{ capitalizeFirstLetter(user?.firstname) }}</span>
         <!-- <span>Dashboard</span> -->
         <span class="example-spacer"> </span>
 
-        <button mat-button [matMenuTriggerFor]="profile">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-            <mat-icon>arrow_drop_down</mat-icon>
+        <button mat-button [matMenuTriggerFor]="profile" style="margin-right: 2em;">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home" class="homeIcon"></mat-icon>
+            <mat-icon class="homeIcon">arrow_drop_down</mat-icon>
         </button>
         <mat-menu #profile>
             <button mat-menu-item routerLink="/profile"><i class="fa-regular fa-user"
@@ -22,24 +23,21 @@
         </mat-menu>
     </mat-toolbar>
     <mat-drawer-container autosize>
-        <mat-drawer #drawer opened="true" mode="side" position="start">
-
+        <mat-drawer class="leftDrawer" #drawer opened="true" mode="side" position="start">
             <mat-nav-list>
-                <mat-list-item>
-                    <button mat-button routerLink=""><img class="iconMenu" src="assets/images/dashboard.png" alt="icon">
+                <mat-list-item class="listItem"  routerLink="">
+                    <button mat-button ><img class="iconMenu" src="assets/images/dashboard.png" alt="icon">
                         Feed </button>
                 </mat-list-item>
-                <mat-list-item>
-                    <button mat-button routerLink="/forum"><img class="iconMenu" src="assets/images/forum.png"
+                <mat-list-item class="listItem" routerLink="/forum">
+                    <button mat-button ><img class="iconMenu" src="assets/images/forum.png"
                             alt="icon">Forum</button>
                 </mat-list-item>
-                <mat-list-item>
-                    <button mat-button routerLink="/myfiles"><img class="iconMenu" src="assets/images/files.png"
-                            alt="icon">My
-                        files</button>
+                <mat-list-item class="listItem" routerLink="/myfiles">
+                    <button mat-button ><img class="iconMenu" src="assets/images/files.png"
+                            alt="icon">My files</button>
                 </mat-list-item>
             </mat-nav-list>
-
         </mat-drawer>
         <mat-drawer-content>
             <div>

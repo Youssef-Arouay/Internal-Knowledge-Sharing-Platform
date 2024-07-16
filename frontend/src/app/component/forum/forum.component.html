@@ -8,7 +8,7 @@
                 <!-- <i class="fal fa-search"></i> -->
                 <mat-form-field appearance="outline">
                     <mat-label>Search a file by name or content...</mat-label>
-                    <input matInput placeholder="Search...">
+                    <input matInput placeholder="Search..." (input)="applyFilter($event)">
                 </mat-form-field>
             </div>
             <div class="header-right">

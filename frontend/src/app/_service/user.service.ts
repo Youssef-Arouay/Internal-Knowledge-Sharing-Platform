@@ -91,7 +91,7 @@ export class UserService {
     //this.clearCookies();
 
     google.accounts.id.disableAutoSelect();
-
+    
     setTimeout(() => {
       this.router.navigateByUrl('/register');
     }, 200);

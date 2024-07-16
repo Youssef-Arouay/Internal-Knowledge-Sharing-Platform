@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { TagsInputComponent } from '../tags-input/tags-input.component';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../_service/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-share-post',
@@ -36,7 +37,7 @@ export class SharePostComponent {
 
   post: postDetails = { id: 0, description: '', tags: [], creationDate: '', };
 
-  constructor(private postService: PostService, private userService: UserService,  private router: Router) { }
+  constructor(private toastr: ToastrService, private postService: PostService, private userService: UserService,  private router: Router) { }
 
   ngOnInit(): void {
     this.userService.user$.subscribe((user) => {
@@ -62,26 +63,31 @@ export class SharePostComponent {
     let currentDate = new Date();
     currentDate.setHours(currentDate.getHours() + 1);
     this.post.creationDate = currentDate.toISOString();    
-
     this.post.tags = this.tagsInputRef.getTags();
     console.log('Tags:', this.post.tags); // Debug log to verify tags
-    this.postService.addPost(this.post).subscribe({
-      next: (response: postDetails) => {
-        console.log('Post added successfully', response);
-        this.resetPost();  // Clear input fields
-        this.post
-        this.postAdded.emit();
-        this.tagsInputRef.clearTagsInput(); // Clear tags input field
+    if(this.post.description !== "") {
 
-      },
-      error: (error: any) => {
-        console.error('Error adding post', error);
-      },
-      complete: () => {
-        console.log('Post request completed');
-      }
-    });
-  }
+      this.postService.addPost(this.post).subscribe({
+        next: (response: postDetails) => {
+          console.log('Post added successfully', response);
+          this.resetPost();  // Clear input fields
+          this.post
+          this.postAdded.emit();
+          this.tagsInputRef.clearTagsInput(); // Clear tags input field
+          this.toastr.success('Post added');
+
+        },
+        error: (error: any) => {
+          console.error('Error adding post', error);
+        },
+        complete: () => {
+          console.log('Post request completed');
+        }
+      });
+    } else {
+      this.toastr.error('You have to write content to share it !');
+    }
+    }
 
 
   resetPost() {

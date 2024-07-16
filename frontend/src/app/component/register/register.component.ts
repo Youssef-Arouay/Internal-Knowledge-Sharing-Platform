@@ -31,37 +31,6 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  // ngOnInit(): void {
-  //   google.accounts.id.initialize({
-  //     client_id: '778147697118-4ebmnfjvhjp2limdukqialjrqudmbv1i.apps.googleusercontent.com',
-  //     callback: (resp: any) => {
-  //       console.log(resp);
-  //       this.handleLogin(resp);
-  //     }
-  //   });
-  //   google.accounts.id.renderButton(document.getElementById("google-btn"), {
-  //     theme: 'filled_blue',
-  //     size: 'large',
-  //     shape: 'rectangle',
-  //     width: 300
-  //   })
-  //   // localStorage.clear();
-  //   // this.clearCookies();
-  //   // console.log("localStorage cleared");
-  // }
-
-  // private decodeToken(token: string) {
-  //   return JSON.parse(atob(token.split(".")[1]));
-  // }
-
-  // handleLogin(response: any) {
-  //   if (response) {
-  //     const payLoad = this.decodeToken(response.credential);
-  //     sessionStorage.setItem("loggedInUser", JSON.stringify(payLoad));
-  //     this.router.navigateByUrl('/');
-  //   }
-  // }
-
   ngOnInit(): void {
     // window.onGoogleLibraryLoad = () => {
     google.accounts.id.initialize({
@@ -102,19 +71,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-
-
-  // clearCookies(): void {
-  //   const cookies = document.cookie.split(';');
-
-  //   for (let i = 0; i < cookies.length; i++) {
-  //     const cookie = cookies[i];
-  //     const eqPos = cookie.indexOf('=');
-  //     const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-  //     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
-  //   }
-  // }
-
   _regform = this.builder.group({
     firstname: this.builder.control('', Validators.required),
     lastname: this.builder.control('', Validators.required),
@@ -138,8 +94,7 @@ export class RegisterComponent implements OnInit {
           if (response.status === 200) {
             this.toastr.success('Registration completed', 'Registration');
             this._regform.reset();
-            this.isSignDivVisible = false; // Set isSignDivVisible to false
-            // this.router.navigateByUrl('/register'); // Uncomment if you want to navigate
+            this.isSignDivVisible = false; 
           } else {
             this.toastr.error('Failed due to: ' + response, 'Registration Failed');
           }

@@ -16,13 +16,13 @@ export class ProfileComponent {
   constructor(private userService: UserService) { }
 
 
-  name = JSON.parse(sessionStorage.getItem("loggedInUser")!).name ;
+  // name = JSON.parse(sessionStorage.getItem("loggedInUser")!).name ;
 
   ngOnInit(): void {
     this.userService.user$.subscribe((user) => {
       this.user = user;
+      console.log(user)
     });
   }
-
   
 }

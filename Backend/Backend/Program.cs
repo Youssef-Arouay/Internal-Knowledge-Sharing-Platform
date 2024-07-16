@@ -23,6 +23,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Register the user service
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IInteractionService, InteractionService>();
 builder.Services.AddScoped<IFileService, FileService>();

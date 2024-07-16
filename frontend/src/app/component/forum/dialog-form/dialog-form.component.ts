@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, Inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, signal, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
@@ -9,12 +9,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { fileForm } from '../../../_model/file.model';
 import { FileService } from '../../../_service/file.service';
 import { ToastrService } from 'ngx-toastr';
+import { TagsInputComponent } from '../../tools/tags-input/tags-input.component';
 
 @Component({
   selector: 'app-dialog-form',
   standalone: true,
   imports: [MatDialogModule, MatFormFieldModule, CommonModule, MatInputModule,CommonModule, FormsModule, MatButtonModule, MatDialogTitle,
-            MatDialogContent, MatDialogActions, MatDialogClose, ],
+            MatDialogContent, MatDialogActions, MatDialogClose, TagsInputComponent ],
   templateUrl: './dialog-form.component.html',
   styleUrl: './dialog-form.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -30,6 +31,8 @@ export class DialogFormComponent {
     version: '',
     tags: []
   };
+
+  @ViewChild('tagsInputRef') tagsInputRef!: TagsInputComponent;
 
   protected readonly value = signal('');
 
@@ -61,7 +64,7 @@ export class DialogFormComponent {
       formData.append('formFile', this.fileForm.file);
       formData.append('entityName', this.fileForm.fileName);
       formData.append('description', this.fileForm.description);
-      formData.append('tags', JSON.stringify(this.fileForm.tags));
+      formData.append('tags', JSON.stringify(this.tagsInputRef.getTags()));
       formData.append('version', this.fileForm.version);
 
       this.fileService.uploadFile(formData).subscribe({

@@ -3,12 +3,52 @@
   "WorkspaceRootPath": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\services\\iservices\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\services\\iservices\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\dto\\postdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\dto\\postdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\services\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\services\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\services\\iservices\\ipostservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\services\\iservices\\ipostservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\arway\\AppData\\Local\\SourceServer\\2e4ab345a690653f490f0c37dd87b04c67d1e63a1e47e4d806588f87d1e042d7\\Backend\\Backend\\Controllers\\AuthController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -26,16 +66,8 @@
       "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\services\\iservices\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\dto\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\dto\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\services\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,28 +86,8 @@
       "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\services\\interactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\services\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\services\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\dto\\savedpostdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\dto\\savedpostdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\dto\\postdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\dto\\postdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\services\\iservices\\ipostservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\services\\iservices\\ipostservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\controllers\\interactioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -98,10 +110,6 @@
       "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\dto\\ratefiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|c:\\users\\arway\\desktop\\internal-knowledge-sharing-platform\\backend\\backend\\migrations\\20240711213603_savedpost2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5EFF9666-A1AA-4F66-8D78-5412678694EE}|Backend\\Backend.csproj|solutionrelative:backend\\migrations\\20240711213603_savedpost2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -117,24 +125,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\AppData\\Local\\SourceServer\\2e4ab345a690653f490f0c37dd87b04c67d1e63a1e47e4d806588f87d1e042d7\\Backend\\Backend\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\SourceServer\\2e4ab345a690653f490f0c37dd87b04c67d1e63a1e47e4d806588f87d1e042d7\\Backend\\Backend\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\arway\\AppData\\Local\\SourceServer\\2e4ab345a690653f490f0c37dd87b04c67d1e63a1e47e4d806588f87d1e042d7\\Backend\\Backend\\Controllers\\AuthController.cs [Read Only]",
-              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\SourceServer\\2e4ab345a690653f490f0c37dd87b04c67d1e63a1e47e4d806588f87d1e042d7\\Backend\\Backend\\Controllers\\AuthController.cs [Read Only]",
-              "ViewState": "AQIAADkAAAAAAAAAAAAQwGcAAAAMAAAA",
+              "DocumentIndex": 6,
+              "Title": "PostController.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\PostController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\PostController.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\PostController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\PostController.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACEAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T13:14:14.723Z",
-              "EditorCaption": " [Read Only]"
+              "WhenOpened": "2024-07-11T16:44:30.521Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 10,
+              "Title": "IPostService.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\IServices\\IPostService.cs",
+              "RelativeDocumentMoniker": "Backend\\Services\\IServices\\IPostService.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\IServices\\IPostService.cs",
+              "RelativeToolTip": "Backend\\Services\\IServices\\IPostService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAoAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T16:45:26.079Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PostService.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\PostService.cs",
+              "RelativeDocumentMoniker": "Backend\\Services\\PostService.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\PostService.cs",
+              "RelativeToolTip": "Backend\\Services\\PostService.cs",
+              "ViewState": "AQIAACMAAAAAAAAAAAAQwDMAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T16:45:46.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\UserController.cs",
+              "ViewState": "AQIAAB8AAAAAAAAAAAApwDoAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T14:06:33.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\appsettings.json",
               "RelativeDocumentMoniker": "Backend\\appsettings.json",
@@ -147,72 +194,85 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "Backend\\Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\AuthService.cs",
-              "RelativeToolTip": "Backend\\Services\\AuthService.cs",
-              "ViewState": "AQIAAC8AAAAAAAAAAAAAwEkAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T11:06:58.588Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Backend\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\AuthController.cs",
               "RelativeToolTip": "Backend\\Controllers\\AuthController.cs",
-              "ViewState": "AQIAAFgAAAAAAAAAAAAAwGcAAAAMAAAA",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAqwGcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-15T11:06:37.35Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "LoginDto.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\LoginDto.cs",
-              "RelativeDocumentMoniker": "Backend\\DTO\\LoginDto.cs",
-              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\LoginDto.cs",
-              "RelativeToolTip": "Backend\\DTO\\LoginDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 1,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\UserDto.cs",
+              "RelativeDocumentMoniker": "Backend\\DTO\\UserDto.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\UserDto.cs",
+              "RelativeToolTip": "Backend\\DTO\\UserDto.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAkwAsAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T11:03:22.455Z",
+              "WhenOpened": "2024-07-11T14:06:21.986Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Program.cs",
               "RelativeDocumentMoniker": "Backend\\Program.cs",
               "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Program.cs",
               "RelativeToolTip": "Backend\\Program.cs",
-              "ViewState": "AQIAAE0AAAAAAAAAAAAAAAMAAAAAAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABkAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-11T22:18:43.751Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "InteractionService.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\InteractionService.cs",
-              "RelativeDocumentMoniker": "Backend\\Services\\InteractionService.cs",
-              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\InteractionService.cs",
-              "RelativeToolTip": "Backend\\Services\\InteractionService.cs",
-              "ViewState": "AQIAAG8AAAAAAAAAAAAowHYAAABGAAAA",
+              "DocumentIndex": 3,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Backend\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Models\\User.cs",
+              "RelativeToolTip": "Backend\\Models\\User.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-10T23:53:21.682Z",
+              "WhenOpened": "2024-07-12T09:24:38.517Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 0,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "Backend\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\UserService.cs",
+              "RelativeToolTip": "Backend\\Services\\UserService.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACgAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:52:14.949Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\IServices\\IUserService.cs",
+              "RelativeDocumentMoniker": "Backend\\Services\\IServices\\IUserService.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\IServices\\IUserService.cs",
+              "RelativeToolTip": "Backend\\Services\\IServices\\IUserService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAYAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:52:04.685Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "PostDto.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\PostDto.cs",
               "RelativeDocumentMoniker": "Backend\\DTO\\PostDto.cs",
@@ -225,33 +285,56 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "IPostService.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\IServices\\IPostService.cs",
-              "RelativeDocumentMoniker": "Backend\\Services\\IServices\\IPostService.cs",
-              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\IServices\\IPostService.cs",
-              "RelativeToolTip": "Backend\\Services\\IServices\\IPostService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAbAAAA",
+              "DocumentIndex": 20,
+              "Title": "InteractionService.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\InteractionService.cs",
+              "RelativeDocumentMoniker": "Backend\\Services\\InteractionService.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\InteractionService.cs",
+              "RelativeToolTip": "Backend\\Services\\InteractionService.cs",
+              "ViewState": "AQIAAG8AAAAAAAAAAAAowHYAAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T16:45:26.079Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-10T23:53:21.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\LoginDto.cs",
+              "RelativeDocumentMoniker": "Backend\\DTO\\LoginDto.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\LoginDto.cs",
+              "RelativeToolTip": "Backend\\DTO\\LoginDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-15T11:03:22.455Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "PostService.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\PostService.cs",
-              "RelativeDocumentMoniker": "Backend\\Services\\PostService.cs",
-              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\PostService.cs",
-              "RelativeToolTip": "Backend\\Services\\PostService.cs",
-              "ViewState": "AQIAAI0AAAAAAAAAAIBJwLUAAAAJAAAA",
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "Backend\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\AuthService.cs",
+              "RelativeToolTip": "Backend\\Services\\AuthService.cs",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAAwEkAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T16:45:46.379Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-15T11:06:58.588Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\arway\\AppData\\Local\\SourceServer\\2e4ab345a690653f490f0c37dd87b04c67d1e63a1e47e4d806588f87d1e042d7\\Backend\\Backend\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\SourceServer\\2e4ab345a690653f490f0c37dd87b04c67d1e63a1e47e4d806588f87d1e042d7\\Backend\\Backend\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\arway\\AppData\\Local\\SourceServer\\2e4ab345a690653f490f0c37dd87b04c67d1e63a1e47e4d806588f87d1e042d7\\Backend\\Backend\\Controllers\\AuthController.cs [Read Only]",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\SourceServer\\2e4ab345a690653f490f0c37dd87b04c67d1e63a1e47e4d806588f87d1e042d7\\Backend\\Backend\\Controllers\\AuthController.cs [Read Only]",
+              "ViewState": "AQIAADkAAAAAAAAAAAAQwGcAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-15T13:14:14.723Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "IInteractionService.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\IServices\\IInteractionService.cs",
               "RelativeDocumentMoniker": "Backend\\Services\\IServices\\IInteractionService.cs",
@@ -259,12 +342,11 @@
               "RelativeToolTip": "Backend\\Services\\IServices\\IInteractionService.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAjwA0AAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T21:16:58.799Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T21:16:58.799Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 14,
               "Title": "FileController.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\FileController.cs",
               "RelativeDocumentMoniker": "Backend\\Controllers\\FileController.cs",
@@ -272,12 +354,11 @@
               "RelativeToolTip": "Backend\\Controllers\\FileController.cs",
               "ViewState": "AQIAAE4AAAAAAAAAAAAuwGcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T12:38:12.228Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T12:38:12.228Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 15,
               "Title": "IAuthService.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\IServices\\IAuthService.cs",
               "RelativeDocumentMoniker": "Backend\\Services\\IServices\\IAuthService.cs",
@@ -285,12 +366,11 @@
               "RelativeToolTip": "Backend\\Services\\IServices\\IAuthService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAwAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-15T11:07:35.767Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-15T11:07:35.767Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 18,
               "Title": "IFileService.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\IServices\\IFileService.cs",
               "RelativeDocumentMoniker": "Backend\\Services\\IServices\\IFileService.cs",
@@ -298,12 +378,11 @@
               "RelativeToolTip": "Backend\\Services\\IServices\\IFileService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T12:41:07.721Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T12:41:07.721Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 17,
               "Title": "FileService.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Services\\FileService.cs",
               "RelativeDocumentMoniker": "Backend\\Services\\FileService.cs",
@@ -311,25 +390,11 @@
               "RelativeToolTip": "Backend\\Services\\FileService.cs",
               "ViewState": "AQIAAFUAAAAAAAAAAAAWwGoAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T12:35:22.729Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T12:35:22.729Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PostController.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\PostController.cs",
-              "RelativeDocumentMoniker": "Backend\\Controllers\\PostController.cs",
-              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\PostController.cs",
-              "RelativeToolTip": "Backend\\Controllers\\PostController.cs",
-              "ViewState": "AQIAAGwAAAAAAAAAAAAowIsAAAA+AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T16:44:30.521Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 21,
               "Title": "savedPostDto.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\savedPostDto.cs",
               "RelativeDocumentMoniker": "Backend\\DTO\\savedPostDto.cs",
@@ -337,25 +402,11 @@
               "RelativeToolTip": "Backend\\DTO\\savedPostDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T21:24:42.521Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T21:24:42.521Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "UserDto.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\UserDto.cs",
-              "RelativeDocumentMoniker": "Backend\\DTO\\UserDto.cs",
-              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\UserDto.cs",
-              "RelativeToolTip": "Backend\\DTO\\UserDto.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAA0wAoAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T14:06:21.986Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "InteractionController.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\InteractionController.cs",
               "RelativeDocumentMoniker": "Backend\\Controllers\\InteractionController.cs",
@@ -363,25 +414,11 @@
               "RelativeToolTip": "Backend\\Controllers\\InteractionController.cs",
               "ViewState": "AQIAAPoAAAAAAAAAAAAwwCABAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T21:12:22.791Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T21:12:22.791Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Backend\\Models\\User.cs",
-              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Models\\User.cs",
-              "RelativeToolTip": "Backend\\Models\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-12T09:24:38.517Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "Post.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Models\\Post.cs",
               "RelativeDocumentMoniker": "Backend\\Models\\Post.cs",
@@ -389,12 +426,11 @@
               "RelativeToolTip": "Backend\\Models\\Post.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T21:37:17.558Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T21:37:17.558Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 27,
               "Title": "20240711213603_savedPost2.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Migrations\\20240711213603_savedPost2.cs",
               "RelativeDocumentMoniker": "Backend\\Migrations\\20240711213603_savedPost2.cs",
@@ -402,12 +438,11 @@
               "RelativeToolTip": "Backend\\Migrations\\20240711213603_savedPost2.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T21:36:03.723Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T21:36:03.723Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "SavedPost.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Models\\SavedPost.cs",
               "RelativeDocumentMoniker": "Backend\\Models\\SavedPost.cs",
@@ -415,12 +450,11 @@
               "RelativeToolTip": "Backend\\Models\\SavedPost.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T21:12:25.539Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T21:12:25.539Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "FileDto.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\FileDto.cs",
               "RelativeDocumentMoniker": "Backend\\DTO\\FileDto.cs",
@@ -428,12 +462,11 @@
               "RelativeToolTip": "Backend\\DTO\\FileDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T21:25:06.3Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T21:25:06.3Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "RateFileDto.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\DTO\\RateFileDto.cs",
               "RelativeDocumentMoniker": "Backend\\DTO\\RateFileDto.cs",
@@ -441,12 +474,11 @@
               "RelativeToolTip": "Backend\\DTO\\RateFileDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T21:25:02.428Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T21:25:02.428Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 28,
               "Title": "20240711211945_savedPost.cs",
               "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Migrations\\20240711211945_savedPost.cs",
               "RelativeDocumentMoniker": "Backend\\Migrations\\20240711211945_savedPost.cs",
@@ -454,21 +486,7 @@
               "RelativeToolTip": "Backend\\Migrations\\20240711211945_savedPost.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T21:19:45.115Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Backend\\Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Backend\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T14:06:33.803Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T21:19:45.115Z"
             }
           ]
         }

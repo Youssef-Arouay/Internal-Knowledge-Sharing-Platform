@@ -21,7 +21,10 @@ export interface usercred {
     username: string,
     phoneNumber: number,
     email: string,
-    password: string
+    password: string,
+    postsCount:number,
+    filesCount: number,
+    interactionsCount: number
 }
 export interface User {
     id: number,

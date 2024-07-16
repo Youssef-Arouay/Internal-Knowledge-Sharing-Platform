@@ -1,54 +1,72 @@
 .dialog-container {
-    padding: 15px;
-    height: 100%;
-    width: 550px;
-    max-width: 750px;
-    margin: 0 auto;
-  }
-  
-  .dialog-container h2 {
-    margin-bottom: 16px;
-    font-size: 24px;
-  }
-  
-  .form-container {
-    height: 110%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  mat-form-field {
-    margin-top: 3px;
-    width: 90%;
-  }
-  
-  mat-dialog-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 15px;
-  }
-  
-  mat-dialog-actions button {
-    margin-left: 8px;
-    margin-bottom: 10px;
-  }
+  padding: 15px;
+  height: 100%;
+  width: 550px;
+  max-width: 750px;
+  margin: 0 auto;
+}
 
-  .btnDialogCancel {
-    margin-right: 2em;
-    color: azure;
-    background-color: rgb(214, 33, 33);
-    width: 15%;
-  }
-  .btnDialogAdd {
-    margin-right: 1em;
-    color: azure;
-    background-color: rgb(11, 88, 231);
-    width: 15%;
-  }
+.dialog-container h2 {
+  margin-bottom: 16px;
+  font-size: 24px;
+}
 
-  .inputFile{
-    height: 100%;
-    margin-top: -5px;
-    width: 90%;
-  }
+.form-container {
+  height: 120%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+}
+
+mat-form-field {
+  margin-top: 3px;
+  width: 90%;
+}
+
+app-tags-input{
+  all:unset;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* .tagsInput{
+  display: flex;
+  padding: 15px 127px ;
+  margin: 0;
+  width: 100%;
+  height: max-content;
+} */
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+mat-dialog-actions button {
+  margin-left: 8px;
+  margin-bottom: 10px;
+}
+
+.btnDialogCancel {
+  margin-right: 2em;
+  color: azure;
+  background-color: rgb(214, 33, 33);
+  width: 15%;
+}
+
+.btnDialogAdd {
+  margin-right: 1em;
+  color: azure;
+  background-color: rgb(11, 88, 231);
+  width: 15%;
+}
+
+.inputFile {
+  height: 100%;
+  margin-top: -5px;
+  width: 90%;
+}

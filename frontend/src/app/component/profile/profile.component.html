@@ -1,27 +1,27 @@
 <div class="h-screen flex items-center">
-    <div class="container mx-auto my8 p-8 bg-white shadow-md rounded-md max-w-md">
-      <h1 class="text-3xl text-gray-600 font-bold mb-4 text-center">
-        Account Detail
-      </h1>
-      <div *ngIf="user">
-        <div class="text-center">
-          <div
-            class="rounded-full bg-blue-500 my-4 text-4xl w-24 h-24 inline-flex items-center justify-center font-bold text-white">
-            {{user.username | uppercase}}
-          </div>
-        </div>
-        <hr class="py-4 border-slate-400">
-        <div class="grid grid-cols-2 gap-4">
-          <div class="text-gray-600 font-bold">Firstname</div>
-          <div class="text-gray-800 font-medium">{{user.firstname | titlecase}}</div>
+  <div class="container mx-auto my8 p-8 bg-white shadow-md rounded-md max-w-md">
+    <h1 class="text-3xl text-gray-600 font-bold mb-4 text-center">
+      Account Details
+    </h1>
+    <div *ngIf="user">
+      <div class="text-center">
+        <img class="postProfileImg" src="/assets/images/userIcon.png" alt="" />
+      </div>
+      <div class="text-center">
+        <button class="shareButton">Update profile</button>
+      </div>
+      <hr class="border-slate-500">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="text-gray-600 font-bold">Firstname</div>
+        <div class="text-gray-800 font-medium">{{user.firstname | titlecase}}</div>
 
-          <div class="text-gray-600 font-bold">Last name</div>
-          <div class="text-gray-800 font-medium">{{ user.lastname | titlecase}}</div>
-  
-          <div class="text-gray-600 font-bold">Email</div>
-          <div class="text-gray-800 font-medium">{{user.email}}</div>
-  
-          <!-- <div class="text-gray-600 font-bold">Roles</div>
+        <div class="text-gray-600 font-bold">Last name</div>
+        <div class="text-gray-800 font-medium">{{ user.lastname | titlecase}}</div>
+
+        <div class="text-gray-600 font-bold">Email</div>
+        <div class="text-gray-800 font-medium">{{user.email}}</div>
+
+        <!-- <div class="text-gray-600 font-bold">Roles</div>
           <div>
             <ul class="flex gap-1 text-xs">
               <li *ngFor="let role of user.roles" class="bg-green-700 text-white rounded-md py-1 px-2">
@@ -29,16 +29,18 @@
               </li>
             </ul>
           </div> -->
-          
-          <div class="text-gray-600 font-bold">Phone</div>
-          <div class="text-gray-800 font-medium">{{ '-'}}</div>
-  
-          <div class="text-gray-600 font-bold">Files uploaded</div>
-          <div class="text-gray-800 font-medium"></div>
-          <div class="text-gray-600 font-bold">Interactions</div>
-          <div class="text-gray-800 font-medium"></div>
-        </div>
+
+        <div class="text-gray-600 font-bold">Phone</div>
+        <div class="text-gray-800 font-medium">{{ user.phoneNumber ? user.phoneNumber : "-"}}</div>
+
+        <div class="text-gray-600 font-bold">Posts</div>
+        <div class="text-gray-800 font-medium">{{  user.postsCount }} </div>
+        <div class="text-gray-600 font-bold">Files uploaded</div>
+        <div class="text-gray-800 font-medium">{{ user.filesCount }}</div>
+        <div class="text-gray-600 font-bold">Interactions</div>
+        <div class="text-gray-800 font-medium">{{  user.interactionsCount }} </div>
+
       </div>
     </div>
   </div>
-  
+</div>

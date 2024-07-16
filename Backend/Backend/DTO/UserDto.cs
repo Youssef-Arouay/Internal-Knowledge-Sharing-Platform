@@ -9,6 +9,9 @@
         public  string Email { get; set; }
         public int phoneNumber { get; set; }
         public string Password { get; set; }
+        public int PostsCount { get; set; }
+        public int FilesCount { get; set; }
+        public int InteractionsCount { get; set; }
     }
 
     public class UserResp
