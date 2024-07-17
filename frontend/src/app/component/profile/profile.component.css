@@ -168,3 +168,9 @@
     cursor: pointer;
     color: white;
 }
+
+.btnAddFile{
+    margin-right: 2em;
+    color: azure;
+    background-color: rgb(11, 165, 231);
+  }

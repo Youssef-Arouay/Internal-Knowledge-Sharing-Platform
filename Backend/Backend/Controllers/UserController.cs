@@ -24,35 +24,6 @@ namespace Backend.Controllers
             _userService = userService;
         }
 
-        /*[HttpGet(nameof(GetUserDetails))]
-        [Authorize]
-        public async Task<ActionResult<User>> GetUserDetails()
-        {
-            try
-            {
-                // Retrieve email from claims
-                var email = User.FindFirst(ClaimTypes.Email)?.Value;
-
-                if (string.IsNullOrEmpty(email))
-                {
-                    return BadRequest("Email claim not found in token.");
-                }
-
-                // Find user in database
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-
-                if (user == null)
-                {
-                    return NotFound("User not found.");
-                }
-
-                return user;
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-        }*/
 
         [HttpGet(nameof(GetUserDetails))]
         [Authorize]
@@ -75,6 +46,34 @@ namespace Backend.Controllers
                 }
 
                 return Ok(userDetails);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPut(nameof(UpdateUser))]
+        [Authorize]
+        public async Task<IActionResult> UpdateUser([FromForm] UpdateUserDto updateUserDto)
+        {
+            try
+            {
+                var email = User.FindFirst(ClaimTypes.Email)?.Value;
+
+                if (string.IsNullOrEmpty(email))
+                {
+                    return BadRequest("Email claim not found in token.");
+                }
+
+                var result = await _userService.UpdateUserAsync(email, updateUserDto);
+
+                if (!result)
+                {
+                    return NotFound("User not found.");
+                }
+
+                return Ok(new { message = "User updated successfully." });
             }
             catch (Exception ex)
             {

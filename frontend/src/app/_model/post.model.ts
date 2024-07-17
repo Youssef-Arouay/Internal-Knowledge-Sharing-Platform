@@ -31,3 +31,14 @@ export interface MyPostsResp {
     $values: Post[];
 }
 
+export interface postDetails {
+    id: number,
+    description: string,
+    tags: string[],
+    creationDate : string,
+}
+
+export interface postCommentReq {
+    postId: string,
+    content: string,
+}

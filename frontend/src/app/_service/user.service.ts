@@ -82,6 +82,12 @@ export class UserService {
     });
   }
 
+  updateProfile(formData: FormData): Observable<any> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.put<any>(`${this.baseUrl}user/UpdateUser`, formData, { headers });
+  }
+
+
   // LOGOUT : Clear Local Storage, Cookies and Entity User
   logout() {
     this.clearUser();

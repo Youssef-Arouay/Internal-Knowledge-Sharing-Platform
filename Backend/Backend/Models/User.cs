@@ -11,7 +11,9 @@ namespace Backend.Models
         public string Username { get; set; } = string.Empty;
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
-        public int phoneNumber { get; set; }
+        public DateTime BirthDate { get; set; } 
+        public string PhoneNumber { get; set; }
+        public byte[] ProfileImage { get; set; }
         public string PasswordHash { get; set; } = string.Empty;
 
         // Navigation property for files uploaded by this user

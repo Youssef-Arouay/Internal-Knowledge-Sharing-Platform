@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { postCommentReq } from '../_model/user.model';
 import { savedPostsResp } from '../_model/interaction.model';
-import { MyPostsResp } from '../_model/post.model';
+import { MyPostsResp, postCommentReq } from '../_model/post.model';
 
 @Injectable({
   providedIn: 'root'

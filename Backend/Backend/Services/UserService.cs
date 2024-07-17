@@ -13,6 +13,7 @@ public class UserService : IUserService
         _context = context;
     }
 
+    // get user details
     public async Task<UserDto> GetUserDetailsAsync(string email)
     {
         var user = await _context.Users
@@ -33,12 +34,41 @@ public class UserService : IUserService
             Email = user.Email,
             Firstname = user.Firstname,
             Lastname = user.Lastname,
-            phoneNumber = user.phoneNumber,
-
+            PhoneNumber = user.PhoneNumber,
+            BirthDate = user.BirthDate,
             Username = user.Username,
             PostsCount = user.Posts.Count(),
             InteractionsCount = user.Likes.Count() + user.Comments.Count() + user.RateFiles.Count(),
             FilesCount = user.Files.Count()
         };
+    }
+
+    // Update user profile
+    public async Task<bool> UpdateUserAsync(string email, UpdateUserDto updateUserDto)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+        if (user == null)
+        {
+            return false;
+        }
+
+        user.Firstname = updateUserDto.Firstname ?? user.Firstname;
+        user.Lastname = updateUserDto.Lastname ?? user.Lastname;
+        user.Username = updateUserDto.Username ?? user.Username;
+        user.BirthDate = updateUserDto.BirthDate ?? user.BirthDate;
+        user.PhoneNumber = updateUserDto.PhoneNumber ?? user.PhoneNumber;
+
+        if (updateUserDto.ProfileImage != null)
+        {
+            using var memoryStream = new MemoryStream();
+            await updateUserDto.ProfileImage.CopyToAsync(memoryStream);
+            user.ProfileImage = memoryStream.ToArray();
+        }
+
+        _context.Users.Update(user);
+        await _context.SaveChangesAsync();
+
+        return true;
     }
 }

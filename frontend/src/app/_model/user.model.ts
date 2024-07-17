@@ -16,37 +16,42 @@ export interface loginresp {
 
 export interface usercred {
     id: number,
+    imageProfile: File | null;
     firstname: string,
     lastname: string,
     username: string,
-    phoneNumber: number,
+    phoneNumber: string,
+    birthDate: string,
     email: string,
     password: string,
     postsCount:number,
     filesCount: number,
     interactionsCount: number
 }
-export interface User {
-    id: number,
+
+export interface profileForm {
+    imageProfile: File | null;
     firstname: string,
     lastname: string,
     username: string,
-    phoneNumber: number,
+    phoneNumber: string,
+    birthDate: string,
+    email: string
+}
+
+export interface User {
+    id: number,
+    imageProfile: File | null;
+    firstname: string,
+    lastname: string,
+    username: string,
+    phoneNumber: string,
+    birthDate: string,
     email: string,
     password: string
 }
 
-export interface postDetails {
-    id: number,
-    description: string,
-    tags: string[],
-    creationDate : string,
-}
 
-export interface postCommentReq {
-    postId: string,
-    content: string,
-}
 
   
   

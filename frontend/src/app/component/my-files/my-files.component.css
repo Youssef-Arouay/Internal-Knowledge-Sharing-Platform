@@ -5,6 +5,7 @@
 }
 
 .example-stretched-tabs {
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
   box-shadow: 5px;
@@ -21,8 +22,11 @@
 
 .myPostsCards .savedPostsCards {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 3em;
+  padding: 5em;
   height: 95%;
   width: 90%;
 }
@@ -30,7 +34,12 @@
 
 /* My Files */
 .example-card {
-  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  margin: 1.5em;
+  width: 400px;
+  max-width: 600px;
+
 }
 
 .example-card-footer {
@@ -46,11 +55,16 @@
   overflow-y: auto;
 }
 
-.post-container,
-.file-container {
+.post-container{
+  text-align: center;
   width: 100%;
   padding: 15px;
   margin: 2em;
+}
+
+.file-container {
+  text-align: center;
+  min-height: 100%;
 }
 
 .file-card {
@@ -72,4 +86,28 @@
   margin-right: 1em;
   color: white;
   background-color: rgba(226, 23, 23, 0.966);
+}
+
+.cardContainer, app-post-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  min-width: 650px;
+  height: auto;
+}
+
+.fileCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the items horizontally */
+  gap: 13px; /* Space between cards */
+}
+
+.cardWrapper {
+  flex: 1 1 calc(63.333% - 82px); /* Adjust the percentage to control the number of cards per row */
+  box-sizing: border-box;
+  min-width: 300px; /* Minimum width for the card */
+  max-width: 400px; /* Maximum width for the card */
+  min-height: 100%;
 }

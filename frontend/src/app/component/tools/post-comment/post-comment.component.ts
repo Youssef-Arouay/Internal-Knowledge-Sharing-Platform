@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { InteractionService } from '../../../_service/interaction.service';
 import { FormsModule } from '@angular/forms';
-import { postCommentReq, usercred } from '../../../_model/user.model';
+import {  usercred } from '../../../_model/user.model';
 import { UserService } from '../../../_service/user.service';
+import { postCommentReq } from '../../../_model/post.model';
 
 @Component({
   selector: 'app-post-comment',

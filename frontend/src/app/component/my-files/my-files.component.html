@@ -1,37 +1,44 @@
-<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4 container">
+<mat-tab-group mat-stretch-tabs >
 
-    <mat-tab label="Saved posts">
-        <div *ngFor="let post of savedPosts">
-            <div class="savedPostsCards">
-                <app-post-card [post]="post"></app-post-card>
-            </div>
-        </div>
-    </mat-tab>
-    @if (myPosts) {
-
-        <mat-tab label="My posts">
-            <div *ngFor="let post of myPosts">
-                <div class="myPostsCards">
+    @if (savedPosts) {
+        <mat-tab label="Saved posts">
+            <div *ngFor="let post of savedPosts">
+                <div class="cardContainer">
                     <app-post-card [post]="post"></app-post-card>
                 </div>
             </div>
         </mat-tab>
     } @else {
-        <div class="file-container">
-            You didn't uploaded any file !
-        </div>
+    <div class="file-container">
+        You didn't saved any post !
+    </div>
+    }
+
+    @if (myPosts) {
+        <mat-tab label="My posts">
+            <div *ngFor="let post of myPosts">
+                <div class="cardContainer">
+                    <app-post-card [post]="post"></app-post-card>
+                </div>
+            </div>
+        </mat-tab>
+    } @else {
+    <div class="file-container">
+        You didn't added any post !
+    </div>
     }
 
     <mat-tab label="My files">
-        <div class="example-large-box mat-elevation-z4">
+        <div class="fileCardContainer">
             @if (myFiles) {
-            <div *ngFor="let file of myFiles">
+            <div *ngFor="let file of myFiles" class="cardWrapper">
                 <mat-card class="example-card" appearance="outlined">
                     <mat-card-header>
                         <mat-card-title-group>
                             <mat-card-title>{{ file.entityName }}</mat-card-title>
                             <mat-card-subtitle>{{ file.author }}</mat-card-subtitle>
-                            <button class="btnDeleteFile" mat-raised-button (click)="deleteFile(file.id)">Delete file</button>
+                            <button class="btnDeleteFile" mat-raised-button (click)="deleteFile(file.id)">Delete
+                                file</button>
                         </mat-card-title-group>
                     </mat-card-header>
                     <mat-card-content>

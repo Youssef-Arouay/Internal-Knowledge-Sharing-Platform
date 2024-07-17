@@ -3,7 +3,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileAlt, faMapMarkerAlt, faPhotoVideo, faSmile, faTags } from '@fortawesome/free-solid-svg-icons';
-import { postDetails, usercred } from '../../../_model/user.model';
+import { usercred } from '../../../_model/user.model';
 import { PostService } from '../../../_service/post.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { TagsInputComponent } from '../tags-input/tags-input.component';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../_service/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { postDetails } from '../../../_model/post.model';
 
 @Component({
   selector: 'app-share-post',

@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Backend.Data;
 using Backend.Services.IServices;
 using Google.Apis.Auth;
-using Azure.Core;
-using Microsoft.IdentityModel.Tokens;
 
 
 namespace Backend.Controllers

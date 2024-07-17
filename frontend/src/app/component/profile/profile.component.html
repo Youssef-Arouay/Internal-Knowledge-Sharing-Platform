@@ -8,7 +8,7 @@
         <img class="postProfileImg" src="/assets/images/userIcon.png" alt="" />
       </div>
       <div class="text-center">
-        <button class="shareButton">Update profile</button>
+        <button class="shareButton" (click)="openDialog()">Update profile</button>
       </div>
       <hr class="border-slate-500">
       <div class="grid grid-cols-2 gap-4">
@@ -33,10 +33,15 @@
         <div class="text-gray-600 font-bold">Phone</div>
         <div class="text-gray-800 font-medium">{{ user.phoneNumber ? user.phoneNumber : "-"}}</div>
 
+        <div class="text-gray-600 font-bold">Birthdate</div>
+        <div class="text-gray-800 font-medium">{{ user.birthDate ? user.birthDate : "-"}}</div>
+
         <div class="text-gray-600 font-bold">Posts</div>
         <div class="text-gray-800 font-medium">{{  user.postsCount }} </div>
+
         <div class="text-gray-600 font-bold">Files uploaded</div>
         <div class="text-gray-800 font-medium">{{ user.filesCount }}</div>
+        
         <div class="text-gray-600 font-bold">Interactions</div>
         <div class="text-gray-800 font-medium">{{  user.interactionsCount }} </div>
 

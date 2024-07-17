@@ -8,7 +8,7 @@
                     <a routerLink="/register" routerLinkActive="router-link-active"  class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a routerLink="/register" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                 </div> -->
-                <span>or use your email for registeration</span>
+                <!-- <span>or use your email for registeration</span> -->
                 <input type="text" formControlName="firstname" placeholder="Firstname">
                 <input type="text" formControlName="lastname" placeholder="Lastname">
                 <input type="email" formControlName="email" placeholder="Email">
@@ -25,7 +25,7 @@
                     <div id="google-btn"></div>
 
                 </div>
-                <span>or use your email password</span>
+                <span>Or use your email and password</span>
                 <input type="email" formControlName="email" placeholder="Email">
                 <input type="password" formControlName="password"    placeholder="Password">
                 <a routerLink="/resetpassword">→ Forget Your Password? ←</a>
@@ -35,12 +35,12 @@
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
+                    <h1>Welcome Back !</h1>
                     <p>Enter your personal details to use all of site features</p>
                     <button type="button" class="hidden" id="login" (click)="isSignDivVisible = false">Sign In</button>
                 </div>
                 <div class="toggle-panel toggle-right">
-                    <h1>Hello, Friend!</h1>
+                    <h1>Hello, Friend !</h1>
                     <p>Register with your personal details to get access to our plateform</p>
                     <button type="button" class="hidden" id="register" (click)="isSignDivVisible = true">Sign Up</button>
                 </div>

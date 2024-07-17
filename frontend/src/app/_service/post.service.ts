@@ -2,8 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
-import { postDetails } from '../_model/user.model';
-import {MyPostsResp} from '../_model/post.model'
+import {MyPostsResp, postDetails} from '../_model/post.model'
 import { Observable } from 'rxjs';
 
 @Injectable({
