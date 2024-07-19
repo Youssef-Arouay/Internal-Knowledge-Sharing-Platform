@@ -85,9 +85,18 @@ export class PostCardComponent implements OnInit {
       });
     } else {
       // Like the post
+      const user = {
+          userId: this.user!.id,
+          firstname: this.user!.firstname,
+          lastname: this.user!.lastname
+        }
       this.interactionService.likePost(post.postId).subscribe({
         next: () => {
-          post.likes.$values.push({ userId: this.user!.id });
+          console.log('aaaapost.likes.$values', post.likes.$values)
+          // post.likes.$values.push({ userId: this.user!.id });
+          post.likes.$values.push({user });
+
+          console.log('BBBpost.likes.$values', post.likes.$values)
           this.cdr.detectChanges();
         },
         error: (err) => {
@@ -124,7 +133,6 @@ export class PostCardComponent implements OnInit {
   }
 
   
-  // Method to save a post
   // Combined method to save or unsave a post based on isSaved flag
   toggleSavePost() {
     if (this.user && this.post) {

@@ -1,9 +1,9 @@
 import {
-  NG_VALUE_ACCESSOR
-} from "./chunk-UZLQAKCI.js";
-import {
   SelectionModel
 } from "./chunk-XQMYJXJP.js";
+import {
+  NG_VALUE_ACCESSOR
+} from "./chunk-UZLQAKCI.js";
 import {
   MAT_RIPPLE_GLOBAL_OPTIONS,
   MatCommonModule,
