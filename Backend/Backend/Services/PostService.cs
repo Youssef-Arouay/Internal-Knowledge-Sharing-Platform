@@ -124,7 +124,8 @@ namespace Backend.Services
                                           User = new
                                           {
                                               p.User.Firstname,
-                                              p.User.Lastname
+                                              p.User.Lastname,
+                                              ProfileImage =  p.User.ProfileImage != null ? Convert.ToBase64String(p.User.ProfileImage) : null
                                           },
                                           Likes = p.Likes.Select(l => new
                                           {
@@ -162,7 +163,9 @@ namespace Backend.Services
                                           User = new
                                           {
                                               p.User.Firstname,
-                                              p.User.Lastname
+                                              p.User.Lastname,
+                                              ProfileImage = p.User.ProfileImage != null ? Convert.ToBase64String(p.User.ProfileImage) : null,
+
                                           },
                                           Likes = p.Likes.Select(l => new
                                           {

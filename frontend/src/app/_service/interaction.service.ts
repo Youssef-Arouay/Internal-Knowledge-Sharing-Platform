@@ -37,7 +37,6 @@ export class InteractionService {
 
   // Method to add a comment
   addComment(comment: postCommentReq): Observable<any> {
-    const token = localStorage.getItem('token');
     const headers = this.createAuthorizationHeader();
 
     return this.http.post<any>(`${this.baseUrl}post/comment/add`, comment, { headers });

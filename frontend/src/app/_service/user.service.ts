@@ -83,7 +83,11 @@ export class UserService {
   }
 
   updateProfile(formData: FormData): Observable<any> {
-    const headers = this.createAuthorizationHeader();
+    // const headers = this.createAuthorizationHeader();
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
     return this.http.put<any>(`${this.baseUrl}user/UpdateUser`, formData, { headers });
   }
 

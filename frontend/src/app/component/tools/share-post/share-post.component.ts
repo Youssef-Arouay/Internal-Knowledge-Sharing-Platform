@@ -30,7 +30,7 @@ export class SharePostComponent {
   showTagsInput = false ;
   tags: string[] = [];
 
-  user: usercred |null = null ;
+  user? : usercred |null = null ;
 
   
   @Output() postAdded: EventEmitter<void> = new EventEmitter<void>();

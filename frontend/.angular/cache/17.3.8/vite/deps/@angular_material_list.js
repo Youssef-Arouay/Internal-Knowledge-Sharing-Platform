@@ -1,4 +1,7 @@
 import {
+  NG_VALUE_ACCESSOR
+} from "./chunk-UZLQAKCI.js";
+import {
   SelectionModel
 } from "./chunk-XQMYJXJP.js";
 import {
@@ -21,9 +24,6 @@ import {
   coerceNumberProperty,
   hasModifierKey
 } from "./chunk-HEXINVX3.js";
-import {
-  NG_VALUE_ACCESSOR
-} from "./chunk-UZLQAKCI.js";
 import {
   CommonModule,
   NgTemplateOutlet

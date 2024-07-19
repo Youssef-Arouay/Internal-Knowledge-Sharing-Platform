@@ -1,7 +1,7 @@
 <div class="share">
   <div class="shareWrapper">
     <div class="shareTop">
-      <img class="shareProfileImg" src="assets/images/userIcon.png" alt="" />
+      <img class="shareProfileImg" [src]="user?.profileImage ? 'data:image/jpeg;base64,' + user?.profileImage : 'assets/images/userIcon.png'" alt="" />
       <input
         [(ngModel)]="post.description"
         placeholder="What's in your mind {{user?.firstname | titlecase }} ?"

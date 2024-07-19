@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/MxZfgEv9+k=",
+  "dgSpecHash": "zk7KiwdAJOY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\arway\\Desktop\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Backend.csproj",
+  "projectFilePath": "C:\\Users\\arway\\Desktop\\New folder\\Internal-Knowledge-Sharing-Platform\\Backend\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\arway\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\arway\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

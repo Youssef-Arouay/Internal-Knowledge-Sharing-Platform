@@ -37,6 +37,9 @@ public class UserService : IUserService
             PhoneNumber = user.PhoneNumber,
             BirthDate = user.BirthDate,
             Username = user.Username,
+            ProfileImage = user.ProfileImage != null ? Convert.ToBase64String(user.ProfileImage) : null,
+
+
             PostsCount = user.Posts.Count(),
             InteractionsCount = user.Likes.Count() + user.Comments.Count() + user.RateFiles.Count(),
             FilesCount = user.Files.Count()

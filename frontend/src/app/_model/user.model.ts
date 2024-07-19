@@ -16,7 +16,7 @@ export interface loginresp {
 
 export interface usercred {
     id: number,
-    imageProfile: File | null;
+    profileImage: File | null;
     firstname: string,
     lastname: string,
     username: string,
@@ -30,18 +30,17 @@ export interface usercred {
 }
 
 export interface profileForm {
-    imageProfile: File | null;
+    profileImage: File | null;
     firstname: string,
     lastname: string,
     username: string,
     phoneNumber: string,
     birthDate: string,
-    email: string
 }
 
 export interface User {
     id: number,
-    imageProfile: File | null;
+    profileImage: File | null;
     firstname: string,
     lastname: string,
     username: string,

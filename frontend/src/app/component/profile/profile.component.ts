@@ -10,17 +10,17 @@ import { MaterialModule } from '../../material.module';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule,DialogProfileComponent, MatDialogModule,
+  imports: [CommonModule, DialogProfileComponent, MatDialogModule,
     DialogFormComponent,
     MaterialModule,
-    ],
+  ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-  user? : usercred | null ;
-  
-  constructor(private userService: UserService,    public dialog: MatDialog,  ) { }
+  user?: usercred | null;
+
+  constructor(private userService: UserService, public dialog: MatDialog,) { }
 
 
   // name = JSON.parse(sessionStorage.getItem("loggedInUser")!).name ;
@@ -28,7 +28,6 @@ export class ProfileComponent {
   ngOnInit(): void {
     this.userService.user$.subscribe((user) => {
       this.user = user;
-      console.log(user)
     });
   }
 
@@ -41,5 +40,5 @@ export class ProfileComponent {
       console.log('The dialog was closed', result);
     });
   }
-  
+
 }

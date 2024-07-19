@@ -3,16 +3,16 @@
     <mat-dialog-content>
         <div class="form-container">
             <div class="imgDiv">
-                <img class="postProfileImg" src="/assets/images/userIcon.png" alt="" />
+                <img class="postProfileImg" [src]="user?.profileImage ? 'data:image/jpeg;base64,' + user?.profileImage : '/assets/images/userIcon.png'" alt="Profile Image" />
                 <div class="inputFile">
                     <input type="file" class="file-input" (change)="onChange($event)">
-                    <div *ngIf="profileForm.imageProfile">
+                    <div *ngIf="profileForm.profileImage">
                         <section class="file-info">
                             File details:
                             <ul>
-                                <li>Name: {{ profileForm.imageProfile.name }}</li>
-                                <li>Type: {{ profileForm.imageProfile.type }}</li>
-                                <li>Size: {{ profileForm.imageProfile.size }} bytes</li>
+                                <li>Name: {{ profileForm.profileImage.name }}</li>
+                                <li>Type: {{ profileForm.profileImage.type }}</li>
+                                <li>Size: {{ profileForm.profileImage.size }} bytes</li>
                             </ul>
                         </section>
                     </div>

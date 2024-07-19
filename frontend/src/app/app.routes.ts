@@ -26,7 +26,7 @@ export const routes: Routes = [
     {path:'postcard', component:PostCardComponent},
     {path:'sharepost', component:SharePostComponent},
 
-    {path:'test', component:DialogFormComponent},
+    // {path:'test', component:DialogFormComponent},
 
     { path: '**', redirectTo: 'register' },
 

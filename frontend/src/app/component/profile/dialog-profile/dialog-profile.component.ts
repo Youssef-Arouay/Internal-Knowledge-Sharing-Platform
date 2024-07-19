@@ -10,6 +10,7 @@ import { profileForm, usercred } from '../../../_model/user.model';
 import { DialogFormComponent } from '../../forum/dialog-form/dialog-form.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dialog-profile',
@@ -22,30 +23,28 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 })
 export class DialogProfileComponent implements OnInit {
 
-  user: usercred | null = null ;
+  user?: usercred | null ;
   imageProfile: File | null = null; // Variable to store file
 
   profileForm: profileForm = {
-    imageProfile: null,
+    profileImage: null,
     firstname: '',
     lastname: '',
     username: '',
     phoneNumber: '',
-    birthDate:'',
-    email: ''
+    birthDate:''
   };
 
   protected readonly value = signal('');
 
-  constructor(private userService: UserService, public dialogRef: MatDialogRef<DialogFormComponent> , @Inject(MAT_DIALOG_DATA) public data: any)
+  constructor(private userService: UserService, public dialogRef: MatDialogRef<DialogFormComponent> , 
+    private toastr: ToastrService,@Inject(MAT_DIALOG_DATA) public data: any)
   {}
 
   ngOnInit(): void {
-    // this.userService.user$.subscribe((user) => {
-    //   this.user = user;
-    //   });
     if (this.data) {
       this.profileForm = { ...this.data };
+      console.log("profileForm, ", this.profileForm)
     }
   }
 
@@ -58,26 +57,43 @@ export class DialogProfileComponent implements OnInit {
   }
 
   // On file Select
+  // onChange(event: any) {
+  //   const imageProfile: File = event.target.files[0];
+  //   if (imageProfile) {
+  //     //this.file = file;
+  //     this.profileForm.profileImage = imageProfile;
+  //     console.log('File selected:', this.profileForm.profileImage);
+  //   }
+  // }
+
+  // On file select ( to not pass 10mb)
   onChange(event: any) {
     const imageProfile: File = event.target.files[0];
     if (imageProfile) {
-      //this.file = file;
-      this.profileForm.imageProfile = imageProfile;
-      console.log('File selected:', this.profileForm.imageProfile);
+
+      const maxSizeMB = 10;
+
+      if (imageProfile.size > maxSizeMB * 1024 * 1024) {
+        this.toastr.error(`File size exceeds ${maxSizeMB} MB. Please select a smaller file.`, 'File Size Error');
+        this.imageProfile = null; // Clear the imageProfile reference
+        return;
+      }
+      
+      this.profileForm.profileImage = imageProfile;
+      console.log('File selected:', this.profileForm.profileImage);
     }
   }
+
 
   onSubmit(): void {
     const formData = new FormData();
     formData.append('Firstname', this.profileForm.firstname || '');
     formData.append('Lastname', this.profileForm.lastname || '');
     formData.append('Username', this.profileForm.username || '');
-    formData.append('PhoneNumber', this.profileForm.phoneNumber.toString() || '');
+    formData.append('PhoneNumber', this.profileForm.phoneNumber || '');
     formData.append('BirthDate', this.profileForm.birthDate || '');
-    if (this.profileForm.imageProfile) {
-        formData.append('ProfileImage', this.profileForm.imageProfile);
-    } else {
-        formData.append('ProfileImage', '');
+    if (this.profileForm.profileImage) {
+        formData.append('ProfileImage', this.profileForm.profileImage);
     }
 
     // Log FormData for debugging
@@ -88,13 +104,17 @@ export class DialogProfileComponent implements OnInit {
     this.userService.updateProfile(formData).subscribe({
         next: (response) => {
             console.log('Profile updated successfully:', response);
+            this.toastr.success(response.message , 'Success');
             this.dialogRef.close();
         },
         error: (error) => {
             console.error('Error updating profile:', error);
+            this.toastr.error(error.message , 'Failed');
+
         }
     });
 }
+
 
 
 }

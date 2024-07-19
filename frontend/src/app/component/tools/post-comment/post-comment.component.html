@@ -2,7 +2,7 @@
     <div className='SubPostContainer'>
         <div *ngIf="show" style="padding: 15px;">
             <div style="display: flex; align-items: center; padding-top: 1.3em; padding-left: 1em;">
-                <img src="/assets/images/userIcon.png" class="PostImage" alt="" />
+                <img class="PostImage" [src]="user?.profileImage ? 'data:image/jpeg;base64,' + user?.profileImage : 'assets/images/userIcon.png'" alt="" />
                 <input type="text" class="commentinput" placeholder="Write your thought {{ user?.firstname | titlecase }}" 
                 [(ngModel)]="commentContent" />
                 <button class="addCommentbtn" (click)="handleComment()">Post</button>
@@ -10,7 +10,8 @@
             <div *ngFor="let comment of displayedComments"
                 style="align-items: center; padding-top: 1em; padding-left: 1em;">
                 <div style="display: flex; align-items: center;">
-                    <img src="/assets/images/userIcon.png" class="PostImagee" alt="" />
+                    <img class="PostImagee" [src]="user?.profileImage ? 'data:image/jpeg;base64,' + user?.profileImage : 'assets/images/userIcon.png'" alt="" />
+
                     <p style="margin-left: 1em; font-size: 16px; margin-top: 1em;">
                         {{ comment.user.firstname | titlecase}} {{ comment.user.lastname | titlecase}}
                     </p>
