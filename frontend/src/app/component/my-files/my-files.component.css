@@ -1,7 +1,18 @@
 .container {
+  display: flex;
+    flex-direction: column;
   justify-content: center;
   height: 98%;
   width: 97%;
+}
+
+.file-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the items horizontally */
+  text-align: center;
+  min-height: 85vh;
+  height: auto;
 }
 
 .example-stretched-tabs {
@@ -60,11 +71,6 @@
   width: 100%;
   padding: 15px;
   margin: 2em;
-}
-
-.file-container {
-  text-align: center;
-  min-height: 100%;
 }
 
 .file-card {

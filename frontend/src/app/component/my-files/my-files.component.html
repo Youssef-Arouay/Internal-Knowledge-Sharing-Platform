@@ -1,27 +1,28 @@
-<mat-tab-group mat-stretch-tabs >
+<mat-tab-group mat-stretch-tabs>
 
-    @if (savedPosts) {
-        <mat-tab label="Saved posts">
+    <mat-tab label="Saved posts">
+        <div *ngIf="savedPosts.length > 0; else noSavedPosts">
             <div *ngFor="let post of savedPosts">
                 <div class="cardContainer">
                     <app-post-card [post]="post"></app-post-card>
                 </div>
             </div>
-        </mat-tab>
-    } @else {
-    <div class="file-container">
-        You didn't saved any post !
-    </div>
-    }
+        </div>
+        <ng-template #noSavedPosts>
+            <div class="file-container">
+                You didn't save any posts!
+            </div>
+        </ng-template>
+    </mat-tab>
 
     @if (myPosts) {
-        <mat-tab label="My posts">
-            <div *ngFor="let post of myPosts">
-                <div class="cardContainer">
-                    <app-post-card [post]="post"></app-post-card>
-                </div>
+    <mat-tab label="My posts">
+        <div *ngFor="let post of myPosts">
+            <div class="cardContainer">
+                <app-post-card [post]="post"></app-post-card>
             </div>
-        </mat-tab>
+        </div>
+    </mat-tab>
     } @else {
     <div class="file-container">
         You didn't added any post !

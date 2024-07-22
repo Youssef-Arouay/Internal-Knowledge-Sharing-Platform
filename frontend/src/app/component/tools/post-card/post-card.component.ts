@@ -50,6 +50,7 @@ export class PostCardComponent implements OnInit {
     });
   }
 
+
   updateIsOwner() {
     if (this.user && this.post && this.user.id === this.post.userId) {
       this.isOwner = true; // Check if current user is the owner of the post.
@@ -58,9 +59,11 @@ export class PostCardComponent implements OnInit {
     }
   }
 
+  
   toggleShow() {
     this.show = !this.show;
   }
+
 
   // Method to check if current user has liked the post
   hasLiked(post: any): boolean {

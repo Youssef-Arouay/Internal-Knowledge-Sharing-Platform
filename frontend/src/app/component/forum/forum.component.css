@@ -1,93 +1,143 @@
-
-
 table {
-    width: 50%;
-  }
-  
-  th.mat-sort-header-sorted {
-    color: black;
-  }
+  width: 50%;
+  border-collapse: collapse;
+}
+
+.table {
+  width: 95%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th.mat-sort-header-sorted {
+  color: rgb(199, 37, 37);
+}
 
 mat-card {
-    margin: 2%;
-    text-align: left;
-    width: 90%;
-    margin-left: 5%;
-    border: 1px solid #ccc;
-}
-.mat-mdc-raised-button{
-    width:auto;
+  margin: 2% auto;
+  text-align: left;
+  width: 90%;
+  margin-left: 5%;
+  border: 1px solid #ccc;
+  overflow: hidden;
 }
 
-.table-header{
-background-color: blue;
-color: white;
+.mat-mdc-raised-button {
+  width: auto;
 }
 
- mat-form-field {
-  display: flex;
+.table-header {
+  background-color: blue;
+  color: white;
+}
+
+
+mat-form-field {
   margin-left: 50%;
-  width: 80%;
-  } 
+  width: 100%;
+}
 
-  .header-container {
-    display: flex;
-    width: 100%;
-    align-items: center;
-  }
-  
-  .header-left {
-    margin-left: 2em;
-    flex: 1;
-    text-align: left;
-  }
-  
-  .header-center {
-    flex: 1;
-    text-align: center;
-  }
-  
-  .header-right {
-    flex: 1;
-    text-align: right;
-    margin-bottom: 1em;
-  }
-  
-  .btnAddFile{
-    margin-right: 2em;
-    color: azure;
-    background-color: rgb(11, 165, 231);
-  }
-  
+.header-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  /* Rating Icon and Number  */
-  .starRate {
-    font-size: 18px;
-    color: gold;
-    border-color: gold;
-  }
 
-  
-  .starRated {
-    font-size: 18px;
-    border-color: gold;
-    color: gold;
-  }
+.header-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2em;
+  flex: 1;
+  text-align: left;
+}
 
-  .star-container {
-    display: flex; /* Use flexbox to align items horizontally */
-    align-items: center; /* Center items vertically */
-    cursor: pointer;
-    margin-left: 5px;
+
+.header-center {
+  flex: 1;
+  text-align: center;
+}
+
+.header-right {
+  flex: 2;
+  text-align: right;
+  margin-bottom: 1em;
+}
+
+.btnAddFile {
+  color: azure;
+  background-color: rgb(11, 165, 231);
+}
+
+.btnAddFile:hover {
+  background-color: rgb(175, 223, 247);
+  color: rgb(11, 165, 231);
+  cursor: pointer;
+}
+
+.icon{
+  margin: 1rem;
+  color: white;
+  font-size: 18px;
+}
+
+.tableTitle {
+  position: relative;
+  left: -1em;
+  margin: 0;
+  font-size: 2em;
+  color: #333;
+}
+
+.btnTags {
+  margin-left: 1em;
+  color: azure;
+  background-color: rgb(11, 165, 231);
+}
+
+.btnCancelTags {
+  margin-left: 1em;
+  color: azure;
+  background-color: rgb(219, 30, 30);
+}
+
+.btnTags:hover {
+  background-color: rgb(175, 223, 247);
+  color: rgb(11, 165, 231);
+  cursor: pointer;
+}
+
+
+/* Rating Icon and Number  */
+.starRate {
+  font-size: 18px;
+  color: gold;
+  border-color: gold;
+}
+
+
+.starRated {
+  font-size: 18px;
+  border-color: gold;
+  color: gold;
+}
+
+.star-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 5px;
 }
 
 .rate-number {
-    margin-left: 5px; 
-    display: inline-block;
+  margin-left: 5px;
+  display: inline-block;
 }
 
-.star-container > div {
-    margin-right: 5px; /* Optional: Adds space between elements */
+.star-container>div {
+  margin-right: 5px;
 }
 
 

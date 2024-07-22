@@ -2,7 +2,19 @@
     <mat-card-header>
         <div class="header-container">
             <div class="header-left">
-                <h1>Files Listing</h1>
+                <h1 class="tableTitle">Files Listing</h1>
+                <button mat-button [matMenuTriggerFor]="menu" class="btnTags">
+                    <mat-icon class="icon">arrow_drop_down</mat-icon>
+                    {{ selectedTag }}
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item *ngFor="let tag of uniqueTags" (click)="filterByTag(tag)">
+                        {{ tag }}</button>
+                </mat-menu>
+                <button mat-button *ngIf="selectedTag !== 'Tags' " (click)="resetFilter()" class="btnCancelTags" >
+                    <mat-icon class="icon">close</mat-icon>
+                    Cancel
+                </button>
             </div>
             <div class="header-center">
                 <!-- <i class="fal fa-search"></i> -->
@@ -18,7 +30,7 @@
     </mat-card-header>
 
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
-        class="mat-elevation-z8">
+        class="mat-elevation-z8 table">
 
         <!-- Position Column -->
         <ng-container matColumnDef="position">

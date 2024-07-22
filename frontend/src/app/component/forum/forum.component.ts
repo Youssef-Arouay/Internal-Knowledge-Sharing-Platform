@@ -10,8 +10,8 @@ import { DialogFormComponent } from './dialog-form/dialog-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatIconModule } from '@angular/material/icon';
 import { FileService } from '../../_service/file.service';
-import { usercred } from '../../_model/user.model'; 
-import { FileElement } from '../../_model/file.model'; 
+import { usercred } from '../../_model/user.model';
+import { FileElement } from '../../_model/file.model';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../_service/user.service';
@@ -40,11 +40,16 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
   displayedColumns: string[] = ['position', 'author', 'name', 'description', 'version', 'uploadDate', 'downloads', 'rate'];
   dataSource = new MatTableDataSource<FileElement>();
 
+  user: usercred | null = null;
+
+
   hasRated: boolean = false;
-  user: usercred | null=null;
+  hasRatedMap: { [fileId: number]: boolean } = {}; // Map to track if user has rated a file
+  selectedTag: string = 'Tags'; // Default button text
 
   files: FileElement[] = [];
-  hasRatedMap: { [fileId: number]: boolean } = {}; // Map to track if user has rated a file
+  uniqueTags: string[] = [];
+
 
   private subscriptions: Subscription[] = [];
 
@@ -57,20 +62,15 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
     private _liveAnnouncer: LiveAnnouncer,
     public dialog: MatDialog,
     private fileService: FileService,
-    private toastr: ToastrService,
-  ) {
-    // this.dataSource.filterPredicate = (data: FileElement, filter: string) => {
-    //   return data.entityName.toLowerCase().includes(filter) || 
-    //          data.description.toLowerCase().includes(filter);
-    // };
-   }
-  
-    ngOnInit(): void {
-      this.userService.user$.subscribe((user) => {
-        this.user = user;
-        this.fetchAllFiles();
-      });
-    }
+    private toastr: ToastrService,) 
+  {}
+
+  ngOnInit(): void {
+    this.userService.user$.subscribe((user) => {
+      this.user = user;
+      this.fetchAllFiles();
+    });
+  }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
@@ -81,18 +81,41 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
     const subscription = this.fileService.getAllFiles().subscribe({
       next: (response: any) => {
         const filesArray = response && response.$values ? response.$values : [];
-        
-        console.log("response :",response);
 
         if (!Array.isArray(filesArray)) {
           console.error('Files received are not an array:', filesArray);
           return;
         }
+
+        const tagSet = new Set<string>(); // Use a set to store unique tags
+
         // Map filesArray to FileElement[] and reverse the order
         this.files = filesArray.map((file, index) => {
           // Initialize hasRatedMap based on whether the current user has rated the file
           this.hasRatedMap[file.id] = file.ratedByUsers.$values.some((user: usercred) => user.id === this.user?.id);
-  
+
+          // Parse the tags from the $values property
+          let parsedTags: string[] = [];
+          if (file.tags.$values) {
+            parsedTags = file.tags.$values.flatMap((tag: string) => {
+              try {
+                const parsedTag = JSON.parse(tag);
+                // Handle array of tags
+                if (Array.isArray(parsedTag)) {
+                  return parsedTag.map(t => t.trim().replace(/^"|"$/g, '').toLowerCase());
+                }
+                // Handle single tag
+                return [tag.trim().replace(/^"|"$/g, '').toLowerCase()];
+              } catch {
+                // Handle tag that is not JSON
+                return [tag.trim().replace(/^"|"$/g, '').toLowerCase()];
+              }
+            });
+          }
+
+          // Add parsed tags to the set for uniqueness
+          parsedTags.forEach(tag => tagSet.add(tag));
+
           return {
             id: file.id,
             firstName: file.firstName,
@@ -108,10 +131,13 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
             uploadDate: file.uploadDate,
             downloads: file.downloads,
             rates: file.rates,
-            tags: file.tags,
+            tags: parsedTags,
             ratedByUsers: file.ratedByUsers
           };
         }).reverse();// Reverse the array to get it from the newest to oldest one 
+
+        this.uniqueTags = Array.from(tagSet).sort();
+
         this.dataSource.data = this.files;
 
         this.cdr.detectChanges(); // Trigger change detection explicitly
@@ -125,14 +151,24 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
   }
 
 
+  //// Filtre files by tags 
+  filterByTag(tag: string): void {
+    this.selectedTag = tag; 
+    this.dataSource.data = this.files.filter(file => file.tags.includes(tag));
+  }
+  resetFilter(): void {
+    this.selectedTag = 'Tags'; 
+    this.dataSource.data = this.files; 
+  }
+
   //Search by any word in any column
   applyFilter(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     const filterValue = inputElement.value.trim().toLowerCase();
     const filterTerms = filterValue.split(' ');
-    
+
     this.dataSource.data = this.files.filter(file => {
-      return filterTerms.every(term => 
+      return filterTerms.every(term =>
         file.entityName.toLowerCase().includes(term) ||
         file.description.toLowerCase().includes(term) ||
         file.version.toLowerCase().includes(term) ||
@@ -142,7 +178,7 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
       );
     });
   }
-  
+
   // Open upload file form
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogFormComponent, {
@@ -151,7 +187,7 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
-        this.fetchAllFiles();
+      this.fetchAllFiles();
     });
   }
 
@@ -186,7 +222,7 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
       this.dataSource.data = [...this.files];
     }
   }
-  
+
   triggerFileDownload(blob: Blob, fileName: string): void {
     const downloadLink = document.createElement('a');
     downloadLink.href = window.URL.createObjectURL(blob);
@@ -195,7 +231,7 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
     downloadLink.click();
     document.body.removeChild(downloadLink);
   }
-  
+
 
   // RATE & UNRATE FILE //
   handleRateFile(file: FileElement): void {
@@ -207,12 +243,12 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
       this.rateFile(file);
     }
   }
-  
+
   rateFile(file: FileElement): void {
     const subscription = this.fileService.rateFile(file.id).subscribe({
       next: () => {
         file.rates++;
-        this.hasRatedMap[file.id] = true; 
+        this.hasRatedMap[file.id] = true;
         this.dataSource.data = [...this.files];
         this.cdr.detectChanges();
       },
@@ -223,12 +259,12 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
     });
     this.subscriptions.push(subscription);
   }
-  
+
   unrateFile(file: FileElement): void {
     const subscription = this.fileService.unrateFile(file.id).subscribe({
       next: () => {
         file.rates--;
-        this.hasRatedMap[file.id] = false; 
+        this.hasRatedMap[file.id] = false;
         this.dataSource.data = [...this.files];
         this.cdr.detectChanges();
       },
@@ -237,7 +273,7 @@ export class ForumComponent implements OnInit, AfterViewInit, OnDestroy, AfterVi
         this.toastr.error('Failed to unrate file');
       }
     });
-  
+
     this.subscriptions.push(subscription);
   }
 
