@@ -24,9 +24,12 @@ export class PostService {
 
 
   // Methode to add a post 
-  addPost(post: postDetails): Observable<postDetails> {
-    const headers = this.createAuthorizationHeader();  
-    return this.http.post<postDetails>(`${this.baseUrl}post/add`, post, { headers });
+  addPost(postData: FormData): Observable<postDetails> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+
+    });    return this.http.post<postDetails>(`${this.baseUrl}post/add`, postData, { headers });
   }
 
    // Method to delete a post by ID

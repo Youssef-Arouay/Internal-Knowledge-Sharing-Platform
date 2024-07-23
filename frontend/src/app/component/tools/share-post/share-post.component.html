@@ -1,17 +1,17 @@
 <div class="share">
   <div class="shareWrapper">
     <div class="shareTop">
-      <img class="shareProfileImg" [src]="user?.profileImage ? 'data:image/jpeg;base64,' + user?.profileImage : 'assets/images/userIcon.png'" alt="" />
-      <input
-        [(ngModel)]="post.description"
-        placeholder="What's in your mind {{user?.firstname | titlecase }} ?"
-        class="shareInput"
-      />
+      <img class="shareProfileImg"
+        [src]="user?.profileImage ? 'data:image/jpeg;base64,' + user?.profileImage : 'assets/images/userIcon.png'"
+        alt="image profile" />
+      <input [(ngModel)]="post.description" placeholder="What's in your mind {{user?.firstname | titlecase }} ?"
+        class="shareInput" />
     </div>
     <hr class="shareHr" />
     <div class="shareBottom">
       <div class="shareOptions">
-        <div class="shareOption">
+        <div class="shareOption" (click)="triggerFileInput()">
+          <input type="file" (change)="onFileChange($event)" style="display: none;" #fileInput>
           <fa-icon [icon]="documentIcon" class="shareIcon" style="color: goldenrod;"></fa-icon>
           <span class="shareOptionText">Add file</span>
         </div>
@@ -19,15 +19,15 @@
           <fa-icon [icon]="photoVideoIcon" class="shareIcon" style="color: tomato;"></fa-icon>
           <span class="shareOptionText">Photo or Video</span>
         </div> -->
-        <div class="shareOption" (click)="toggleTagsInput()" >
-          <fa-icon [icon]="tagIcon" class="shareIcon" style="color: blue;" ></fa-icon>
+        <div class="shareOption" (click)="toggleTagsInput()">
+          <fa-icon [icon]="tagIcon" class="shareIcon" style="color: blue;"></fa-icon>
           <span class="shareOptionText">Tag</span>
         </div>
         <div [class.hidden]="!showTagsInput">
           <app-tags-input #tagsInputRef></app-tags-input>
           <!-- <button (click)="showTags()">Show Tags</button> -->
         </div>
-        
+
       </div>
       <button class="shareButton" (click)="addPost()">Share</button>
     </div>

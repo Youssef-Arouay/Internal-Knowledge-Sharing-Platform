@@ -29,7 +29,7 @@ namespace Backend.Controllers
         // POST: api/posts
         [HttpPost("add")]
         [Authorize]
-        public async Task<IActionResult> AddPost(PostDto createPostDto)
+        public async Task<IActionResult> AddPost([FromForm] PostDto createPostDto)
         {
             var result = await _postService.AddPostAsync(createPostDto, User);
 
@@ -40,6 +40,7 @@ namespace Backend.Controllers
 
             return BadRequest(new { message = result.ErrorMessage });
         }
+
 
 
         // DELETE

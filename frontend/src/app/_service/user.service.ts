@@ -39,9 +39,8 @@ export class UserService {
 
   clearUser(): void {
     this.user = null; 
-    this.userSubject.next(null); // Notify all subscribers that the user is null
+    this.userSubject.next(null); 
     this.clearSubs(); 
-
   }
 
 

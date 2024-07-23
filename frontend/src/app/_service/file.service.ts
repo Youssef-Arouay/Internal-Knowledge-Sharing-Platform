@@ -18,34 +18,25 @@ export class FileService {
     const token = localStorage.getItem('token');
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
-      'Content-Type': contentType
+      // 'Content-Type': contentType
     });
   }
 
 
   uploadFile(formData: FormData): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    const headers = this.createAuthorizationHeader();
     return this.http.post(`${this.baseUrl}File/uploadfile`, formData, { headers });
   }
 
   // GET ALL FILES Entities
   getAllFiles(): Observable<FileElement[]> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    const headers = this.createAuthorizationHeader();
     return this.http.get<FileElement[]>(`${this.baseUrl}file/all`, { headers });
   }
   
   //DOWNLOAD FILE 
   downloadFile(entityName: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    const headers = this.createAuthorizationHeader();
     return this.http.get(`${this.baseUrl}File/downloadfile`, {
       headers,
       params: { entityName },
@@ -56,19 +47,13 @@ export class FileService {
   //////////////////// RATE AND UNRATE FILE (FORUM) //////////////////
   rateFile(fileId: number): Observable<any> {
     const url = `${this.baseUrl}RateFile/rate/${fileId}`;
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    const headers = this.createAuthorizationHeader();
     return this.http.post(url, null, {headers} );
   }
 
   unrateFile(fileId: number): Observable<any> {
     const url = `${this.baseUrl}RateFile/unrate/${fileId}`;
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    const headers = this.createAuthorizationHeader();
     return this.http.delete(url, {headers} );
   }
 

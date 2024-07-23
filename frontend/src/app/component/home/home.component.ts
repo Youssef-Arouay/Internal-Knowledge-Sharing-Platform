@@ -43,12 +43,11 @@ export class HomeComponent implements OnInit {
             return new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime();
           });
           console.log('Posts fetched and sorted successfully', this.posts);
-
           // Trigger change detection
           this.cdr.detectChanges();  
 
         } else {
-          console.error('Unexpected response format', response);
+          console.error('Error:', response);
         }
       },
       error: (error: any) => {

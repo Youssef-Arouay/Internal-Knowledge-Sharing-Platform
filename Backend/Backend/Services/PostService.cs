@@ -1,5 +1,6 @@
 ﻿using Backend.Data;
 using Backend.DTO;
+using Backend.Helper;
 using Backend.Models;
 using Backend.Services.IServices;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,6 @@ namespace Backend.Services
             return user?.Id;
         }
 
-        // Add Post Logic
         public async Task<(bool Success, Post Post, string ErrorMessage)> AddPostAsync(PostDto createPostDto, ClaimsPrincipal userClaims)
         {
             try
@@ -41,8 +41,21 @@ namespace Backend.Services
                     UserId = userId.Value,
                     Description = createPostDto.Description,
                     Tags = createPostDto.Tags,
-                    CreationDate = createPostDto.CreationDate
+                    CreationDate = DateTime.UtcNow
                 };
+
+                if (createPostDto.File != null)
+                {
+                    var fileName = $"{Guid.NewGuid()}_{createPostDto.File.FileName}";
+                    var filePath = Path.Combine(Common.GetStaticContentDirectory(), "postsFiles", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await createPostDto.File.CopyToAsync(stream);
+                    }
+
+                    post.FilePath = fileName; 
+                }
 
                 _context.Posts.Add(post);
                 await _context.SaveChangesAsync();
@@ -54,6 +67,7 @@ namespace Backend.Services
                 return (false, null, $"Failed to add post: {ex.Message}");
             }
         }
+
 
 
         // Delete post with deleting Like, comments...
@@ -137,7 +151,10 @@ namespace Backend.Services
                                                   l.User.Lastname,
                                               }
                                           }).ToList(),
-                                          CommentCount = p.Comments.Count()
+                                          CommentCount = p.Comments.Count(),
+                                          ContentType = GetContentType(p.FilePath),
+                                          FileName = ExtractOriginalFileName(p.FilePath),
+                                          FileContent = !string.IsNullOrEmpty(p.FilePath) ? Convert.ToBase64String(System.IO.File.ReadAllBytes(Path.Combine(Common.GetStaticContentDirectory(), "postsFiles", p.FilePath))) : null
                                       })
                                       .ToListAsync();
 
@@ -159,6 +176,9 @@ namespace Backend.Services
                                           p.Description,
                                           p.Tags,
                                           p.CreationDate,
+                                          ContentType = GetContentType(p.FilePath),
+                                          FileName = ExtractOriginalFileName(p.FilePath),
+                                          FileContent = !string.IsNullOrEmpty(p.FilePath) ? Convert.ToBase64String(File.ReadAllBytes(Path.Combine(Common.GetStaticContentDirectory(), "postsFiles", p.FilePath))) : null,
                                           p.UserId,
                                           User = new
                                           {
@@ -190,6 +210,40 @@ namespace Backend.Services
             return await _context.Comments
                 .CountAsync(c => c.PostId == postId);
         }
+
+
+        //To get a post's fileContent type 
+        private static string GetContentType(string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return null;
+            }
+
+            var extension = Path.GetExtension(filePath)?.ToLowerInvariant();
+            return extension switch
+            {
+                ".jpg" or ".jpeg" => "image/jpeg",
+                ".png" => "image/png",
+                ".gif" => "image/gif",
+                ".pdf" => "application/pdf",
+                _ => "application/octet-stream"
+            };
+        }
+
+        private static string ExtractOriginalFileName(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return null;
+            }
+
+            var parts = fileName.Split('_', 2);
+            return parts.Length > 1 ? parts[1] : fileName;
+        }
+
+
+
 
 
     }

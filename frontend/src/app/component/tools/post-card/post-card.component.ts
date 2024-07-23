@@ -11,6 +11,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { savedPostsResp } from '../../../_model/interaction.model';
 import { MyPostsResp } from '../../../_model/post.model';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post-card',
@@ -38,7 +39,9 @@ export class PostCardComponent implements OnInit {
   isOwner: boolean = false; // Flag to indicate if current user is the owner of the post
   isSaved: boolean = false
 
-  constructor(private cdr: ChangeDetectorRef, private dialog: MatDialog, private postService: PostService,
+  pdfUrl: SafeResourceUrl | null = null;
+
+  constructor(private sanitizer: DomSanitizer, private cdr: ChangeDetectorRef, private dialog: MatDialog, private postService: PostService,
     private userService: UserService, private interactionService: InteractionService) { }
 
 
@@ -48,7 +51,67 @@ export class PostCardComponent implements OnInit {
       this.updateIsOwner();
       this.fetchSavedPosts();
     });
+    if (this.post && this.post.fileContent && this.isPdf(this.post.contentType)) {
+      this.pdfUrl = this.sanitizePdfUrl(this.post.fileContent);
+    }
   }
+  isPdf(contentType: string): boolean {
+    return contentType === 'application/pdf';
+  }
+
+  sanitizePdfUrl(base64String: string): SafeResourceUrl {
+    const byteCharacters = atob(base64String);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  openFileInNewTab(fileName: string, contentType: string, fileContent: string) {
+  const byteCharacters = atob(fileContent);
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+  const blob = new Blob([byteArray], { type: contentType });
+
+  const newTabContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>${fileName}</title>
+      <style>
+        body, html {
+          margin: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+        object, embed {
+          width: 100%;
+          height: 100%;
+        }
+      </style>
+    </head>
+    <body>
+      <object type="${contentType}" data="${URL.createObjectURL(blob)}">
+        <embed src="${URL.createObjectURL(blob)}" type="${contentType}" />
+      </object>
+    </body>
+    </html>
+  `;
+
+  const newBlob = new Blob([newTabContent], { type: 'text/html' });
+  const newTabURL = URL.createObjectURL(newBlob);
+
+  window.open(newTabURL, '_blank');
+}
+
 
 
   updateIsOwner() {
@@ -170,21 +233,18 @@ export class PostCardComponent implements OnInit {
   fetchSavedPosts(): void {
     this.interactionService.getSavedPosts().subscribe({
       next: (response: MyPostsResp) => {
-        this.savedPosts = response.$values; 
-  
-        // Check if the current post is saved
+        this.savedPosts = response.$values;   
         this.isSaved = this.savedPosts.some(savedPost => savedPost.postId === this.post.postId);  
         this.cdr.detectChanges(); // Ensure the component updates
-        // console.log("this.savedPosts :", this.savedPosts);
       },
       error: (error) => {
         console.error('Error fetching saved posts:', error);
       }
     });
   }
-  
-  
-  
-  
+
+  isImage(contentType: string): boolean {
+    return contentType.startsWith('image/');
+  }
 
 }

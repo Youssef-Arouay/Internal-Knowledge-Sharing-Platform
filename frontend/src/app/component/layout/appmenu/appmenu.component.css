@@ -1,13 +1,29 @@
-.example-spacer{
-    flex : 1 1 auto ;
+/*
+.example-spacer {
+    flex: 1 1 auto;
 }
 
 .toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
     color: white;
     background-color: #2e2e38;
 }
 
-.listItem{
+.layout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    overflow: auto;   
+
+}
+
+.listItem {
     width: auto;
     height: auto;
     margin: 1em;
@@ -15,7 +31,6 @@
 
 
 .iconMenu {
-    /* font-size: 1.5em; */
     max-width: 25px;
     max-height: 25px;
     margin: 0.5em;
@@ -29,12 +44,88 @@
     margin: 0.2em;
 }
 
-.homeIcon{
+.homeIcon {
     max-width: 30px;
     max-height: 30px;
     color: white;
 }
 
-.leftDrawer{
+.leftDrawer {
+    position: fixed;
+    top: 25px;
     width: 12%;
+} */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Prevents scrolling on the body */
+}
+
+.layout {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden; /* Prevents scrolling on the body */
+}
+
+.toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    color: white;
+    background-color: #2e2e38;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.drawer-container {
+    display: flex;
+    height: 100%;
+    margin-top: 64px; /* Adjust based on the height of the toolbar */
+}
+
+.leftDrawer {
+    width: 12%;
+    height: 100%; /* Full height for drawer */
+    position: fixed;
+    top: 64px; /* Adjust based on the height of the toolbar */
+}
+
+.drawer-content {
+    margin-left: 12%; /* Margin left to accommodate the drawer width */
+    flex: 1; /* Ensures it takes the remaining space */
+    overflow-y: auto; /* Enables scrolling for the content area */
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.listItem {
+    width: auto;
+    height: auto;
+    margin: 1em;
+}
+
+.iconMenu {
+    max-width: 25px;
+    max-height: 25px;
+    margin: 0.5em;
+    font-size: 25px;
+}
+
+.logoIcon {
+    font-size: 1.1em;
+    max-width: 8em;
+    max-height: 4em;
+    margin: 0.2em;
+}
+
+.homeIcon {
+    max-width: 30px;
+    max-height: 30px;
+    color: white;
 }

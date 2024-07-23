@@ -35,7 +35,8 @@ export interface postDetails {
     id: number,
     description: string,
     tags: string[],
-    creationDate : string,
+    // creationDate : string,
+    file: File | null;
 }
 
 export interface postCommentReq {

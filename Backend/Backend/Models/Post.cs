@@ -11,6 +11,7 @@ namespace Backend.Models
         public string Description { get; set; } = string.Empty;
         public List<string> Tags { get; set; } = new List<string>();
         public DateTime CreationDate { get; set; }
+        public string? FilePath { get; set; }
 
 
         public int UserId { get; set; }

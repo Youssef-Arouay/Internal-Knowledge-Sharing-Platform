@@ -3,11 +3,13 @@
     <div class="postTop">
       <div class="topLeftElt">
         <div class="postTopLeft">
-          <img class="postProfileImg" [src]="post.user.profileImage ? 'data:image/jpeg;base64,' + post.user.profileImage : 'assets/images/userIcon.png'" alt="" />
+          <img class="postProfileImg"
+            [src]="post.user.profileImage ? 'data:image/jpeg;base64,' + post.user.profileImage : 'assets/images/userIcon.png'"
+            alt="" />
           <span class="postUsername"> {{post.user.firstname | titlecase}} {{post.user.lastname | titlecase}}</span>
           <span class="postDate">{{ formatPostDate(post.creationDate) }}</span>
         </div>
-        <div class="tagsPost">
+        <div class="tagsPost" *ngIf="post.tags.$values">
           <span *ngFor="let tag of post.tags.$values"> #{{tag}} </span>
         </div>
       </div>
@@ -42,9 +44,26 @@
   </div>
   <div class="postCenter">
     <span class="postText">{{ post.description }}</span>
-    <!-- <img class="postImg" src="assets/images/Image_test.png" alt="Image post" /> -->
-    <div *ngIf="post.image">
-      <img class="postImg" [src]="post.image" alt="Post Image" />
+    <div *ngIf="post.fileContent" class="postContentContainer">
+      <!-- Check if the file is an image based on content type -->
+      <img *ngIf="isImage(post.contentType)" class="postImg" [src]="'data:image/jpeg;base64,' + post.fileContent"
+        alt="Post Image" />
+
+      <!-- Non-image file name and download link -->
+      <div *ngIf="!isImage(post.contentType)" class="pdfLink">
+        <!-- Open file in new tab -->
+        <a (click)="openFileInNewTab(post.fileName, post.contentType ,post.fileContent)" href="javascript:void(0);"
+          style="cursor:pointer;">
+          <i class="fa-solid fa-file-arrow-down fileIcon"></i> {{ post.fileName }}
+        </a>
+      </div>
+
+      <!-- PDF File Handling -->
+      <div *ngIf="isPdf(post.contentType)" class="pdfOverview">
+        <object [data]="pdfUrl" type="application/pdf">
+          <p>It appears you don't have a PDF plugin for this browser.</p>
+        </object>
+      </div>
     </div>
   </div>
   <div class="postBottom">
