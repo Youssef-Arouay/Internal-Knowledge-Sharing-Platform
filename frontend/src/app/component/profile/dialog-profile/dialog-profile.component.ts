@@ -56,16 +56,6 @@ export class DialogProfileComponent implements OnInit {
     this.value.set((event.target as HTMLInputElement).value);
   }
 
-  // On file Select
-  // onChange(event: any) {
-  //   const imageProfile: File = event.target.files[0];
-  //   if (imageProfile) {
-  //     //this.file = file;
-  //     this.profileForm.profileImage = imageProfile;
-  //     console.log('File selected:', this.profileForm.profileImage);
-  //   }
-  // }
-
   // On file select ( to not pass 10mb)
   onChange(event: any) {
     const imageProfile: File = event.target.files[0];

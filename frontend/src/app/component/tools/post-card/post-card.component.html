@@ -52,9 +52,13 @@
       <!-- Non-image file name and download link -->
       <div *ngIf="!isImage(post.contentType)" class="pdfLink">
         <!-- Open file in new tab -->
+        <a (click)="downloadFile(post)" style="cursor:pointer;" matTooltip="Download the file">
+          <i class="fa-solid fa-file-arrow-down fileIcon"></i>
+        </a>
+            
         <a (click)="openFileInNewTab(post.fileName, post.contentType ,post.fileContent)" href="javascript:void(0);"
-          style="cursor:pointer;">
-          <i class="fa-solid fa-file-arrow-down fileIcon"></i> {{ post.fileName }}
+          style="cursor:pointer;" matTooltip="Open the file" >
+          {{ post.fileName }}
         </a>
       </div>
 

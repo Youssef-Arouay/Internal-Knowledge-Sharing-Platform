@@ -2,9 +2,8 @@
   height: auto;
   width: 70%;
   border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-  margin: 25px 0;
+  margin: 1.5em auto;
 }
 
 .postWrapper {
@@ -75,11 +74,11 @@
 
 .postContentContainer {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically if needed */
-  flex-direction: column; /* Stack children vertically */
-  width: 100%; /* Ensure it takes full width of its container */
-  height: auto; /* Adjust height as needed or set to 'auto' */
+  justify-content: center; 
+  align-items: center; 
+  flex-direction: column;
+  width: 100%;
+  height: auto; 
 }
 
 .postImg {
@@ -88,7 +87,7 @@
   height: auto; 
   margin: 1 auto;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .postBottom {

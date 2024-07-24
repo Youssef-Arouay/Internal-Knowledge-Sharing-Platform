@@ -30,11 +30,11 @@ export class PostCardComponent implements OnInit {
   @Output() postLiked: EventEmitter<void> = new EventEmitter<void>();
   @Output() postUnliked: EventEmitter<void> = new EventEmitter<void>();
 
-  
+
   user: usercred | null = null;
-  
+
   savedPosts: any[] = []; // Array to hold saved posts got in ngOnInit
-  
+
   show: boolean = false;
   isOwner: boolean = false; // Flag to indicate if current user is the owner of the post
   isSaved: boolean = false
@@ -72,15 +72,15 @@ export class PostCardComponent implements OnInit {
   }
 
   openFileInNewTab(fileName: string, contentType: string, fileContent: string) {
-  const byteCharacters = atob(fileContent);
-  const byteNumbers = new Array(byteCharacters.length);
-  for (let i = 0; i < byteCharacters.length; i++) {
-    byteNumbers[i] = byteCharacters.charCodeAt(i);
-  }
-  const byteArray = new Uint8Array(byteNumbers);
-  const blob = new Blob([byteArray], { type: contentType });
+    const byteCharacters = atob(fileContent);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: contentType });
 
-  const newTabContent = `
+    const newTabContent = `
     <!DOCTYPE html>
     <html>
     <head>
@@ -106,11 +106,18 @@ export class PostCardComponent implements OnInit {
     </html>
   `;
 
-  const newBlob = new Blob([newTabContent], { type: 'text/html' });
-  const newTabURL = URL.createObjectURL(newBlob);
+    const newBlob = new Blob([newTabContent], { type: 'text/html' });
+    const newTabURL = URL.createObjectURL(newBlob);
 
-  window.open(newTabURL, '_blank');
-}
+    window.open(newTabURL, '_blank');
+  }
+
+  downloadFile(post: any) {
+    const link = document.createElement('a');
+    link.href = 'data:application/octet-stream;base64,' + post.fileContent;
+    link.download = post.fileName;
+    link.click();
+  }
 
 
 
@@ -122,7 +129,7 @@ export class PostCardComponent implements OnInit {
     }
   }
 
-  
+
   toggleShow() {
     this.show = !this.show;
   }
@@ -152,15 +159,15 @@ export class PostCardComponent implements OnInit {
     } else {
       // Like the post
       const user = {
-          userId: this.user!.id,
-          firstname: this.user!.firstname,
-          lastname: this.user!.lastname
-        }
+        userId: this.user!.id,
+        firstname: this.user!.firstname,
+        lastname: this.user!.lastname
+      }
       this.interactionService.likePost(post.postId).subscribe({
         next: () => {
           console.log('aaaapost.likes.$values', post.likes.$values)
           // post.likes.$values.push({ userId: this.user!.id });
-          post.likes.$values.push({user });
+          post.likes.$values.push({ user });
 
           console.log('BBBpost.likes.$values', post.likes.$values)
           this.cdr.detectChanges();
@@ -198,7 +205,7 @@ export class PostCardComponent implements OnInit {
       .join(', ');
   }
 
-  
+
   // Combined method to save or unsave a post based on isSaved flag
   toggleSavePost() {
     if (this.user && this.post) {
@@ -233,8 +240,8 @@ export class PostCardComponent implements OnInit {
   fetchSavedPosts(): void {
     this.interactionService.getSavedPosts().subscribe({
       next: (response: MyPostsResp) => {
-        this.savedPosts = response.$values;   
-        this.isSaved = this.savedPosts.some(savedPost => savedPost.postId === this.post.postId);  
+        this.savedPosts = response.$values;
+        this.isSaved = this.savedPosts.some(savedPost => savedPost.postId === this.post.postId);
         this.cdr.detectChanges(); // Ensure the component updates
       },
       error: (error) => {

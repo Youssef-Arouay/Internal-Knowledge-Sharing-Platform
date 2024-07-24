@@ -155,7 +155,8 @@
     width: 8em;
     height: 8em;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: fill;
+
 }
 
 .shareButton {

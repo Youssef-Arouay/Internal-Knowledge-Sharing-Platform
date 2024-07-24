@@ -84,20 +84,20 @@ html, body {
 .drawer-container {
     display: flex;
     height: 100%;
-    margin-top: 64px; /* Adjust based on the height of the toolbar */
+    margin-top: 64px; 
 }
 
 .leftDrawer {
     width: 12%;
-    height: 100%; /* Full height for drawer */
+    height: 100%; 
     position: fixed;
-    top: 64px; /* Adjust based on the height of the toolbar */
+    top: 64px; 
 }
 
 .drawer-content {
-    margin-left: 12%; /* Margin left to accommodate the drawer width */
-    flex: 1; /* Ensures it takes the remaining space */
-    overflow-y: auto; /* Enables scrolling for the content area */
+    margin-left: 12%; 
+    flex: 1; 
+    overflow-y: auto; 
 }
 
 .example-spacer {

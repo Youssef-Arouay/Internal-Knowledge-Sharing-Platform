@@ -16,7 +16,7 @@ namespace Backend.Services
         {
             _context = context;
         }
-        
+
         //get UserId from Email
         public async Task<int?> GetUserIdByEmail(string email)
         {
@@ -29,7 +29,7 @@ namespace Backend.Services
             try
             {
                 var userEmail = userClaims.FindFirst(ClaimTypes.Email)?.Value;
-                var userId = await GetUserIdByEmail(userEmail);
+                var userId = await GetUserIdByEmail(userEmail!);
 
                 if (userId == null)
                 {
@@ -54,7 +54,7 @@ namespace Backend.Services
                         await createPostDto.File.CopyToAsync(stream);
                     }
 
-                    post.FilePath = fileName; 
+                    post.FilePath = fileName;
                 }
 
                 _context.Posts.Add(post);
@@ -139,7 +139,7 @@ namespace Backend.Services
                                           {
                                               p.User.Firstname,
                                               p.User.Lastname,
-                                              ProfileImage =  p.User.ProfileImage != null ? Convert.ToBase64String(p.User.ProfileImage) : null
+                                              ProfileImage = p.User.ProfileImage != null ? Convert.ToBase64String(p.User.ProfileImage) : null
                                           },
                                           Likes = p.Likes.Select(l => new
                                           {
@@ -152,9 +152,9 @@ namespace Backend.Services
                                               }
                                           }).ToList(),
                                           CommentCount = p.Comments.Count(),
-                                          ContentType = GetContentType(p.FilePath),
-                                          FileName = ExtractOriginalFileName(p.FilePath),
-                                          FileContent = !string.IsNullOrEmpty(p.FilePath) ? Convert.ToBase64String(System.IO.File.ReadAllBytes(Path.Combine(Common.GetStaticContentDirectory(), "postsFiles", p.FilePath))) : null
+                                          ContentType = GetContentType(p.FilePath!),
+                                          FileName = ExtractOriginalFileName(p.FilePath!),
+                                          FileContent = !string.IsNullOrEmpty(p.FilePath) ? GetFileContent(p.FilePath) : null
                                       })
                                       .ToListAsync();
 
@@ -176,9 +176,9 @@ namespace Backend.Services
                                           p.Description,
                                           p.Tags,
                                           p.CreationDate,
-                                          ContentType = GetContentType(p.FilePath),
-                                          FileName = ExtractOriginalFileName(p.FilePath),
-                                          FileContent = !string.IsNullOrEmpty(p.FilePath) ? Convert.ToBase64String(File.ReadAllBytes(Path.Combine(Common.GetStaticContentDirectory(), "postsFiles", p.FilePath))) : null,
+                                          ContentType = GetContentType(p.FilePath!),
+                                          FileName = ExtractOriginalFileName(p.FilePath!),
+                                          FileContent = !string.IsNullOrEmpty(p.FilePath) ? GetFileContent(p.FilePath) : null,
                                           p.UserId,
                                           User = new
                                           {
@@ -209,6 +209,24 @@ namespace Backend.Services
         {
             return await _context.Comments
                 .CountAsync(c => c.PostId == postId);
+        }
+
+        // method to get file content
+        private static string GetFileContent(string filePath)
+        {
+            try
+            {
+                var fullPath = Path.Combine(Common.GetStaticContentDirectory(), "postsFiles", filePath);
+                return Convert.ToBase64String(File.ReadAllBytes(fullPath));
+            }
+            catch (FileNotFoundException)
+            {
+                return "file indisponible";
+            }
+            catch (Exception)
+            {
+                return "file indisponible";
+            }
         }
 
 
