@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace Backend.Services
 {
@@ -15,12 +16,14 @@ namespace Backend.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
 
-        public AuthService(IConfiguration configuration, ApplicationDbContext context)
+        public AuthService(IConfiguration configuration, ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<bool> EmailExistsAsync(string email)
@@ -64,7 +67,7 @@ namespace Backend.Services
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: creds
                 );
 
@@ -72,5 +75,45 @@ namespace Backend.Services
 
             return jwt;
         }
+
+
+        public RefreshToken GenerateRefreshToken()
+        {
+            var refreshToken = new RefreshToken
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Expires = DateTime.Now.AddDays(1)
+            };
+
+            return refreshToken;
+        }
+
+        public void SetRefreshToken(RefreshToken newRefreshToken, User user)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = newRefreshToken.Expires,
+            };
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
+
+            user.RefreshToken = newRefreshToken.Token;
+            user.RefreshTokenCreated = newRefreshToken.Created;
+            user.RefreshTokenExpires = newRefreshToken.Expires;
+
+            _context.SaveChanges();
+        }
+
+        public async Task<User> GetUserByRefreshTokenAsync(string refreshToken)
+        {
+            return await _context.Users.SingleOrDefaultAsync(u => u.RefreshToken == refreshToken);
+        }
+    }
+
+    public class RefreshToken
+    {
+        public required string Token { get; set; } = string.Empty;
+        public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime Expires { get; set; }
     }
 }

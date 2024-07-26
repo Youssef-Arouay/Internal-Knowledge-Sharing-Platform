@@ -30,6 +30,8 @@ builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddTransient<IRateFileService, RateFileService>();
 
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor(); 
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 

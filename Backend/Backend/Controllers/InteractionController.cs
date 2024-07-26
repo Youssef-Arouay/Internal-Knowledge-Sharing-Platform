@@ -37,7 +37,7 @@ namespace Backend.Controllers
             try
             {
                 var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
-                var userId = await _interactionService.GetUserIdByEmail(userEmail);
+                var userId = await _interactionService.GetUserIdByEmail(userEmail!);
 
                 if (userId == null)
                 {

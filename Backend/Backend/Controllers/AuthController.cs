@@ -80,11 +80,17 @@ namespace Backend.Controllers
                     return BadRequest("Wrong Email or Password!");
                 }
                 string token = _authService.CreateToken(user);
+
+                var refreshToken = _authService.GenerateRefreshToken();
+                _authService.SetRefreshToken(refreshToken, user);
+
+
                 var response = new
                 {
                     Token = token,
                     User = user
                 };
+
                 return Ok(response);
             }
             catch (Exception ex)
@@ -93,6 +99,34 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpPost("refreshToken")]
+        public async Task<ActionResult<string>> RefreshToken()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+
+            var user = await _authService.GetUserByRefreshTokenAsync(refreshToken);
+            if (user == null)
+            {
+                return Unauthorized("Invalid Refresh Token");
+            }
+            else if (user.RefreshTokenExpires < DateTime.Now)
+            {
+                return Unauthorized("Token expired");
+            }
+
+            string token = _authService.CreateToken(user);
+            var newRefreshToken = _authService.GenerateRefreshToken();
+            _authService.SetRefreshToken(newRefreshToken, user);
+
+            var response = new
+            {
+                Token = token,
+                RefreshToken = newRefreshToken.Token
+            };
+
+            return Ok(response);
+
+        }
 
         // Login with google account( only if it exists)
         [HttpPost("loginWithGoogle")]
@@ -128,7 +162,7 @@ namespace Backend.Controllers
                     return BadRequest("User not found. You must Sign up with the same email first !");
                 }
             }
-            catch (Google.Apis.Auth.InvalidJwtException ex)
+            catch (InvalidJwtException ex)
             {
                 // Handle invalid JWT exception
                 Console.WriteLine($"Invalid JWT: {ex.Message}");

@@ -11,5 +11,11 @@ namespace Backend.Services.IServices
         bool VerifyPassword(string password, string passwordHash);
 
         string CreateToken(User user);
+        RefreshToken GenerateRefreshToken();
+
+        void SetRefreshToken(RefreshToken newRefreshToken, User user);
+        Task<User> GetUserByRefreshTokenAsync(string refreshToken);
+
+
     }
 }

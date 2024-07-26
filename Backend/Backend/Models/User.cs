@@ -15,6 +15,10 @@ namespace Backend.Models
         public string PhoneNumber { get; set; }
         public byte[] ProfileImage { get; set; }
         public string PasswordHash { get; set; } = string.Empty;
+        public string RefreshToken { get; set; } = string.Empty;
+        public DateTime RefreshTokenCreated { get; set; }
+        public DateTime RefreshTokenExpires { get; set; }
+
 
         // Navigation property for files uploaded by this user
 
