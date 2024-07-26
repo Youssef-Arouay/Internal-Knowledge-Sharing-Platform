@@ -119,6 +119,22 @@ namespace Backend.Controllers
             }
         }
 
+        //for lazy loading posts
+        [HttpGet("getall")]
+        public async Task<IActionResult> GetAllPosts([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        {
+            try
+            {
+                var posts = await _postService.GetPagedPostsAsync(page, pageSize);
+                return Ok(posts);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
+            }
+        }
+
+
         // Return User's posts
         [HttpGet("myposts")]
         [Authorize]

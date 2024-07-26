@@ -161,6 +161,47 @@ namespace Backend.Services
             return posts.Cast<object>().ToList();
         }
 
+        public async Task<List<object>> GetPagedPostsAsync(int page, int pageSize)
+        {
+            var posts = await _context.Posts
+                                      .Include(p => p.User)
+                                      .Include(p => p.Likes)
+                                      .Include(p => p.Comments)
+                                      .OrderByDescending(p => p.CreationDate) // Sort posts by creation date in descending order
+                                      .Skip((page - 1) * pageSize) // Skip posts for previous pages
+                                      .Take(pageSize) // Take only the posts for the current page
+                                      .Select(p => new
+                                      {
+                                          p.PostId,
+                                          p.Description,
+                                          p.Tags,
+                                          p.CreationDate,
+                                          p.UserId,
+                                          User = new
+                                          {
+                                              p.User.Firstname,
+                                              p.User.Lastname,
+                                              ProfileImage = p.User.ProfileImage != null ? Convert.ToBase64String(p.User.ProfileImage) : null
+                                          },
+                                          Likes = p.Likes.Select(l => new
+                                          {
+                                              l.LikeId,
+                                              l.UserId,
+                                              User = new
+                                              {
+                                                  l.User.Firstname,
+                                                  l.User.Lastname,
+                                              }
+                                          }).ToList(),
+                                          CommentCount = p.Comments.Count(),
+                                          ContentType = GetContentType(p.FilePath!),
+                                          FileName = ExtractOriginalFileName(p.FilePath!),
+                                          FileContent = !string.IsNullOrEmpty(p.FilePath) ? GetFileContent(p.FilePath) : null
+                                      })
+                                      .ToListAsync();
+
+            return posts.Cast<object>().ToList();
+        }
 
         //Get a user's post
         public async Task<List<object>> GetMyPostsAsync(int userId)

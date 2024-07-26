@@ -10,8 +10,8 @@ export interface loginReq {
 }
 
 export interface loginresp {
-    token: any;
-    user: usercred;
+    token: string;
+    refreshToken : string;
 }
 
 export interface usercred {

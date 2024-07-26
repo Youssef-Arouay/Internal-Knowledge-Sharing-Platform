@@ -13,7 +13,7 @@ namespace Backend.Services.IServices
         string CreateToken(User user);
         RefreshToken GenerateRefreshToken();
 
-        void SetRefreshToken(RefreshToken newRefreshToken, User user);
+        Task<bool> SetRefreshTokenAsync(RefreshToken newRefreshToken, User user);
         Task<User> GetUserByRefreshTokenAsync(string refreshToken);
 
 

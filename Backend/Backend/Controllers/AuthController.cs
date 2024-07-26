@@ -79,16 +79,18 @@ namespace Backend.Controllers
                 {
                     return BadRequest("Wrong Email or Password!");
                 }
+                
                 string token = _authService.CreateToken(user);
 
                 var refreshToken = _authService.GenerateRefreshToken();
-                _authService.SetRefreshToken(refreshToken, user);
+
+                await _authService.SetRefreshTokenAsync(refreshToken, user);
 
 
                 var response = new
                 {
                     Token = token,
-                    User = user
+                    RefreshToken = refreshToken.Token
                 };
 
                 return Ok(response);
@@ -105,18 +107,14 @@ namespace Backend.Controllers
             var refreshToken = Request.Cookies["refreshToken"];
 
             var user = await _authService.GetUserByRefreshTokenAsync(refreshToken);
-            if (user == null)
+            if (user == null || user.RefreshTokenExpires < DateTime.Now)
             {
-                return Unauthorized("Invalid Refresh Token");
-            }
-            else if (user.RefreshTokenExpires < DateTime.Now)
-            {
-                return Unauthorized("Token expired");
+                return Unauthorized(new { message = "Invalid or expired refresh token" });
             }
 
             string token = _authService.CreateToken(user);
             var newRefreshToken = _authService.GenerateRefreshToken();
-            _authService.SetRefreshToken(newRefreshToken, user);
+            _authService.SetRefreshTokenAsync(newRefreshToken, user);
 
             var response = new
             {

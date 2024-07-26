@@ -9,7 +9,7 @@ export const authRedirectGuard: CanActivateFn = (route, state) => {
   let toastr = inject(ToastrService);
 
 
-  if (localStorage.getItem('token') && localStorage.getItem('user')) {
+  if (localStorage.getItem('token')) {
     // If user is authenticated, redirect to /dashboard
     toastr.warning("You are already connected !")
     router.navigateByUrl('/dashboard');

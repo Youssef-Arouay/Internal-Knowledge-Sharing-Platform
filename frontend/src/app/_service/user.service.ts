@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { loginReq, loginresp, userRegister, usercred } from '../_model/user.model';
-import { BehaviorSubject, Observable, Subscription, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, Subscription, switchMap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 declare var google : any ;
@@ -60,11 +60,6 @@ export class UserService {
   }
 
   //// User Details //////
-  getUserInfo(): Observable<usercred> {
-    const headers = this.createAuthorizationHeader();
-    return this.http.get<usercred>(`${this.baseUrl}user/GetUserDetails`, { headers });
-  }
-
   fetchUserInfo(): void {
     const headers = this.createAuthorizationHeader();
     this.http.get<usercred>(`${this.baseUrl}user/GetUserDetails`, { headers }).subscribe({
@@ -82,14 +77,23 @@ export class UserService {
   }
 
   updateProfile(formData: FormData): Observable<any> {
-    // const headers = this.createAuthorizationHeader();
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-    return this.http.put<any>(`${this.baseUrl}user/UpdateUser`, formData, { headers });
+    return this.http.put<any>(`${this.baseUrl}user/UpdateUser`, formData);
   }
 
+  refreshToken(): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}auth/refreshToken`, {}).pipe(
+      switchMap((response: any) => {
+        localStorage.setItem('token', response.Token);
+        return response;
+      }),
+      catchError(error => {
+        console.error('Token refresh failed', error);
+        this.logout();
+        return throwError(error);
+      })
+    );
+  }
+  
 
   // LOGOUT : Clear Local Storage, Cookies and Entity User
   logout() {

@@ -11,6 +11,7 @@ namespace Backend.Services.IServices
         Task<(bool Success, Post Post, string ErrorMessage)> AddPostAsync(PostDto createPostDto, ClaimsPrincipal userClaims);
         Task<(bool Success, string ErrorMessage)> DeletePostAsync(int postId, ClaimsPrincipal userClaims);
         Task<List<object>> GetAllPostsAsync();
+        Task<List<object>> GetPagedPostsAsync(int page, int pageSize);
         Task<List<object>> GetMyPostsAsync(int userId);
         Task<int> GetCommentCountAsync(int postId);
     }

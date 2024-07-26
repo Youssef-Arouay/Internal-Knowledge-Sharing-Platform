@@ -88,21 +88,33 @@ namespace Backend.Services
             return refreshToken;
         }
 
-        public void SetRefreshToken(RefreshToken newRefreshToken, User user)
+        public async Task<bool> SetRefreshTokenAsync(RefreshToken newRefreshToken, User user)
         {
-            var cookieOptions = new CookieOptions
+            try
             {
-                HttpOnly = true,
-                Expires = newRefreshToken.Expires,
-            };
-            _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = newRefreshToken.Expires,
+                };
 
-            user.RefreshToken = newRefreshToken.Token;
-            user.RefreshTokenCreated = newRefreshToken.Created;
-            user.RefreshTokenExpires = newRefreshToken.Expires;
+                _httpContextAccessor?.HttpContext.Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
 
-            _context.SaveChanges();
+                user.RefreshToken = newRefreshToken.Token;
+                user.RefreshTokenCreated = newRefreshToken.Created;
+                user.RefreshTokenExpires = newRefreshToken.Expires;
+
+                await _context.SaveChangesAsync(); 
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Console.WriteLine($"An error occurred: {ex.Message}");
+                return false;
+            }
         }
+
 
         public async Task<User> GetUserByRefreshTokenAsync(string refreshToken)
         {

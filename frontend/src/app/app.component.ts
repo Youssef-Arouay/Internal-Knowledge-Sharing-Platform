@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppmenuComponent } from './component/layout/appmenu/appmenu.component';
-import { UserService } from './_service/user.service';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +9,9 @@ import { UserService } from './_service/user.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'frontend';
 
-  constructor(private userService: UserService) {}
-
-  ngOnInit(): void {
-      this.userService.fetchUserInfo();
-  }
-
+  constructor() {}
 
 }

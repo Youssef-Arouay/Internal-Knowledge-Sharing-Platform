@@ -43,6 +43,17 @@ export class PostService {
     return this.http.get<any[]>(`${this.baseUrl}post/all`);
   }
 
+  //lazyLoading posts 
+  getAll(page: number, pageSize: number): Observable<any[]> {
+    console.log(`Fetching posts from ${this.baseUrl}/post/getall?page=${page}&pageSize=${pageSize}`);
+    return this.http.get<any[]>(`${this.baseUrl}post/getall`, {
+      params: {
+        page: page.toString(),
+        pageSize: pageSize.toString()
+      }
+    });
+  }
+
   getMyPosts(): Observable<MyPostsResp> {
     const headers = this.createAuthorizationHeader();  
     return this.http.get<MyPostsResp>(`${this.baseUrl}post/myposts`, { headers });

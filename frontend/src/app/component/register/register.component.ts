@@ -134,19 +134,13 @@ export class RegisterComponent implements OnInit {
             console.log(responseData)
 
 
-            if (responseData && responseData.token && responseData.user) {
+            if (responseData && responseData.token) {
               localStorage.setItem('token', responseData.token);
-              localStorage.setItem('user', JSON.stringify(responseData.user));
-
-              this.userService.setUser(responseData.user); // Store user data in UserService
-
-              console.log('User set in UserService:', this.userService.getUser());
-
 
               this.toastr.success('Logged in successfully', 'Success');
               setTimeout(() => {
                 this.router.navigateByUrl('/dashboard');
-              }, 750); // 1000 milliseconds = 1 second delay
+              }, 900); // 1000 milliseconds = 1 second delay
             } else {
               this.toastr.error('Invalid credentials', 'Login Failed');
             }
