@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
         },
         error: error => {
           console.error('Error during registration:', error);
-          this.toastr.error('Failed due to: ' + error.error.message, 'Registration Failed');
+          this.toastr.error('Failed due to: ' + error.message, 'Registration Failed');
         },
         complete: () => {
           console.log('Registration request completed');

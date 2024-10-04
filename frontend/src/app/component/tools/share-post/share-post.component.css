@@ -1,90 +1,137 @@
 .share {
-    background-color: white;
-    width: 70%;
-    height: 170px;
-    margin: 1em auto;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-  }
-  
-  .shareWrapper {
-    padding: 10px;
-  }
-  
-  .shareTop {
-    display: flex;
-    align-items: center;
-  }
-  
-  .shareProfileImg {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-  }
-  
-  .shareInput {
-    background-color: white;
-    border: none;
-    width: 80%;
-  }
-  
-  .shareInput:focus {
-    outline: none;
-  }
-  
-  .shareHr {
-    margin: 25px;
-  }
-  
-  .shareBottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-  }
-  
-  .shareOptions{
-      display: flex;
-      margin-left: 20px;
-  }
-  
-  .shareOption{
-      display: flex;
-      align-items: center;
-      margin-right: 15px;
-      cursor: pointer;
-  }
-  
-  .shareIcon{
-      font-size: 18px;
-      margin-right: 3px;
-  }
-  
-  .shareOptionText{
-      font-size: 14px;
-      font-weight: 500;
-  }
-  
-  .shareButton{
-      border: none;
-      padding: 7px;
-      border-radius: 5px;
-      background-color: rgb(43, 97, 190);
-      font-weight: 500;
-      margin-right: 20px;
-      cursor: pointer;
-      color: white;
-  }
+  background-color: white;
+  width: 70%;
+  height: auto;
+  /* Allow height to adjust based on content */
+  margin: 1em auto;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+}
+
+.shareWrapper {
+  padding: 10px;
+}
+
+.shareTop {
+  display: flex;
+  align-items: center;
+}
+
+.shareProfileImg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.shareInput {
+  background-color: white;
+  border: none;
+  width: 80%;
+}
+
+.shareInput:focus {
+  outline: none;
+}
+
+.shareHr {
+  margin: 25px;
+}
 
 
+.shareOptions {
+  display: flex;
+  /* Horizontal layout for buttons */
+  margin-left: 20px;
+  width: 100%;
+  /* Ensure it takes the full width */
+}
 
-  /* ////// */
+.shareOption {
+  display: flex;
+  flex-direction: column;
+  /* Stack button and input vertically */
+  align-items: center;
+  /* Center align items */
+  margin-right: 20px;
+  /* Space between options */
+  cursor: pointer;
+}
 
-  /* bootstrap-tagsinput.css file - add in local */
+.shareOption2 {
+  display: flex;
+  flex-direction: column;
+  /* Stack button and input vertically */
+  align-items: center;
+  /* Center align items */
+  margin-left: 20px;
+  /* Space between options */
+  cursor: pointer;
+}
 
+.shareIcon {
+  font-size: 18px;
+  margin-bottom: 5px;
+  /* Space between icon and text */
+}
+
+.shareOptionText {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.shareBottom {
+  display: flex;
+  /* Use flexbox for layout */
+  align-items: center;
+  /* Align items vertically in the center */
+  justify-content: flex-end;
+  /* Align items to the right */
+  margin-top: -15px;
+  /* Optional spacing above the share button */
+}
+
+
+.shareButton {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(43, 97, 190);
+  font-weight: 500;
+  cursor: pointer;
+  color: white;
+}
+
+/* File info styles */
+.file-info {
+  background-color: #f5f5f5;
+  /* Light gray background */
+  padding: 12px;
+  border-radius: 4px;
+  margin-top: 8px;
+  /* Spacing from the Add file button */
+}
+
+.file-info ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.file-info li {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #333;
+  /* Darker text color */
+}
+
+.hidden {
+  display: none;
+}
+
+/* Bootstrap tags input styles */
 .bootstrap-tagsinput {
   background-color: #fff;
   border: 1px solid #ccc;
@@ -96,8 +143,8 @@
   border-radius: 4px;
   max-width: 100%;
   line-height: 22px;
-  cursor: text;
 }
+
 .bootstrap-tagsinput input {
   border: none;
   box-shadow: none;
@@ -108,40 +155,75 @@
   width: auto;
   max-width: inherit;
 }
+
 .bootstrap-tagsinput.form-control input::-moz-placeholder {
   color: #777;
   opacity: 1;
 }
+
 .bootstrap-tagsinput.form-control input:-ms-input-placeholder {
   color: #777;
 }
+
 .bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
   color: #777;
 }
+
 .bootstrap-tagsinput input:focus {
   border: none;
   box-shadow: none;
 }
+
 .bootstrap-tagsinput .tag {
   margin-right: 2px;
   color: white;
 }
+
 .bootstrap-tagsinput .tag [data-role="remove"] {
   margin-left: 8px;
   cursor: pointer;
 }
+
 .bootstrap-tagsinput .tag [data-role="remove"]:after {
   content: "x";
   padding: 0px 2px;
 }
+
 .bootstrap-tagsinput .tag [data-role="remove"]:hover {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
+
 .bootstrap-tagsinput .tag [data-role="remove"]:hover:active {
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 
+.file-preview {
+  width: 150px;
+  /* Set a fixed width */
+  height: auto;
+  /* Maintain aspect ratio */
+  margin-top: 5px;
+  /* Add some spacing */
+  border: 1px solid #ccc;
+  /* Optional border */
+  border-radius: 4px;
+  /* Optional rounding */
+}
 
-.hidden {
-  display: none;
+.cancelButton {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #f44336;
+  /* Red background for cancel */
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 5px;
+  /* Spacing above */
+}
+
+.cancelButton:hover {
+  background-color: #d32f2f;
+  /* Darker red on hover */
 }

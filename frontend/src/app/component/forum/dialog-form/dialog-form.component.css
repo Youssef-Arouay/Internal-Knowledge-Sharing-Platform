@@ -32,14 +32,6 @@ app-tags-input{
   padding: 0;
 }
 
-/* .tagsInput{
-  display: flex;
-  padding: 15px 127px ;
-  margin: 0;
-  width: 100%;
-  height: max-content;
-} */
-
 mat-dialog-actions {
   display: flex;
   justify-content: flex-end;

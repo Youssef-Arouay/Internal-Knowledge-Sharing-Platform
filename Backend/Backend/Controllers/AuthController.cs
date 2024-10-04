@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Backend.Data;
 using Backend.Services.IServices;
 using Google.Apis.Auth;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Backend.Controllers
@@ -55,17 +56,32 @@ namespace Backend.Controllers
                     Lastname = request.Lastname,
                     Username = request.Firstname + request.Lastname,
                     Email = request.Email,
+                    CreationDate = DateTime.Now,
+                    PhoneNumber = "",
+                    ProfileImage = [],
                     PasswordHash = passwordHash
                 };
 
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
-                return Ok(user);
+                var registerRespDto = new RegisterRespDto
+                {
+                    Firstname = user.Firstname,
+                    Lastname = user.Lastname,
+                    Email = user.Email
+                };
+
+                return Ok(registerRespDto);
+            }
+            catch (DbUpdateException dbEx)
+            {
+                // Log and return more detailed error information
+                return StatusCode(500, $"Database update error: {dbEx.InnerException?.Message ?? dbEx.Message}");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex);
+                return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
 

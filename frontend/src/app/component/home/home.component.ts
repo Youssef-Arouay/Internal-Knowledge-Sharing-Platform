@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { UserService } from '../../_service/user.service';
 import { SharePostComponent } from '../tools/share-post/share-post.component';
@@ -13,7 +14,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, SharePostComponent, CommonModule, PostCardComponent],
+  imports: [MatIconModule, MatButtonModule, SharePostComponent, CommonModule, PostCardComponent, MatProgressSpinnerModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -21,13 +22,15 @@ export class HomeComponent implements OnInit {
 
   user!: usercred | null ;
   posts: any[] = [];
-
+  isLoading = false;
 
   constructor(private postService: PostService, private userService: UserService, 
     private router: Router, private dialog: MatDialog, private cdr: ChangeDetectorRef  // Inject ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
+    this.userService.fetchUserInfo();
+
     this.userService.user$.subscribe((user) => {
       this.user = user;
       this.fetchPosts();
@@ -35,6 +38,7 @@ export class HomeComponent implements OnInit {
   }
   
   fetchPosts() {
+    this.isLoading = true;
     this.postService.getAllPosts().subscribe({
       next: (response: any) => {
         if (response && response.$values) {
@@ -44,7 +48,8 @@ export class HomeComponent implements OnInit {
           });
           console.log('Posts fetched and sorted successfully', this.posts);
           // Trigger change detection
-          this.cdr.detectChanges();  
+          this.cdr.detectChanges(); 
+          this.isLoading = false; 
 
         } else {
           console.error('Error:', response);

@@ -26,12 +26,13 @@ export class SharePostComponent {
   locationIcon = faMapMarkerAlt;
   feelingsIcon = faSmile;
   documentIcon = faFileAlt;
-
+  
   showTagsInput = false;
   tags: string[] = [];
-
+  
   user?: usercred | null = null;
   selectedFile: File | null = null;
+  filePreviewUrl: string | null = null; // URL for the file preview
 
   @Output() postAdded: EventEmitter<void> = new EventEmitter<void>();
   @ViewChild('tagsInputRef') tagsInputRef!: TagsInputComponent;
@@ -61,63 +62,24 @@ export class SharePostComponent {
     this.fileInput.nativeElement.click();
   }
 
-  onFileChange(event: any) {
-    this.selectedFile = event.target.files[0];
-    console.log("this.selectedFile", this.selectedFile)
-  }
-
-  /////New Approch 
-  // addPost() {
-  //   this.post.tags = this.tagsInputRef.getTags();
-  //   if (this.selectedFile) {
-  //     this.post.file = this.selectedFile;
-  //   }
-  //   // console.log('Tags:', this.post.tags);
-  //   if (this.post.description !== "") {
-  //     // const formData : postDetails = null;
-  //     // formData.description = this.post.description;
-
-  //     // formData.append('description', this.post.description);
-  //     // formData.append('tags', JSON.stringify(this.post.tags));
-  //     // formData.append('creationDate', this.post.creationDate);
-
-  //     // if (this.selectedFile) {
-  //     //   formData.append('file', this.selectedFile);
-  //     // }
-
-  //     this.postService.addPost(this.post).subscribe({
-  //       next: (response: postDetails) => {
-  //         this.resetPost();  // Clear input fields
-  //         this.postAdded.emit();
-  //         this.tagsInputRef.clearTagsInput(); // Clear tags input field
-  //         this.toastr.success('Post added');
-
-  //       },
-  //       error: (error: any) => {
-  //         console.error('Error adding post', error);
-  //         this.toastr.error('Error adding post');
-  //       },
-  //       complete: () => {
-  //         console.log('Post request completed');
-  //       }
-  //     });
-  //   } else {
-  //     this.toastr.error('You can not share post with no content');
-  //   }
+  // onFileChange(event: any) {
+  //   this.selectedFile = event.target.files[0];
+  //   console.log("this.selectedFile", this.selectedFile)
   // }
 
   addPost() {
     // this.post.tags = this.tagsInputRef.getTags();
     const formData = new FormData();
-    
+
     formData.append('Description', this.post.description);
     formData.append('Tags', JSON.stringify(this.tagsInputRef.getTags()));
 
     if (this.selectedFile) {
+      console.log(this.selectedFile)
       formData.append('File', this.selectedFile);
     }
-  
-    
+
+
     if (this.post.description !== "") {
       this.postService.addPost(formData).subscribe({
         next: (response: postDetails) => {
@@ -139,10 +101,46 @@ export class SharePostComponent {
       this.toastr.error('You can not share post with no content');
     }
   }
-  
+
   resetPost() {
     this.post = { id: 0, description: '', tags: [], file: null };
     this.selectedFile = null;
   }
+
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+
+      // Create a preview URL for images
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.filePreviewUrl = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        this.filePreviewUrl = null;
+      }
+    }
+  }
+
+  isImage(file: File): boolean {
+    return file.type.startsWith('image/');
+  }
+
+  cancelFile() {
+    this.selectedFile = null; // Reset the selected file
+    this.filePreviewUrl = null; // Reset the file preview URL
+    
+    // Using type assertion with 'as HTMLInputElement'
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = ''; // Clear the file input
+    }
+  }
+  
+  
 
 }

@@ -27,3 +27,12 @@ app-post-card {
     width: auto;
     margin-bottom: 1em;
 }
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh; /* Full viewport height */
+  }
+  
+  

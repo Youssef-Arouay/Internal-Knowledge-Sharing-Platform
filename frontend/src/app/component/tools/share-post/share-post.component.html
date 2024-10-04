@@ -15,19 +15,26 @@
           <fa-icon [icon]="documentIcon" class="shareIcon" style="color: goldenrod;"></fa-icon>
           <span class="shareOptionText">Add file</span>
         </div>
-        <!-- <div class="shareOption">
-          <fa-icon [icon]="photoVideoIcon" class="shareIcon" style="color: tomato;"></fa-icon>
-          <span class="shareOptionText">Photo or Video</span>
-        </div> -->
-        <div class="shareOption" (click)="toggleTagsInput()">
+        <div *ngIf="this.selectedFile">
+          <section class="file-info">
+            File details:
+            <ul>
+              <li>Name: {{ selectedFile.name }}</li>
+              <li>Size: {{ selectedFile.size }} bytes</li>
+              <li *ngIf="isImage(selectedFile)"><img [src]="filePreviewUrl" class="file-preview" /></li>
+            </ul>
+            <button class="cancelButton" (click)="cancelFile()">Cancel</button> <!-- Cancel Button -->
+
+          </section>
+        </div>
+        
+        <div class="shareOption2" (click)="toggleTagsInput()">
           <fa-icon [icon]="tagIcon" class="shareIcon" style="color: blue;"></fa-icon>
           <span class="shareOptionText">Tag</span>
         </div>
         <div [class.hidden]="!showTagsInput">
           <app-tags-input #tagsInputRef></app-tags-input>
-          <!-- <button (click)="showTags()">Show Tags</button> -->
         </div>
-
       </div>
       <button class="shareButton" (click)="addPost()">Share</button>
     </div>

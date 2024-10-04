@@ -1,22 +1,30 @@
-
-<div class="parent"> 
+<div class="parent">
     <div class="container" [ngClass]="isSignDivVisible ? 'active' :'' " id="container">
-        <div class="form-container sign-up" >
+        <div class="form-container sign-up">
             <form [formGroup]="_regform" (ngSubmit)="proceedregister()">
-                <h1>Create Account</h1>
-                <!-- <div class="social-icons">
-                    <a routerLink="/register" routerLinkActive="router-link-active"  class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                    <a routerLink="/register" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                </div> -->
-                <!-- <span>or use your email for registeration</span> -->
+                <h1>Create An Account</h1>
                 <input type="text" formControlName="firstname" placeholder="Firstname">
+                <div *ngIf="_regform.controls['firstname'].invalid && _regform.controls['firstname'].touched">
+                    <small *ngIf="_regform.controls['firstname'].errors?.['required']">Firstname is required</small>
+                </div>
                 <input type="text" formControlName="lastname" placeholder="Lastname">
+                <div *ngIf="_regform.controls['lastname'].invalid && _regform.controls['lastname'].touched">
+                    <small *ngIf="_regform.controls['lastname'].errors?.['required']">Lastname is required</small>
+                </div>
                 <input type="email" formControlName="email" placeholder="Email">
+                <div *ngIf="_regform.controls['email'].invalid && _regform.controls['email'].touched">
+                    <small *ngIf="_regform.controls['email'].errors?.['required']">Email is required</small>
+                    <small *ngIf="_regform.controls['email'].errors?.['email']">Enter a valid email</small>
+                </div>
                 <input type="password" formControlName="password" placeholder="Password">
-                <button type="submit" >Sign Up</button>
+                <div *ngIf="_regform.controls['password'].invalid && _regform.controls['password'].touched">
+                    <small *ngIf="_regform.controls['password'].errors?.['required']">Password is required</small>
+                </div>
+
+                <button type="submit">Sign Up</button>
             </form>
         </div>
-        <div class="form-container sign-in" >
+        <div class="form-container sign-in">
             <form [formGroup]="_loginform" (ngSubmit)="proceedLogin()">
                 <h1>Sign In</h1>
                 <div class="social-icons">
@@ -27,25 +35,32 @@
                 </div>
                 <span>Or use your email and password</span>
                 <input type="email" formControlName="email" placeholder="Email">
-                <input type="password" formControlName="password"    placeholder="Password">
+                <div *ngIf="_loginform.controls['email'].invalid && _loginform.controls['email'].touched">
+                    <small *ngIf="_loginform.controls['email'].errors?.['required']">Email is required</small>
+                    <small *ngIf="_loginform.controls['email'].errors?.['email']">Enter a valid email</small>
+                </div>
+                <input type="password" formControlName="password" placeholder="Password">
+                <div *ngIf="_loginform.controls['password'].invalid && _loginform.controls['password'].touched">
+                    <small *ngIf="_loginform.controls['password'].errors?.['required']">Password is required</small>
+                </div>
                 <a routerLink="/resetpassword">→ Forget Your Password? ←</a>
-                <button type="submit" >Sign In</button>
+                <button type="submit">Sign In</button>
             </form>
         </div>
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back !</h1>
-                    <p>Enter your personal details to use all of site features</p>
+                    <h1>Hello, Friend !</h1>
+                    <p>Register with your personal details to get access to our plateform</p>
                     <button type="button" class="hidden" id="login" (click)="isSignDivVisible = false">Sign In</button>
                 </div>
                 <div class="toggle-panel toggle-right">
-                    <h1>Hello, Friend !</h1>
-                    <p>Register with your personal details to get access to our plateform</p>
-                    <button type="button" class="hidden" id="register" (click)="isSignDivVisible = true">Sign Up</button>
+                    <h1>Welcome Back !</h1>
+                    <p>Enter your personal details to use all of site features</p>
+                    <button type="button" class="hidden" id="register" (click)="isSignDivVisible = true">Sign
+                        Up</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
